@@ -19,13 +19,6 @@ class StoriesView: UIView {
     
     var onStoryTapped: ((StoryModel) -> Void)?
     var currentStoryIndex = 0
-    var textForStoriesGeneratedCount: Int = 0
-    
-    var storiesTexts: [String] {
-        (1...420).map { index in
-            "stories.text\(index)".localize()
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
