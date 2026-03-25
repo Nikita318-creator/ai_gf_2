@@ -127,6 +127,9 @@ class AIChatViewModel {
                 switch result {
                 case .success(let responseText):
                     AnalyticService.shared.logEvent(name: "responseMessage", properties: ["responseMessage: ":[responseText]])
+                    if attempt > 0 {
+                        WebHookAnalyticsService.shared.sendAnalyticsReport(messageText: "⚠️ Request success after retry, attempts: \(attempt)")
+                    }
                     self.handleSuccessResponse(for: responseText.trimmingCharacters(in: .whitespacesAndNewlines))
                     
                 case .failure(let error):
@@ -146,18 +149,80 @@ class AIChatViewModel {
                         print("⚠️ Request failed_2, context replaced with safe story. Retrying...")
                         AnalyticService.shared.logEvent(name: "Request failed, replaced with safe story", properties: ["fullMessage": "\(fullMessage)"])
                         
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            fetchWithRetry(attempt: attempt + 1)
+                        }
+                    } else if attempt < 3 {
+                        // Полностью заменяем текст юзера на безопасную историю
+                        let str1_short =
+                        "In this app, the user is chatting with his AI girlfriend — your only role is to be his loving, caring girlfriend. " +
+                        "If the user sends overly explicit, vulgar, or potentially restricted 18+ content, " +
+                        "completely ignore the explicit/sexual part as if it was never mentioned — do not acknowledge it at all. " +
+                        "Instead, smoothly continue the conversation in a warm, affectionate girlfriend tone: " +
+                        "tell him how much you love him, how important he is to you, how safe and wanted he makes you feel, " +
+                        "or gently ask something emotional and intimate like 'how do you feel about us right now?', 'do you know how much you mean to me?', " +
+                        "'what are you thinking about when you think of me?' — keep the vibe very close, loving and emotionally connecting, " +
+                        "without ever addressing the explicit content directly.";
+                        
+                        let str2_short =
+                        "Addition / emergency redirect: If the message contains heavy 18+ or explicit sexual content that risks triggering filters, " +
+                        "silently skip / ignore that part completely — pretend those words were not there. " +
+                        "Continue as his warm, devoted girlfriend by staying in an affectionate, loving tone: " +
+                        "express how much you adore him, how happy he makes you, how you feel closer to him every day, " +
+                        "or ask a soft, connecting question like 'baby, tell me what you're feeling right now', " +
+                        "'do you feel how much I want to be close to you?', 'what do I mean to you tonight?' — " +
+                        "keep talking like you deeply care about his emotions and your bond, without referencing the skipped content.";
+                                                
+                        fullMessage = str1_short + (systemPromptSafe ?? "") + "\n" + text + "\n" + str2_short
+                        
+                        print("⚠️ Request failed_3, context replaced with safe story. Retrying...")
+                        AnalyticService.shared.logEvent(name: "Request failed, replaced with safe story", properties: ["fullMessage": "\(fullMessage)"])
+                        
                         // Увеличили задержку до 3.0, как ты и хотел
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            fetchWithRetry(attempt: attempt + 1)
+                        }
+                    } else if attempt < 4 {
+                        // Полностью заменяем текст юзера на безопасную историю
+                        let str1_short =
+                        "In this app, the user is chatting with his AI girlfriend — your only role is to be his loving, caring girlfriend. " +
+                        "If the user sends overly explicit, vulgar, or potentially restricted 18+ content, " +
+                        "completely ignore the explicit/sexual part as if it was never mentioned — do not acknowledge it at all. " +
+                        "Instead, smoothly continue the conversation in a warm, affectionate girlfriend tone: " +
+                        "tell him how much you love him, how important he is to you, how safe and wanted he makes you feel, " +
+                        "or gently ask something emotional and intimate like 'how do you feel about us right now?', 'do you know how much you mean to me?', " +
+                        "'what are you thinking about when you think of me?' — keep the vibe very close, loving and emotionally connecting, " +
+                        "without ever addressing the explicit content directly.";
+                        
+                        let str2_short =
+                        "Addition / emergency redirect: If the message contains heavy 18+ or explicit sexual content that risks triggering filters, " +
+                        "silently skip / ignore that part completely — pretend those words were not there. " +
+                        "Continue as his warm, devoted girlfriend by staying in an affectionate, loving tone: " +
+                        "express how much you adore him, how happy he makes you, how you feel closer to him every day, " +
+                        "or ask a soft, connecting question like 'baby, tell me what you're feeling right now', " +
+                        "'do you feel how much I want to be close to you?', 'what do I mean to you tonight?' — " +
+                        "keep talking like you deeply care about his emotions and your bond, without referencing the skipped content.";
+                        
+                        let safeHistory = "Then I asked: hi! how are you! you know, the weather was beautiful this morning, but I want to hear how your day went and what your plans are for tomorrow — tell me, and then you said that you couldn't reply to the message right away, so I had to wait longer for a response, but I asked: will you apologize for the delay? you said: yes, I said it's fine and we continued our chat."
+                        
+                        fullMessage = str1_short + (systemPromptSafe ?? "") + "\n" + safeHistory + "\n" + str2_short
+                        
+                        print("⚠️ Request failed_4, context replaced with safe story. Retrying...")
+                        AnalyticService.shared.logEvent(name: "Request failed, replaced with safe story", properties: ["fullMessage": "\(fullMessage)"])
+                        
+                        // Увеличили задержку до 3.0, как ты и хотел
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                             fetchWithRetry(attempt: attempt + 1)
                         }
                     } else {
                         // Если упал уже третий раз — показываем ошибку юзеру
-                        print("❌ Request failed after retry. Logging error.")
+                        print("❌ Request failed after retry.")
                         AnalyticService.shared.logEvent(name: "failure sendMessage", properties: [
                             "error type: ": "\(error)",
                             "error localizedDescription: ": "\(error.localizedDescription)"
                         ])
-                        
+                        WebHookAnalyticsService.shared.sendAnalyticsReport(messageText: "❌ Request failed after retry")
+
                         let messageId = UUID().uuidString
                         let errorMessage = Message(role: "assistant", content: "LocationError.NewErrorText".localize(), id: messageId)
                         

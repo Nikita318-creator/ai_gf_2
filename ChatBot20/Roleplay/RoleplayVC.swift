@@ -17,7 +17,7 @@ class RoleplayVC: UIViewController {
                 role: "role.roleplay\(index)".localize(),
                 image: "roleplay\(index)",
                 assistantInfo: "Roleplay.firstMessage\(index)".localize(),
-                userInfo: "This is a strictly enforced roleplay mode where you MUST embody the persona of \("roleplay.userInfo\(index)".localize()) and never break character, ensuring every word and action reflects this specific archetype without exception."
+                userInfo: "\(index - 1)" // так будем в риал тайм вытаскивать актуальный промпт
             )
         } else {
             if index == 5 || index == 9 || index == 10 {
@@ -33,7 +33,7 @@ class RoleplayVC: UIViewController {
                 userInfo: ""
             )
         }
-    }.shuffled()
+    }
 
     
     // MARK: - Initializers

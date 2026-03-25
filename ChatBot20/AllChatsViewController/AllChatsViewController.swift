@@ -12,6 +12,7 @@ class AllChatsViewController: UIViewController {
     private enum RowType {
         case customHeader
         case stories
+        case emptyState
         case chat(index: Int)
     }
     
@@ -93,6 +94,7 @@ class AllChatsViewController: UIViewController {
         tableView.register(ChatListItemCell.self, forCellReuseIdentifier: ChatListItemCell.identifier)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "HeaderCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StoriesCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EmptyCell")
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 200, right: 0)
     }
@@ -104,8 +106,12 @@ class AllChatsViewController: UIViewController {
             rows.append(.stories)
         }
         
-        for i in 0..<viewModel.chats.count {
-            rows.append(.chat(index: i))
+        if viewModel.chats.isEmpty {
+            rows.append(.emptyState)
+        } else {
+            for i in 0..<viewModel.chats.count {
+                rows.append(.chat(index: i))
+            }
         }
     }
 
@@ -194,6 +200,18 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.configure(with: chat)
             cell.setUnread(chat.isUnread)
             return cell
+        case .emptyState:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyCell", for: indexPath)
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            if cell.contentView.subviews.isEmpty {
+                let emptyView = createEmptyStateView()
+                cell.contentView.addSubview(emptyView)
+                emptyView.snp.makeConstraints { make in
+                    make.edges.equalToSuperview()
+                }
+            }
+            return cell
         }
     }
 
@@ -207,6 +225,8 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
             return view.isCurrentDeviceiPad() ? 140 : 115
         case .chat:
             return view.isCurrentDeviceiPad() ? 150 : 100
+        case .emptyState:
+            return 250
         }
     }
 
@@ -246,6 +266,39 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
 //            })
 //        }
 //    }
+    
+    private func createEmptyStateView() -> UIView {
+        let container = UIView()
+        
+        let iconView = UIImageView()
+        iconView.image = UIImage(systemName: "bubble.left.and.bubble.right.fill")
+        iconView.tintColor = .gray
+        iconView.contentMode = .scaleAspectFit
+        
+        let label = UILabel()
+        label.text = "No messages here yet"
+        label.textColor = .gray
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        
+        container.addSubview(iconView)
+        container.addSubview(label)
+        
+        iconView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(50) // Тот самый отступ 50px
+            make.centerX.equalToSuperview()
+            make.size.equalTo(60)
+        }
+        
+        label.snp.makeConstraints { make in
+            make.top.equalTo(iconView.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(40)
+            make.bottom.equalToSuperview()
+        }
+        
+        return container
+    }
 }
 
 extension AllChatsViewController: StoryDetailViewDelegate {
