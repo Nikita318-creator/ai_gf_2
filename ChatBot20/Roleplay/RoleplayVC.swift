@@ -16,7 +16,8 @@ class RoleplayVC: UIViewController {
                 name: "role.roleplay\(index).name".localize(),
                 role: "role.roleplay\(index)".localize(),
                 image: "roleplay\(index)",
-                assistantInfo: "Roleplay.firstMessage\(index)".localize()
+                assistantInfo: "Roleplay.firstMessage\(index)".localize(),
+                userInfo: "This is a strictly enforced roleplay mode where you MUST embody the persona of \("roleplay.userInfo\(index)".localize()) and never break character, ensuring every word and action reflects this specific archetype without exception."
             )
         } else {
             if index == 5 || index == 9 || index == 10 {
@@ -28,7 +29,8 @@ class RoleplayVC: UIViewController {
                 name: "role.roleplay\(index).name".localize(),
                 role: "role.roleplay\(index)".localize(),
                 image: "roleplay\(index)",
-                assistantInfo: "Roleplay.firstMessage\(index)".localize()
+                assistantInfo: "Roleplay.firstMessage\(index)".localize(),
+                userInfo: ""
             )
         }
     }.shuffled()
@@ -242,7 +244,7 @@ extension RoleplayVC: UICollectionViewDataSource {
                 assistantName: roles[indexPath.row].name,
                 expertise: .roleplay,
                 assistantInfo: roles[indexPath.row].assistantInfo,
-                userInfo: "",
+                userInfo: roles[indexPath.row].userInfo,
                 avatarImageName: roles[indexPath.row].image ?? ""
             )
             if let selectedAssistant {

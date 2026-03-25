@@ -8,6 +8,7 @@ struct RoleplayModel {
     let role: String
     let image: String?
     let assistantInfo: String
+    let userInfo: String
 }
 
 class RoleplayCell: UICollectionViewCell {
