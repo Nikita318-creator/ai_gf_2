@@ -63,7 +63,10 @@ class RoleplayCell: UICollectionViewCell {
         bioLabel.layer.shadowRadius = 3
         bioLabel.layer.masksToBounds = false
         contentView.addSubview(bioLabel)
-
+        if !ConfigService.shared.isTestB {
+            bioLabel.isHidden = true
+            blurView.isHidden = true
+        }
         
         nameLabel.textColor = .white
         nameLabel.font = .systemFont(ofSize: 20, weight: .medium)
@@ -103,7 +106,7 @@ class RoleplayCell: UICollectionViewCell {
     func configure(with model: RoleplayModel) {
         imageView.image = UIImage(named: model.image ?? "")
         bioLabel.text = model.role
-        nameLabel.text = " " + model.name + "  "
+        nameLabel.text = " " + model.name + "   "
     }
 }
 

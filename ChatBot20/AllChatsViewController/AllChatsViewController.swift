@@ -276,7 +276,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         iconView.contentMode = .scaleAspectFit
         
         let label = UILabel()
-        label.text = "No messages here yet"
+        label.text = "NoMessagesYet".localize()
         label.textColor = .gray
         label.font = .systemFont(ofSize: 16, weight: .medium)
         label.numberOfLines = 0

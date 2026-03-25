@@ -253,7 +253,11 @@ extension RoleplayVC: UICollectionViewDataSource {
             
             let messageId = UUID().uuidString
             MessageHistoryService().addMessage(
-                Message(role: "assistant", content: "Roleplay.firstMessage\(roles[indexPath.row].id)".localize(), id: messageId),
+                Message(
+                    role: "assistant",
+                    content: ConfigService.shared.isTestB ? "Roleplay.firstMessage\(roles[indexPath.row].id)".localize() : "Roleplay.Hi".localize(),
+                    id: messageId
+                ),
                 assistantId: selectedAssistantID,
                 messageId: messageId
             )

@@ -62,3 +62,23 @@ final class AvatarsService {
         return manualPhotos.union(newPhotos)
     }()
 }
+
+extension AvatarsService {
+    
+    // 4. Логика для кастомных аватарок (createdByUser_X)
+    // Генерируем по 10 фоток для каждого из 4-х ID
+    var userCreatedAvatars: [Int: [String]] {
+        var dict: [Int: [String]] = [:]
+        for id in 1...4 {
+            // Формат: createdByUser_1_1, createdByUser_1_2 ... createdByUser_1_10
+            let photos = (1...10).map { "createdByUser_\(id)_\($0)" }
+            dict[id] = photos
+        }
+        return dict
+    }
+    
+    // Вспомогательная функция, чтобы дергать фотки по ID для кастомных аи-шек
+    func getCustomPhotos(for id: Int) -> [String] {
+        return userCreatedAvatars[id] ?? []
+    }
+}

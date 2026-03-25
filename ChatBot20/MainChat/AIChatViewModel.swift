@@ -329,7 +329,17 @@ class AIChatViewModel {
             avatar.hasPrefix("roleplay"),
             let role = Int(avatar.replacingOccurrences(of: "roleplay", with: ""))
         else {
-            return getRandomAllPhoto()
+            if avatar.contains("CreateDreamWaifu1") {
+                return service.getCustomPhotos(for: 1).randomElement() ?? ""
+            } else if avatar.contains("CreateDreamWaifu2") {
+                return service.getCustomPhotos(for: 2).randomElement() ?? ""
+            } else if avatar.contains("CreateDreamWaifu3") {
+                return service.getCustomPhotos(for: 3).randomElement() ?? ""
+            } else if avatar.contains("CreateDreamWaifu4") {
+                return service.getCustomPhotos(for: 4).randomElement() ?? ""
+            } else {
+                return getRandomAllPhoto()
+            }
         }
 
         guard var rolePhotos = service.roleplayAvatars[role] else {
