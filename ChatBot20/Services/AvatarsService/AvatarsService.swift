@@ -49,7 +49,8 @@ final class AvatarsService {
     lazy var testBAvatars: Set<String> = {
         let manualPhotos: Set<String> = [
             "roleplay4_7", "roleplay4_9", "roleplay6_4", "roleplay6_9",
-            "roleplay7_6", "roleplay7_10", "roleplay8_6", "roleplay10_9"
+            "roleplay7_6", "roleplay7_10", "roleplay8_6", "roleplay10_9",
+            "roleplay5_3",
         ]
         
         // Автоматически добавляем все новые фото (11-20)
