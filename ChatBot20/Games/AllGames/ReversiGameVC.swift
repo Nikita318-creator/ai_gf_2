@@ -55,7 +55,7 @@ class ReversiGameVC: BaseGameViewController {
 
         let imageName: String
         switch userScore {
-        case 0: imageName = "roleplay11"
+        case 0: imageName = "roleplay11_1"
         case 1: imageName = "CGameGirls1"
         case 2: imageName = "CGameGirls2"
         case 3: imageName = "CGameGirls3"
@@ -73,7 +73,7 @@ class ReversiGameVC: BaseGameViewController {
         }
 
         guard ConfigService.shared.isTestB else {
-            self.waifuImageView.image = UIImage(named: "roleplay11")
+            self.waifuImageView.image = UIImage(named: "roleplay11_1")
             return
         }
         UIView.animate(withDuration: 1) {

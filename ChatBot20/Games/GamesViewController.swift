@@ -126,10 +126,9 @@ class GamesViewController: UIViewController {
             
             var boundaryItems: [NSCollectionLayoutBoundarySupplementaryItem] = []
             
-            // 3. ВОЗВРАЩАЕМ ЖЕСТКИЙ ХЕДЕР (Как было до поломки)
+            // 3. ХЕДЕР
             if ConfigService.shared.isTestB {
                 let bannerWidth = layoutEnvironment.container.contentSize.width - 32
-                // Используем .absolute, чтобы он НИКОГДА не тянулся лишнего
                 let headerHeight = bannerWidth / 2 + 16
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                         heightDimension: .absolute(headerHeight))
@@ -143,7 +142,7 @@ class GamesViewController: UIViewController {
             
             // 4. ФУТЕР С ФИДБЕКОМ (Многострочный)
             let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                    heightDimension: .estimated(60)) // Даем запас под 2-3 строки
+                                                    heightDimension: .estimated(60))
             let footer = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: footerSize,
                 elementKind: UICollectionView.elementKindSectionFooter,
