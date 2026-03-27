@@ -148,6 +148,14 @@
 		101FBD762F76FBC7001E6C2A /* StorylineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineCell.swift; sourceTree = "<group>"; };
 		101FBD782F7701E6001E6C2A /* StorylineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineVC.swift; sourceTree = "<group>"; };
 		101FBD7A2F77042A001E6C2A /* StorylineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineViewModel.swift; sourceTree = "<group>"; };
+		101FBD7D2F774BA2001E6C2A /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		101FBD7E2F774CD4001E6C2A /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		101FBD7F2F774D76001E6C2A /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		101FBD802F774D92001E6C2A /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		101FBD812F774DA4001E6C2A /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		101FBD822F774E9D001E6C2A /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		101FBD832F774FB8001E6C2A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		101FBD842F7755E0001E6C2A /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10335FC52DF268510075D699 /* MessageHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryService.swift; sourceTree = "<group>"; };
 		1035BD872E5919250053486C /* BlurryOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryOverlayView.swift; sourceTree = "<group>"; };
 		1035BD942E592FAF0053486C /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
@@ -838,6 +846,14 @@
 				tr,
 				ur,
 				th,
+				he,
+				nl,
+				hr,
+				sv,
+				da,
+				nb,
+				uk,
+				ms,
 			);
 			mainGroup = 1061A1782DF0E9AD00206F61;
 			minimizedProjectReferenceProxies = 1;
@@ -1000,6 +1016,14 @@
 				105F9C4D2F0F6F00007B82CE /* tr */,
 				105F9C4E2F0FE41A007B82CE /* ur */,
 				10C7DA182F2EC99C00ACA897 /* th */,
+				101FBD7D2F774BA2001E6C2A /* he */,
+				101FBD7E2F774CD4001E6C2A /* nl */,
+				101FBD7F2F774D76001E6C2A /* hr */,
+				101FBD802F774D92001E6C2A /* sv */,
+				101FBD812F774DA4001E6C2A /* da */,
+				101FBD822F774E9D001E6C2A /* nb */,
+				101FBD832F774FB8001E6C2A /* uk */,
+				101FBD842F7755E0001E6C2A /* ms */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

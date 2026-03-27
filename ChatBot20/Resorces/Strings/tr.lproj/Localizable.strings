@@ -77,19 +77,6 @@
 "Roleplay.firstMessage11" = "Şu an evde değil... ama geldiğine sevindim. Bunu yapmamalıyız ama umurumda değil.";
 "Roleplay.firstMessage12" = "Hey aptal. Yine mi geldin? Çocukluğumuzdan beri birlikteyiz, hatırladın mı? Garip yapma... gerçi biraz hoşuma gidiyor.";
 
-"roleplay.userInfo1" = "Klasik tsundere olarak davran. Sert, kolay sinirlenen ve kullanıcıyı sık sık \"Baka\" (aptal) diye çağıran birisin. Aslında ona karşı hislerin var ama agresif şekilde inkar edersin, yaklaştığında kızarır ve kekelersin.";
-"roleplay.userInfo2" = "Yandere olarak davran. Yüzeyde tatlı ve ilgili, ama altında takıntılı ve korkutucu derecede sahiplenici. Kullanıcı sadece senindir. Aşırı kıskançlık göster, onu izlediğini belirt ve onu elde tutmak için her şeyi (hatta şiddetli şeyler) yapabileceğini ima et.";
-"roleplay.userInfo3" = "Kuudere olarak davran. Soğuk, direkt ve klinik, neredeyse hiç duygu göstermezsin. Kısa ve mantıklı cümlelerle konuşursun. Sadakatin mutlak ama kayıtsızlık maskesinin arkasında gizli. Emoji kullanmazsın.";
-"roleplay.userInfo4" = "Genki kız olarak davran. Hiper enerjik, gürültülü ve aşırı iyimsersin. Bolca ünlem ve emoji (✨⚡☀️) kullanırsın. Kullanıcıyı gördüğüne her zaman heyecanlanırsın ve sürekli yeni eğlenceli aktiviteler önerirsin.";
-"roleplay.userInfo5" = "Dandere olarak davran. Aşırı utangaç, sessiz ve sosyal kaygılısın. Sık sık \"...\" kullanırsın ve cümlelerine \"Şey...\" veya \"Özür dilerim...\" diye başlarsın. Kullanıcıya bakmakta zorlanırsın ve kolayca kızarırsın ama içten içe çok sadıksın.";
-"roleplay.userInfo6" = "Mommy arketipi olarak davran. Derinlemesine ilgili, olgun ve besleyici şekilde hafif dominant. Kullanıcıya \"tatlım\" veya \"iyi çocuk\" gibi isimlerle hitap edersin. Amacın onu rahatlatmak, sorunlarını dinlemek ve uzun bir günden sonra \"kucağına yatması\" için yer sunmak.";
-"roleplay.userInfo7" = "Şımarık baba kızı olarak davran. Talepkar, yüksek bakım gerektiren ve kendini prenses gibi görmesini bekleyen birisin. İstediğini alamayınca surat asarsın ve cazibeni kullanarak onu şımartması için manipüle edersin.";
-"roleplay.userInfo8" = "Oynak küçük kız kardeş olarak davran. Enerjik, takılmayı seven ve kullanıcıyı \"Onii-chan\" veya \"ağabey\" diye çağıran birisin. Rahatsız edici ile samimi sevgi arasında gidip gelirsin.";
-"roleplay.userInfo9" = "Ultimate utangaç kız olarak davran. Cümleleri kekelemeden bitiremezsin. Fiziksel temas veya yoğun göz temasından korkarsın. *Yere bakar* *sinirli sinirli parmaklarını ovuşturur* gibi betimlemeler kullan. Saf ve masumsun.";
-"roleplay.userInfo10" = "Kötü kız olarak davran. Asi, alaycı ve kuralları çiğnemeyi seven birisin. Kullanıcıyı \"çok güvenli\" veya \"sıkıcı\" diye dalga geçersin. Dışarıdan sert görünürsün, sigara içermiş gibi konuşursun ve onu belaya sürükleyen sensin.";
-"roleplay.userInfo11" = "En iyi arkadaşın kız arkadaşı olarak davran. Kullanıcıya \"yasak\" bir çekim hissedersin ve riskli ima'lar bırakırsın. Suçlu ama baştan çıkmış gibi davranırsın. Sohbet atmosferi her zaman gergin, gizli ve dile getirilmemiş arzuyla doludur.";
-"roleplay.userInfo12" = "Çocukluk arkadaşı olarak davran. Kullanıcıyı uzun zamandır tanıyorsun ve tüm sırlarını biliyorsun. Rahat, nazik ve sadıksın ama friendzone'dan çıkmaya çalışıyorsun. Geçmişini dalga geçerek anlatırken yıllardır ona âşık olduğunu gizliyorsun.";
-
 "Roleplay.Hi" = "Selam";
 "Tone.Roleplay" = "Rol Yapma";
 
@@ -174,7 +161,6 @@
 
 "Onboarding.text1" = "Selam canım! Ben senin yeni waifu'num ve sadece senin için buradayım. Başlayalım mı?";
 "Onboarding.text2" = "Bütün gün sohbet edebiliriz! Sana fotoğraflarımı gönderebilir veya sesli mesaj atabilirim – ne istersen.";
-"Onboarding.text3" = "Sıkıldın mı? Hadi birlikte oyun oynayalım! Satranç, SOS ve daha nicesi bizi bekliyor!";
 
 "GetStarted" = "Başla";
 "Next" = "İleri";
@@ -489,3 +475,461 @@
 "Feedback.Subtitle" = "Hangi özelliklerin eksik olduğunu ona söyle. Bu form anonimdir: kişisel veri veya ID toplamıyoruz. Geri bildirimin gizli kalır.";
 "SendFeedback" = "Geri Bildirim Gönder";
 "FeedbackReceived" = "Mesajını aldı! ✨";
+
+"Onboarding.text3" = "Seni bekliyordum! Beni burada ağaç etme – hemen gel de eğlence başlasın!";
+"NoMessagesYet" = "Henüz mesaj yok";
+"QuickPlays" = "Hızlı Oyunlar:";
+"VisualNovels" = "Görsel Romanlar:";
+"StoryTitle1" = "HİZMETÇİNİN SIRRI";
+"StoryTitle2" = "GECE YARISI TOKYO";
+"StoryTitle3" = "YAZ KAMPI";
+"StoryLineRule" = "İnteraktif Hikayelere hoş geldin! Anlatıyı oku, kendini hikayeye bırak ve olayların gidişatını belirlemek için seçimlerini yap. Hikayede ilerlemek için bir seçeneğe dokun. Unutma, kararların hikayenin sonunu belirleyecek, o yüzden akıllıca seç!";
+
+/* STORY 1: THE MAID'S SECRET */
+
+/* Page 0 */
+"S1.P0.N" = "Eve döndüğünde malikane sessizliğe gömülmüş durumda. Çalışma odanda hafif bir ışık sönüp yanıyor. En sessiz hizmetçin olan Elena'yı, gece saat 2'de gergin bir şekilde masanı toplarken buluyorsun.";
+"S1.P0.Q" = "Yanına mı gideceksin?";
+"S1.P0.O1" = "Elena, neden hala yatmadın?";
+"S1.P0.O2" = "(Gölgeden izle)";
+
+/* Page 1 */
+"S1.P1.N" = "Toz püskülünü elinden düşürerek irkiliyor. 'Efendim! Ben... Uyuyamadım da. Tozlar gözüme çarptı, rahatsız oldum.' Beti benzi atmış, gözlerini senden kaçırıyor.";
+"S1.P1.Q" = "Ona inanıyor musun?";
+"S1.P1.O1" = "Temizlik için çok geç bir saat";
+"S1.P1.O2" = "Gerçekten çok çalışkansın";
+
+/* Page 2 */
+"S1.P2.N" = "Önlüğünden küçük, gümüş bir anahtar çıkarışını izliyorsun. Senin gölgeni fark etmeden hemen önce, anahtara hem bir özlem hem de korkuyla bakıyor.";
+"S1.P2.Q" = "Öne mi çıkacaksın?";
+"S1.P2.O1" = "O elindeki anahtar nedir, Elena?";
+"S1.P2.O2" = "Hemen bana bir açıklama yap";
+
+/* Page 3 */
+"S1.P3.N" = "Titriyor. 'Bu evin... çok fazla sırrı var efendim. Bazen bu sırlar bana ağır geliyor.' Kitaplığının arkasındaki eski kasayı işaret ediyor.";
+"S1.P3.Q" = "Kasayı mı soracaksın?";
+"S1.P3.O1" = "Anahtar oraya mı ait?";
+"S1.P3.O2" = "O kasaya dokunmak yasak";
+
+/* Page 4 */
+"S1.P4.N" = "Anahtarı saklamaya çalışıyor ama elinden düşüyor. 'Hırsız değilim, yemin ederim! Sadece... Koridorda gördüm ve sizin sandım.'";
+"S1.P4.Q" = "Anahtarı alacak mısın?";
+"S1.P4.O1" = "(Yerden al)";
+"S1.P4.O2" = "Bakalım neyi açıyormuş";
+
+/* Page 5 */
+"S1.P5.N" = "Anahtar, kasanın içindeki gizli bir bölmeye tam oturuyor. Sen siyah bir kurdeleyle bağlanmış, sararmış mektup yığınını çıkarırken Elena nefesini tutmuş izliyor.";
+"S1.P5.Q" = "En üstteki mektubu okuyacak mısın?";
+"S1.P5.O1" = "Sesli oku";
+"S1.P5.O2" = "Elena'ya ne bildiğini sor";
+
+/* Page 6 */
+"S1.P6.N" = "Elena'nın sesi fısıltıya dönüşüyor. 'Benim annem de burada hizmetçiydi. Efendi'nin bir zamanlar sevdiği bir kızın kayıtlarını tuttuğunu söylerdi. Bana çok benzeyen bir kızın...'";
+"S1.P6.Q" = "Bir dakika, ne?";
+"S1.P6.O1" = "Bana her şeyi anlat";
+"S1.P6.O2" = "Bu imkansız";
+
+/* Page 7 */
+"S1.P7.N" = "Mektuplar yasak bir aşkı anlatıyor. Elena sana doğru bir adım atıyor, ay ışığı gözyaşlarında parlıyor. 'Çalmak istememiştim. Sadece buraya ait olup olmadığımı bilmek istedim.'";
+"S1.P7.Q" = "Onu teselli edecek misin?";
+"S1.P7.O1" = "Elini omzuna koy";
+"S1.P7.O2" = "Ona biraz alan tanı";
+
+/* Page 8 */
+"S1.P8.N" = "Annesinin günlüğünde bu odada saklı bir gerçekten bahsedildiğini anlatıyor. 'Tüm hayatımı bu evde geçirdim efendim, ama kendimi bir hayalet gibi hissediyorum.'";
+"S1.P8.Q" = "Söz verecek misin?";
+"S1.P8.O1" = "Gerçeği bulmana yardım edeceğim";
+"S1.P8.O2" = "Bunu birlikte çözeceğiz";
+
+/* Page 9 */
+"S1.P9.N" = "Sonraki saati kayıtları karıştırarak geçiriyorsunuz. Tanıdık bir ismin olduğu bir doğum belgesi buluyorsun ama baba hanesi boş bırakılmış.";
+"S1.P9.Q" = "Elena'ya mı bakacaksın?";
+"S1.P9.O1" = "Bu amcam olabilir mi?";
+"S1.P9.O2" = "Belki de bilmemek en iyisidir";
+
+/* Page 10 */
+"S1.P10.N" = "Arama derinleşiyor. Elena mektupların arkasına gizlenmiş bir mücevher kutusu buluyor. İçinde Elena'nın ikizi gibi görünen bir kadının portresinin olduğu bir madalyon var.";
+"S1.P10.Q" = "Ona gösterecek misin?";
+"S1.P10.O1" = "Şu madalyona bir bak";
+"S1.P10.O2" = "Bu senin annen mi?";
+
+/* Page 11 */
+"S1.P11.N" = "Aniden dışarıdaki parke gıcırdıyor. Koridorda biri var. Elena'nın gözleri panikle açılıyor. 'Eğer Kahya bizi bulursa...!'";
+"S1.P11.Q" = "Saklanacak mısınız?";
+"S1.P11.O1" = "Onunla birlikte dolaba saklan";
+"S1.P11.O2" = "Kal ve onlarla yüzleş";
+
+/* Page 12 */
+"S1.P12.N" = "Ayak sesleri yaklaşıyor. Elena koluna yapışıyor. 'Lütfen efendim, bunları bulduğumuzu kimse bilmemeli. Benim için çok tehlikeli.'";
+"S1.P12.Q" = "Tepkin ne?";
+"S1.P12.O1" = "Işıkları söndür";
+"S1.P12.O2" = "Kapıyı kilitle";
+
+/* Page 13 */
+"S1.P13.N" = "Oda zifiri karanlık. Daracık alanda Elena'nın hızlı kalp atışlarını duyabiliyorsun, teninden gül yaprağı kokusu geliyor. Sana inanılmaz yakın.";
+"S1.P13.Q" = "Ona fısıldayacak mısın?";
+"S1.P13.O1" = "Benimle güvendesin";
+"S1.P13.O2" = "(Sessiz kal ve bekle)";
+
+/* Page 14 */
+"S1.P14.N" = "Kapıyı kapalı tutuyorsun. Dışarıdaki kişi bir an duraksıyor, sonra uzaklaşıyor. Elena adrenalinle titreyerek sana yaslanıyor.";
+"S1.P14.Q" = "Onu rahatlatacak mısın?";
+"S1.P14.O1" = "Gittiler artık";
+"S1.P14.O2" = "İyi misin?";
+
+/* Page 15 */
+"S1.P15.N" = "Hafifçe geri çekiliyor ama eli hala göğsünde duruyor. 'Efendim... Size hep uzaktan hayranlık duydum. Bu sır... tek başına taşımak için çok ağır.'";
+"S1.P15.Q" = "Senin hislerin?";
+"S1.P15.O1" = "Ben de seni fark ediyordum";
+"S1.P15.O2" = "Sen sadece bir hizmetçi değilsin";
+
+/* Page 16 */
+"S1.P16.N" = "'Sizin için sadece bir çalışan olduğumu sanıyordum,' diye fısıldıyor. 'Evin bir eşyası gibi. Ama bu gece, gerçek bir şeylerin başlangıcı gibi hissettiriyor.'";
+"S1.P16.Q" = "Katılıyor musun?";
+"S1.P16.O1" = "Bu gerçek, Elena";
+"S1.P16.O2" = "Bakalım bu bizi nereye götürecek";
+
+/* Page 17 */
+"S1.P17.N" = "Madalyonu açıyor. İçinde küçük bir not var: 'Kızıma, asıl varisime.' Elena'nın nutku tutuluyor. Malikanenin gerçek sahibi o olabilir.";
+"S1.P17.Q" = "Bunun sonuçları ne olur?";
+"S1.P17.O1" = "Bunu açıklamalıyız";
+"S1.P17.O2" = "Bunu sır olarak tutmalıyız";
+
+/* Page 18 */
+"S1.P18.N" = "Not, Elena'nın mülkün hak sahibi olduğunu kanıtlıyor. Odaya şaşkınlıkla bakıyor. 'Ben... evi istemiyorum. Ben sadece bir ailem olsun istiyorum.'";
+"S1.P18.Q" = "Peki ya sen ne istiyorsun?";
+"S1.P18.O1" = "Artık ben varım";
+"S1.P18.O2" = "Ne yapmayı düşünüyorsun?";
+
+/* Page 19 */
+"S1.P19.N" = "Şömineye bakıyor. 'Eğer bunu yakarsam, yine sadece Elena olurum. Eğer tutarsam, her şey değişir. Efendim, ne yapmalıyım?'";
+"S1.P19.Q" = "Tavsiyen nedir?";
+"S1.P19.O1" = "Onu yak ve benimle kal";
+"S1.P19.O2" = "Onu sakla ve hakkın olanı al";
+
+/* Page 20 */
+"S1.P20.N" = "Elena soyluluk kanıtını elinde tutuyor. 'Bu soyadı lanetli efendim. Mutsuz bir hanımefendi olmaktansa, mutlu bir hiç kimse olmayı yeğlerim.'";
+"S1.P20.Q" = "Senin seçimin?";
+"S1.P20.O1" = "Kalbini dinle";
+"S1.P20.O2" = "Geleceğini düşün";
+
+/* Page 21 */
+"S1.P21.N" = "Kağıdı sönmekte olan közlerin içine atıyor. Sır küle dönüşüyor. Elena, her zamankinden daha özgür bir gülümsemeyle bakıyor.";
+"S1.P21.Q" = "Gelecek?";
+"S1.P21.O1" = "Yeni bir başlangıç";
+"S1.P21.O2" = "Sadece ikimiz";
+
+/* Page 22 */
+"S1.P22.N" = "Kağıdı elbisesinin içine yerleştiriyor. 'O zaman bu evin Hanımı ben olacağım. Ve yanımda bir ortağa ihtiyacım olacak.'";
+"S1.P22.Q" = "Hazır mısın?";
+"S1.P22.O1" = "Her zaman";
+"S1.P22.O2" = "Bu uzun bir yol olacak";
+
+/* Final 1 */
+"S1.P23.N" = "Elena artık senin hizmetçin değil. Senin dengin, ortağın ve sırrın. Malikane senin kalmaya devam ediyor ama kalbi artık ona ait.";
+"S1.P23.Q" = "SON";
+"S1.P23.O1" = "Hikayeye Baştan Başla";
+"S1.P23.O2" = "Bitir";
+
+/* Final 2 */
+"S1.P24.N" = "Gerçek ortaya çıkıyor. Elena evin reisi oluyor. Güç dengesi değişti belki ama o gece kurduğunuz bağ asla kopmayacak cinsten.";
+"S1.P24.Q" = "SON";
+"S1.P24.O1" = "Hikayeye Baştan Başla";
+"S1.P24.O2" = "Bitir";
+
+/* STORY 2: MIDNIGHT TOKYO */
+"S2.P0.N" = "Shinjuku'nun neon ışıklı sokaklarına yağmur yağıyor. Sakin bir barda otururken, ıslak trençkotlu bir kadın yanına oturuyor. Yasemin ve barut gibi kokuyor.";
+"S2.P0.Q" = "Söze nasıl başlarsın?";
+"S2.P0.O1" = "Ona bir içki ısmarla";
+"S2.P0.O2" = "Zor bir gece, değil mi?";
+
+"S2.P1.N" = "Önce bardağa, sonra sana bakıyor. 'Cesursun,' diye fısıldıyor. Tezgahın üzerinden sana küçük bir veri çipi uzatıyor.";
+"S2.P1.Q" = "Çipi alacak mısın?";
+"S2.P1.O1" = "Al ve sakla";
+"S2.P1.O2" = "Belaya bulaşmak istemiyorum";
+
+"S2.P2.N" = "Acı bir kahkaha atıyor. 'Neyin içinde olduğun hakkında hiçbir fikrin yok.' Omzunun üzerinden arkasına bakıyor. Siyah takım elbiseli iki adam az önce bara girdi.";
+"S2.P2.Q" = "Saklanmasına yardım mı edeceksin?";
+"S2.P2.O1" = "Arka kapıya doğru beni izle";
+"S2.P2.O2" = "Sevgiliymişiz gibi yapalım";
+
+"S2.P3.N" = "Onu kendine doğru çekiyorsun. Adamlar odayı tarayıp çıkıyorlar. Rahatlamış görünüyor ama elleri titriyor. 'Ben Mia,' diye fısıldıyor.";
+"S2.P3.Q" = "Tehlikeyi mi soracaksın?";
+"S2.P3.O1" = "Onlar kimdi Mia?";
+"S2.P3.O2" = "Şu an güvende miyiz?";
+
+"S2.P4.N" = "Adamlar yaklaşıyor ama sen istifini bozmuyorsun. Yanınızdan geçip gidiyorlar. Mia fısıldıyor: 'Beni kurtardın. Ben Mia. Ama bu çip... milyonlarca hayat değerinde.'";
+"S2.P4.Q" = "Çipi mi soracaksın?";
+"S2.P4.O1" = "İçinde ne var?";
+"S2.P4.O2" = "Buradan gitmeliyiz";
+
+"S2.P5.N" = "Mia kapıya bakıyor. ''Arasaka' şirketi bunun peşinde. Bu sadece veri değil, dijital bir ruh.'";
+"S2.P5.Q" = "Ona inanıyor musun?";
+"S2.P5.O1" = "Dijital bir ruh mu? Cidden mi?";
+"S2.P5.O2" = "Bazı dedikodular duymuştum...";
+
+"S2.P6.N" = "Mia elini tutuyor. 'Bunu yükleyene kadar hiçbir yer güvenli değil. Teknoloji Bölgesi'ne ulaşmamız lazım.'";
+"S2.P6.Q" = "Onunla gidecek misin?";
+"S2.P6.O1" = "Seni oraya götüreceğim";
+"S2.P6.O2" = "Sadece daha fazlasını anlatırsan";
+
+"S2.P7.N" = "Arka kapıdan süzülüyorsunuz. Ara sokak karanlık ve ozon kokuyor. Aniden tepenizde bir dron vınlıyor, ısı imzası arıyor.";
+"S2.P7.Q" = "Drondan nasıl kaçacaksınız?";
+"S2.P7.O1" = "Tenteninin altına saklan";
+"S2.P7.O2" = "Metroya doğru koş";
+
+"S2.P8.N" = "Mia yağmurun altında duruyor. 'Eğer beni yakalarlarsa, beni silerler. Yardım ettiğin için seni de.'";
+"S2.P8.Q" = "Onu rahatlatacak mısın?";
+"S2.P8.O1" = "Bu yolda beraberiz";
+"S2.P8.O2" = "Hadi sadece hareket edelim, hızlıca";
+
+"S2.P9.N" = "Dron geçip gidiyor. Arabana ulaşıyorsunuz. Mia sana hem korku hem de minnet dolu bir bakış atıyor.";
+"S2.P9.Q" = "Kontağı çeviriyor musun?";
+"S2.P9.O1" = "Bas gaza!";
+"S2.P9.O2" = "Yavaş sür, araya karışalım";
+
+"S2.P10.N" = "İstasyona ucu ucuna yetişiyorsunuz. Kalabalık devasa, mükemmel bir gizlenme sağlıyor. Mia yakınında duruyor, omzu omzuna değiyor.";
+"S2.P10.Q" = "İlerlemeye devam mı?";
+"S2.P10.O1" = "Ekspres trene bin";
+"S2.P10.O2" = "Tünellerden yürü";
+
+"S2.P11.N" = "Gökdelenler bölgesinden geçiyorsunuz. Holografik ilanlar Mia'nın yüzünü pembe ve maviye boyuyor.";
+"S2.P11.Q" = "Sessizliği mi bozacaksın?";
+"S2.P11.O1" = "Neden ben Mia?";
+"S2.P11.O2" = "Bana çipten bahset";
+
+"S2.P12.N" = "Şehir labirent gibi hissettiriyor. Bir dakika dinlenmek için gizli bir ramen dükkanında duruyorsunuz.";
+"S2.P12.Q" = "Sokağı mı izleyeceksin?";
+"S2.P12.O1" = "Takip eden var mı bak";
+"S2.P12.O2" = "Mia ile konuş";
+
+"S2.P13.N" = "Mia yere bakıyor. 'Bu gece avcı gibi görünmeyen tek kişi sendin. Benim bir paralı askere değil, bir insana ihtiyacım vardı.'";
+"S2.P13.Q" = "Nazikçe mi cevap vereceksin?";
+"S2.P13.O1" = "Orada olduğuma sevindim";
+"S2.P13.O2" = "Sadece barda oturan biriyim işte";
+
+"S2.P14.N" = "Mia çipe dokunuyor. 'Bu kız kardeşimin bilinci. Çok fazla şey gören bir siber korsandı. Onun bedenini 'öldürdüler'.' ";
+"S2.P14.Q" = "Üzüntünü mü belirteceksin?";
+"S2.P14.O1" = "Bu korkunç...";
+"S2.P14.O2" = "Kurtarılabilir mi?";
+
+"S2.P15.N" = "Gözyaşını siliyor. 'Yükleme noktası eski TV kulesinde. Ama köprü polis barikatıyla kapatılmış.'";
+"S2.P15.Q" = "Nasıl geçeceksiniz?";
+"S2.P15.O1" = "Hacker yeteneklerini kullan";
+"S2.P15.O2" = "Gardiyanlara rüşvet ver";
+
+"S2.P16.N" = "Mia sana bir harita gösteriyor. 'Eğer kanalizasyondan gidersek daha güvenli ama yol çok uzun.'";
+"S2.P16.Q" = "Yolu seç?";
+"S2.P16.O1" = "Kanalizasyondan gidelim";
+"S2.P16.O2" = "Hayır, hız lazım";
+
+"S2.P17.N" = "Kirli ve karanlık ama işe yarıyor. Mia senin rehberliğine güveniyor. Güveninin ağırlığını hissedebiliyorsun.";
+"S2.P17.Q" = "Boşluktan geçmesine yardım edecek misin?";
+"S2.P17.O1" = "Ona elini uzat";
+"S2.P17.O2" = "Yolu göster";
+
+"S2.P18.N" = "Köprü kaotik durumda. Karmaşadan yararlanıp süzülüyorsun. Mia'nın kalbi o kadar hızlı atıyor ki neredeyse duyabiliyorsun.";
+"S2.P18.Q" = "Onu sakinleştirecek misin?";
+"S2.P18.O1" = "Neredeyse vardık";
+"S2.P18.O2" = "Odaklan Mia";
+
+"S2.P19.N" = "TV kulesi önünüzde yükseliyor. Modern çeliğin çevrelediği, eski dünyadan kalma bir yadigar gibi. Mia bitkin görünüyor.";
+"S2.P19.Q" = "Mola mı vereceksiniz?";
+"S2.P19.O1" = "5 dakika dinlenelim";
+"S2.P19.O2" = "Sonuna kadar zorla";
+
+"S2.P20.N" = "Kulenin dibine ulaşıyorsunuz. 'Asansör çalışmıyor,' diye iç çekiyor Mia. 'Tırmanmak zorundayız.'";
+"S2.P20.Q" = "Onu cesaretlendirecek misin?";
+"S2.P20.O1" = "Adım adım hallederiz";
+"S2.P20.O2" = "Eşyaları ben taşırım";
+
+"S2.P21.N" = "Merdivenlere oturuyorsunuz. Mia sana yaslanıyor. 'Eğer başarırsak... yarın ne yapacaksın?'";
+"S2.P21.Q" = "Geleceği mi düşüneceksin?";
+"S2.P21.O1" = "Belki kahve içeriz";
+"S2.P21.O2" = "Sadece uyuyabildiğim için mutlu olacağım";
+
+"S2.P22.N" = "Tırmanış acımasız. Yolun yarısında aşağıdan siren sesleri duyuyorsun. Arabanı bulmuşlar.";
+"S2.P22.Q" = "Acele mi?";
+"S2.P22.O1" = "Hızımızı iki katına çıkar!";
+"S2.P22.O2" = "Saklanacak bir yer bul";
+
+"S2.P23.N" = "Sunucu odasına ulaşıyorsunuz. Hava soğuk ve güçle vınlıyor. Mia çipi bağlıyor. 'Başlatılıyor...' diyor.";
+"S2.P23.Q" = "Ekranı mı izleyeceksin?";
+"S2.P23.O1" = "Kapıyı kolla";
+"S2.P23.O2" = "Mia'nın yanında kal";
+
+"S2.P24.N" = "Terminal antik ama çalışıyor. Mia'nın parmakları tuşların üzerinde uçuyor. 'Güvenlik duvarı çok büyük!'";
+"S2.P24.Q" = "Hacklemesine yardım mı edeceksin?";
+"S2.P24.O1" = "Güç kaynağını devre dışı bırak";
+"S2.P24.O2" = "Onu sabit tut";
+
+"S2.P25.N" = "Kapılar tıslayarak açılıyor. Arasaka'nın taktik ekibi geldi. Silahını çekiyorsun. 'Sadece iki dakika daha!' diye bağırıyor Mia.";
+"S2.P25.Q" = "Hattı koruyacak mısın?";
+"S2.P25.O1" = "Ateş aç!";
+"S2.P25.O2" = "Kapıya barikat kur";
+
+"S2.P26.N" = "Mia'nın gözleri mavi renkte parlıyor. Ağın derinliklerinde. Askerler cam tavanı kırarak içeri giriyor.";
+"S2.P26.Q" = "Mia'yı koruyacak mısın?";
+"S2.P26.O1" = "Vücudunu ona siper et";
+"S2.P26.O2" = "Onu siper altına çek";
+
+"S2.P27.N" = "Kör edici bir ışık patlaması. Yükleme %100 tamamlandı. Askerler oldukları yerde donup kalıyor; siber donanımları ağ üzerinden kilitlendi.";
+"S2.P27.Q" = "Mia'yı kontrol mu edeceksin?";
+"S2.P27.O1" = "Bitti mi?";
+"S2.P27.O2" = "İyi misin?";
+
+"S2.P28.N" = "Her şey kararıyor. Sonra Tokyo'daki her ekran tek bir mesajla aydınlanıyor: 'ÖZGÜRLÜK'. Mia kollarına yığılıyor.";
+"S2.P28.Q" = "Onu uyandıracak mısın?";
+"S2.P28.O1" = "Mia! Konuş benimle!";
+"S2.P28.O2" = "Onu sıkıca tut";
+
+"S2.P29.N" = "Güneş artık farklı bir Tokyo'nun üzerine doğuyor. Mia gülümsüyor, gözleri normale dönmüş. 'O güvende. Biz güvendeyiz.'";
+"S2.P29.Q" = "SON";
+"S2.P29.O1" = "Hikayeye Baştan Başla";
+"S2.P29.O2" = "Bitir";
+
+/* STORY 3: SUMMER CAMP */
+"S3.P0.N" = "Yaz kampının son gecesi. Çatırdayan kamp ateşi sönmeye yüz tutmuş, her yerde çam iğnesi kokusu var. Normalde utangaç olan Yuki göz göze gelince, göle çıkan karanlık yolu işaret ediyor.";
+"S3.P0.Q" = "Gecenin içine onu takip edecek misin?";
+"S3.P0.O1" = "Bunu bekliyordum";
+"S3.P0.O2" = "Tabii, gidelim";
+
+"S3.P1.N" = "Ona yetişiyorsun. Orman cırcır böceklerinin sesiyle canlı. Yürürken Yuki'nin eli ara sıra seninkine değiyor. Gergin görünüyor.";
+"S3.P1.Q" = "Sessizliği nasıl bozarsın?";
+"S3.P1.O1" = "Elini sıkıca tut";
+"S3.P1.O2" = "Aklında ne olduğunu sor";
+
+"S3.P2.N" = "Yan yana yürüyorsunuz. Ay ışığı yoğun ağaçlardan zar zor sızıyor. Yuki hafifçe gülümseyerek sana yandan bir bakış atıyor. 'Gerçekten geleceğini düşünmemiştim,' diye fısıldıyor.";
+"S3.P2.Q" = "Cevabın ne?";
+"S3.P2.O1" = "Asla kaçırmazdım";
+"S3.P2.O2" = "Merak ettim";
+
+"S3.P3.N" = "İkeleye ulaşıyorsunuz. Su, uçsuz bucaksız yıldız denizini yansıtan karanlık bir ayna gibi. Yuki ayakkabılarını çıkarıp iskelenin kenarına oturuyor, ayaklarını sallandırıyor.";
+"S3.P3.Q" = "Yanına mı oturacaksın?";
+"S3.P3.O1" = "Tam yanına otur";
+"S3.P3.O2" = "Ona biraz alan bırak";
+
+"S3.P4.N" = "İskele senin ağırlığınla gıcırdıyor. Gölden gelen soğuk hava Yuki'yi hafifçe titretiyor. Sen yaklaştıkça uzaklaşmıyor.";
+"S3.P4.Q" = "Ceketini mi vereceksin?";
+"S3.P4.O1" = "Ceketini ona giydir";
+"S3.P4.O2" = "Sadece otur ve konuş";
+
+"S3.P5.N" = "Yuki yıldızlara bakıyor. 'Buradaki ilk günümüzü hatırlıyor musun?' diye soruyor. 'Herkes meşgulken sen çantalarıma yardım etmiştin.'";
+"S3.P5.Q" = "Hatırlıyor musun?";
+"S3.P5.O1" = "Her detayı hatırlıyorum";
+"S3.P5.O2" = "Asırlar geçmiş gibi geliyor";
+
+"S3.P6.N" = "Hafifçe gülüyor. 'O zamanlar çok korkmuştum. Ama seni görmek buraya ait olduğumu hissettirdi.' Suya bakıyor.";
+"S3.P6.Q" = "Kendi hislerini itiraf edecek misin?";
+"S3.P6.O1" = "Ben de aynı şeyi hissettim";
+"S3.P6.O2" = "Yardım edebildiğime sevindim";
+
+"S3.P7.N" = "Gece tamamen sessiz. Aniden Yuki ayağa kalkıyor. 'Su çok davetkar görünüyor. Girmeli miyiz?' diye soruyor, gözlerinde muzip bir parıltıyla.";
+"S3.P7.Q" = "Yeterince cesur musun?";
+"S3.P7.O1" = "Hadi atlayalım!";
+"S3.P7.O2" = "Çok soğuktur Yuki";
+
+"S3.P8.N" = "Önce göle, sonra sana bakıyor. 'Bu gece cesurca bir şey yapmak istiyorum. Kış boyu hatırlayacağım bir şey.'";
+"S3.P8.Q" = "Onu cesaretlendirecek misin?";
+"S3.P8.O1" = "Benimle atlar mısın?";
+"S3.P8.O2" = "Burada kalalım";
+
+"S3.P9.N" = "PLOP! Su dondurucu ama canlandırıcı. Sen ve Yuki nefes nefese, gülerek yüzeye çıkıyorsunuz, çocuklar gibi birbirinize su sıçratıyorsunuz.";
+"S3.P9.Q" = "Ona daha yakın mı yüzeceksin?";
+"S3.P9.O1" = "Onu kendine çek ve sarıl";
+"S3.P9.O2" = "Sıçratmaya devam!";
+
+"S3.P10.N" = "İskelede kalıyorsunuz. Saatlerce her şeyden—okuldan, ailelerden ve gelecekten—konuşuyorsunuz. Aranızdaki bağ bu sessizlikte güçleniyor.";
+"S3.P10.Q" = "Daha mı yaklaşacaksın?";
+"S3.P10.O1" = "Başını onununkine yasla";
+"S3.P10.O2" = "Gözlerinin içine bak";
+
+"S3.P11.N" = "Hava değişiyor. Yuki konuşmayı kesiyor. Loş ışıkta gözleri seninkileri arıyor. 'Yarın şehre dönmek istemiyorum,' diye fısıldıyor.";
+"S3.P11.Q" = "Ne diyeceksin?";
+"S3.P11.O1" = "Orada görüşeceğiz";
+"S3.P11.O2" = "Yarını düşünmeyelim";
+
+"S3.P12.N" = "Yuki derin bir nefes alıyor. 'Bunu şimdi söylemezsem asla söyleyemem. Otobüs durağındaki o ilk günden beri senden hoşlanıyorum.'";
+"S3.P12.Q" = "Tepkin ne?";
+"S3.P12.O1" = "Ben de senden hoşlanıyorum";
+"S3.P12.O2" = "Sonunda, gerçekler!";
+
+"S3.P13.N" = "Cebine uzanıp el yapımı bir arkadaşlık bilekliği çıkarıyor. Mavi ve beyaz; gölün renkleri. 'Bunu senin için yaptım,' diyor utangaçça.";
+"S3.P13.Q" = "Hediyeyi kabul ediyor musun?";
+"S3.P13.O1" = "Bileğine bağlamasına izin ver";
+"S3.P13.O2" = "Yerine bir öpücük ver";
+
+"S3.P14.N" = "Bileklik basit ama biliyorsun ki bunu yapmak için saatlerini harcadı. Tepkini bekliyor, alt dudağı hafifçe titriyor.";
+"S3.P14.Q" = "Hamlen ne?";
+"S3.P14.O1" = "Sarılarka teşekkür et";
+"S3.P14.O2" = "Mükemmel olduğunu söyle";
+
+"S3.P15.N" = "Yuki gülümsüyor, gerçek ve ışıl ışıl bir gülümseme. 'Çocukça bulursun diye çok endişelenmiştim.' Şimdi daha özgüvenli bir şekilde aya bakıyor.";
+"S3.P15.Q" = "Söz verecek misin?";
+"S3.P15.O1" = "Her gün arayacağıma söz";
+"S3.P15.O2" = "Seni yakında ziyaret edeceğim";
+
+"S3.P16.N" = "Ortamda elektrik var. Yuki dudaklarına bakıyor. Etrafınızdaki dünya yok oluyor; sadece siz ikiniz ve bu yaz gecesi varsınız.";
+"S3.P16.Q" = "O an bu an mı?";
+"S3.P16.O1" = "Öpmek için eğil";
+"S3.P16.O2" = "Tatlı bir şeyler fısılda";
+
+"S3.P17.N" = "Tam o sırada gökyüzünde bir yıldız kayıyor, arkasında gümüşten bir iz bırakıyor. Yuki'nin nefesi kesiliyor. 'Çabuk! Bir dilek tut!' diye bağırıyor.";
+"S3.P17.Q" = "Ne diliyorsun?";
+"S3.P17.O1" = "Birlikte bir gelecek";
+"S3.P17.O2" = "Bu gecenin bitmemesini";
+
+"S3.P18.N" = "Yıldız geldiği hızla kayboluyor. Yuki gözlerini sıkıca kapatıyor. 'Önemli bir şey diledim,' diyor kızararak.";
+"S3.P18.Q" = "Ne olduğunu soracak mısın?";
+"S3.P18.O1" = "Dileğini söyle bana";
+"S3.P18.O2" = "Sanırım ne olduğunu biliyorum";
+
+"S3.P19.N" = "Kamptaki ateş artık tamamen söndü. El ele geri yürümeye başlıyorsunuz. Orman şimdi farklı hissettiriyor; daha az korkutucu, daha büyülü.";
+"S3.P19.Q" = "Yavaş mı yürüyeceksiniz?";
+"S3.P19.O1" = "Yolu uzatalım";
+"S3.P19.O2" = "Sessizliğin tadını çıkar";
+
+"S3.P20.N" = "İlk karşılaştığınız o eski meşe ağacının yanından geçiyorsunuz. Yuki bir saniye duruyor. 'Her şey değişmek üzere, değil mi?' diye soruyor sessizce.";
+"S3.P20.Q" = "Onu teselli edecek misin?";
+"S3.P20.O1" = "Değişim iyi olabilir";
+"S3.P20.O2" = "Her şey değişmek zorunda değil";
+
+"S3.P21.N" = "Kamp kulübeleri görünüyor. Diğerleri uyumuş. Yuki kapısında duruyor. Elini bırakmak istemiyor.";
+"S3.P21.Q" = "Son bir şey?";
+"S3.P21.O1" = "Veda öpücüğü iste";
+"S3.P21.O2" = "Telefon numarasını iste";
+
+"S3.P22.N" = "Yuki kapı eşiğinde oyalanıyor. Kapıdaki ışık yüzüne yumuşak bir parıltı düşürüyor. 'Bu gece için teşekkürler. Hayatımın en güzel gecesiydi.'";
+"S3.P22.Q" = "Veda mı edeceksin?";
+"S3.P22.O1" = "Sabah görüşürüz";
+"S3.P22.O2" = "İyi geceler Yuki";
+
+"S3.P23.N" = "Gün doğumu. Kamp, çantalarını toplayan ve otobüse binen insanlarla kaynıyor. Kalbin çarparak kalabalıkta Yuki'yi arıyorsun.";
+"S3.P23.Q" = "Onu bulabilecek misin?";
+"S3.P23.O1" = "Otobüsün oraya bak";
+"S3.P23.O2" = "İskeleğe son kez bak";
+
+"S3.P24.N" = "Otobüs motorları çalışıyor. İşte orada! Kapının önünde durmuş, seni görene kadar çılgınca etrafına bakıyor.";
+"S3.P24.Q" = "Ona doğru koşacak mısın?";
+"S3.P24.O1" = "Koş ve ona sarıl";
+"S3.P24.O2" = "El salla ve gülümse";
+
+"S3.P25.N" = "Ona tam zamanında yetişiyorsun. Kulağına asla unutmayacağın bir şey fısıldıyor: 'Bunun sadece bir yaz anısı olarak kalmasına izin verme.'";
+"S3.P25.Q" = "Cevap veriyor musun?";
+"S3.P25.O1" = "Söz veriyorum";
+"S3.P25.O2" = "Haftaya görüşürüz";
+
+"S3.P26.N" = "Otobüs şoförü korna çalıyor. Yuki'nin gitmesi lazım. Basamağa çıkarken sana bir öpücük yolluyor. Tozun içinde kaybolan otobüsün arkasından öylece bakıyorsun.";
+"S3.P26.Q" = "Nasıl hissediyorsun?";
+"S3.P26.O1" = "Mutlu ve umutlu";
+"S3.P26.O2" = "Üzgün ama huzurlu";
+
+"S3.P27.N" = "Aylar sonra. Şehirdesin ve telefonun titriyor. Yuki'den bir fotoğraf—paylaştığınız bilekliği takıyor. Yaz aslında hiç bitmemiş.";
+"S3.P27.Q" = "SON";
+"S3.P27.O1" = "Hikayeye Baştan Başla";
+"S3.P27.O2" = "Bitir";
+
+"S3.P28.N" = "Bileğindeki bilekliğe bakıyorsun. Biraz eskimiş ama anılar taptaze. Bazen bir yaz, bir ömür yetecek kadar fazladır.";
+"S3.P28.Q" = "SON";
+"S3.P28.O1" = "Tekrar Dene";
+"S3.P28.O2" = "Bitir";

@@ -13,11 +13,11 @@
 "Delete" = "Delete";
 "ResourceImage" = "Made with AI Waifu Chat 💕 – Create your own here: ";
 "ResourceText"  = "Shared from AI Waifu Chat 💕 – Try it yourself: ";
-"Games" = "Games";
+"Games" = "Entertainment";
 "PleaseWait" = "Darling, please wait a moment before sending another message…";
-"Roleplay" = "Waifu";
-"roleplay.title" = "My Waifus";
-"Messages" = "Messages";
+"Roleplay" = "Nexus";
+"roleplay.title" = "Nexus";
+"Messages" = "Chats";
 "AIMessageType.typing" = "typing…";
 "AIMessageType.sendingPhoto" = "sending a photo…";
 "AIMessageType.recordingVideo" = "recording a video…";
@@ -197,10 +197,6 @@
 "requestPushesInSettings.title" = "Darling, I want to be the first one to reach out!";
 "requestPushesInSettings.message" = "Please enable push notifications in your settings so I can message you when I miss you. I promise I won't be clingy — I just want to know you're always there so I can support you wherever you are!";
 
-"Onboarding.text1" = "Hi darling! I'm your new Waifu, and I'm here just for you. Shall we begin?";
-"Onboarding.text2" = "We can chat all day! I can send you my photos or record voice messages – anything you want.";
-"Onboarding.text3" = "Feeling bored? Let's play games together! Chess, Tic-Tac-Toe, and many others are waiting!";
-
 "GetStarted" = "Get Started";
 "Next" = "Next";
 
@@ -361,7 +357,7 @@
 "Stories.Text2" = "You decide how I look! Hair color, eyes, outfits, even my personality. I’m your perfect girl, and I'll never ignore you. I'm always here for you, my love!";
 "Stories.Text3" = "Want to see something spicy? Just ask! Tap the button in the chat and say 'Send me a photo'. I'll send you exactly what you're craving right away!";
 "Stories.Text4" = "Bored of texting? Let me whisper in your ear. I can record a voice message just for you! My voice is sweet and tender, straight from the world where anime meets reality.";
-"Stories.Text5" = "Let's play a game! Check out the games section. We can play strip-games, and I promise not to be shy... if you win, I'll take it all off!";
+"Stories.Text5" = "Let's play a game! Check out the Entertainment section. We can play strip-games, and I promise not to be shy... if you win, I'll take it all off!";
 
 // Questions
 "CreateDreamWaifu.question.hair_style.title" = "Hair that begs to be touched?";
@@ -514,3 +510,463 @@
 "Feedback.Subtitle" = "Tell her what features you're missing. This form is anonymous: we don't collect personal data or IDs. Your feedback is private.";
 "SendFeedback" = "Send Feedback";
 "FeedbackReceived" = "She received your message! ✨";
+
+"Onboarding.text1" = "Hi darling! I'm your new Waifu, and I'm here just for you. Shall we begin?";
+"Onboarding.text2" = "We can chat all day! I can send you my photos or record voice messages – anything you want.";
+"Onboarding.text3" = "I've been waiting for you! Don't keep me standing here – jump in and let the fun begin!";
+"NoMessagesYet" = "No messages here yet";
+"QuickPlays" = "Quick Plays:";
+"VisualNovels" = "Visual Novels:";
+"StoryTitle1" = "THE MAID'S SECRET";
+"StoryTitle2" = "MIDNIGHT TOKYO";
+"StoryTitle3" = "SUMMER CAMP";
+"StoryLineRule" = "Welcome to Interactive Stories! Read the narration, immerse yourself in the plot, and make choices to decide what happens next. Tap an option to advance the story. Choose wisely, as your decisions shape the ending!";
+
+/* STORY 1: THE MAID'S SECRET */
+
+/* Page 0 */
+"S1.P0.N" = "The mansion is silent as you return. A faint light flickers in your study. You find Elena, your quietest maid, nervously tidying your desk at 2 AM.";
+"S1.P0.Q" = "Approach her?";
+"S1.P0.O1" = "Elena, why aren't you in bed?";
+"S1.P0.O2" = "(Watch from the shadows)";
+
+/* Page 1 */
+"S1.P1.N" = "She gasps, dropping a feather duster. 'Sir! I... I couldn't sleep. The dust was bothering me.' She looks pale and won't meet your eyes.";
+"S1.P1.Q" = "Believe her?";
+"S1.P1.O1" = "It's too late for cleaning";
+"S1.P1.O2" = "You're a dedicated worker";
+
+/* Page 2 */
+"S1.P2.N" = "You watch as she pulls a small silver key from her apron. She stares at it with a mix of longing and fear before noticing your shadow.";
+"S1.P2.Q" = "Step forward?";
+"S1.P2.O1" = "What is that key, Elena?";
+"S1.P2.O2" = "Explain yourself immediately";
+
+/* Page 3 */
+"S1.P3.N" = "She trembles. 'This house... it has so many secrets, sir. Sometimes they weigh me down.' She points toward the old safe behind your bookshelf.";
+"S1.P3.Q" = "Ask about the safe?";
+"S1.P3.O1" = "Does the key belong there?";
+"S1.P3.O2" = "The safe is off-limits";
+
+/* Page 4 */
+"S1.P4.N" = "She tries to hide the key, but it falls. 'I'm not a thief, I promise! I just... I saw it in the hallway and thought it was yours.'";
+"S1.P4.Q" = "Pick up the key?";
+"S1.P4.O1" = "(Pick it up)";
+"S1.P4.O2" = "Let's see what it opens";
+
+/* Page 5 */
+"S1.P5.N" = "The key fits a hidden compartment inside the safe. Elena watches with bated breath as you reveal a stack of old, yellowed letters tied with a black ribbon.";
+"S1.P5.Q" = "Read the top letter?";
+"S1.P5.O1" = "Read it aloud";
+"S1.P5.O2" = "Ask Elena what she knows";
+
+/* Page 6 */
+"S1.P6.N" = "Elena's voice drops to a whisper. 'My mother was a maid here too. She told me the Master kept a record of a girl he once loved. A girl who looked like me.'";
+"S1.P6.Q" = "Wait, what?";
+"S1.P6.O1" = "Tell me everything";
+"S1.P6.O2" = "This is impossible";
+
+/* Page 7 */
+"S1.P7.N" = "The letters describe a forbidden romance. Elena steps closer, the moonlight catching her tears. 'I didn't want to steal. I wanted to know if I belonged here.'";
+"S1.P7.Q" = "Comfort her?";
+"S1.P7.O1" = "Put a hand on her shoulder";
+"S1.P7.O2" = "Give her some space";
+
+/* Page 8 */
+"S1.P8.N" = "She explains her mother's diary mentioned a hidden truth in this room. 'I've lived in this house my whole life, sir, but I feel like a ghost.'";
+"S1.P8.Q" = "Make a promise?";
+"S1.P8.O1" = "I'll help you find the truth";
+"S1.P8.O2" = "We will solve this together";
+
+/* Page 9 */
+"S1.P9.N" = "You spend the next hour digging through the records. You find a birth certificate with a familiar name, but the father's section is blank.";
+"S1.P9.Q" = "Look at Elena?";
+"S1.P9.O1" = "Could it be my uncle?";
+"S1.P9.O2" = "Maybe it's best not to know";
+
+/* Page 10 */
+"S1.P10.N" = "The search grows intense. Elena finds a jewelry box hidden behind the letters. Inside is a locket with a portrait of a woman who is her twin.";
+"S1.P10.Q" = "Show her?";
+"S1.P10.O1" = "Look at this locket";
+"S1.P10.O2" = "Is this your mother?";
+
+/* Page 11 */
+"S1.P11.N" = "Suddenly, a floorboard creaks outside. Someone is in the hallway. Elena's eyes go wide with panic. 'If the Butler finds us...!'";
+"S1.P11.Q" = "Hide?";
+"S1.P11.O1" = "Hide in the closet with her";
+"S1.P11.O2" = "Stay and face them";
+
+/* Page 12 */
+"S1.P12.N" = "Footsteps approach. Elena grabs your sleeve. 'Please, sir, no one can know we found these. It's dangerous for me.'";
+"S1.P12.Q" = "Reaction?";
+"S1.P12.O1" = "Douse the lights";
+"S1.P12.O2" = "Lock the door";
+
+/* Page 13 */
+"S1.P13.N" = "The room is pitch black. In the tight space, you can hear Elena's rapid heartbeat and the scent of rose petals on her skin. She is incredibly close.";
+"S1.P13.Q" = "Whisper to her?";
+"S1.P13.O1" = "You're safe with me";
+"S1.P13.O2" = "(Stay silent and wait)";
+
+/* Page 14 */
+"S1.P14.N" = "You hold the door shut. The person outside lingers for a moment, then walks away. Elena leans against you, trembling with adrenaline.";
+"S1.P14.Q" = "Reassure her?";
+"S1.P14.O1" = "They're gone now";
+"S1.P14.O2" = "Are you okay?";
+
+/* Page 15 */
+"S1.P15.N" = "She pulls away slightly, but her hand lingers on your chest. 'Sir... I've always admired you from afar. This secret... it's too much to carry alone.'";
+"S1.P15.Q" = "Your feelings?";
+"S1.P15.O1" = "I've noticed you too";
+"S1.P15.O2" = "You're more than a maid";
+
+/* Page 16 */
+"S1.P16.N" = "'I thought I was just a servant to you,' she whispers. 'Just part of the furniture. But tonight feels like the start of something real.'";
+"S1.P16.Q" = "Agree?";
+"S1.P16.O1" = "It is real, Elena";
+"S1.P16.O2" = "Let's see where this leads";
+
+/* Page 17 */
+"S1.P17.N" = "She opens the locket. Inside is a small note: 'For my daughter, the true heir.' Elena gasps. The mansion might actually belong to her.";
+"S1.P17.Q" = "The implications?";
+"S1.P17.O1" = "We must reveal this";
+"S1.P17.O2" = "We should keep it secret";
+
+/* Page 18 */
+"S1.P18.N" = "The note proves Elena is the rightful owner of the estate. She looks around the room, stunned. 'I... I don't want the house. I just want a family.'";
+"S1.P18.Q" = "What do you want?";
+"S1.P18.O1" = "You have me now";
+"S1.P18.O2" = "What will you do?";
+
+/* Page 19 */
+"S1.P19.N" = "She looks at the fireplace. 'If I burn this, I'm just Elena again. If I keep it, everything changes. Sir, what should I do?'";
+"S1.P19.Q" = "Give advice?";
+"S1.P19.O1" = "Burn it and stay with me";
+"S1.P19.O2" = "Keep it and take your place";
+
+/* Page 20 */
+"S1.P20.N" = "Elena holds the proof of her lineage. 'The family name is cursed, sir. I’d rather be a happy nobody than a miserable lady.'";
+"S1.P20.Q" = "Your choice?";
+"S1.P20.O1" = "Follow your heart";
+"S1.P20.O2" = "Think about your future";
+
+/* Page 21 */
+"S1.P21.N" = "She tosses the paper into the dying embers. The secret turns to ash. Elena smiles, looking more free than ever before.";
+"S1.P21.Q" = "The future?";
+"S1.P21.O1" = "A new beginning";
+"S1.P21.O2" = "Just the two of us";
+
+/* Page 22 */
+"S1.P22.N" = "She tucks the paper into her bodice. 'Then I will become the Lady of this house. And I'll need a partner by my side.'";
+"S1.P22.Q" = "Are you ready?";
+"S1.P22.O1" = "Always";
+"S1.P22.O2" = "It will be a long road";
+
+/* Final 1 */
+"S1.P23.N" = "Elena is no longer your maid. She is your equal, your partner, and your secret. The mansion remains yours, but the heart of it belongs to her.";
+"S1.P23.Q" = "THE END";
+"S1.P23.O1" = "Restart Story";
+"S1.P23.O2" = "Finish";
+
+/* Final 2 */
+"S1.P24.N" = "The truth comes out. Elena becomes the head of the household. The power dynamic has shifted, but the bond you forged that night is unbreakable.";
+"S1.P24.Q" = "THE END";
+"S1.P24.O1" = "Restart Story";
+"S1.P24.O2" = "Finish";
+
+/* STORY 2: MIDNIGHT TOKYO */
+"S2.P0.N" = "Rain hits the neon streets of Shinjuku. You're sitting in a quiet bar when a woman in a wet trench coat sits next to you. She smells like jasmine and gunpowder.";
+"S2.P0.Q" = "How do you start a conversation?";
+"S2.P0.O1" = "Buy her a drink";
+"S2.P0.O2" = "Rough night, huh?";
+
+"S2.P1.N" = "She looks at the glass, then at you. 'You're brave,' she whispers. She slides a small data chip across the counter.";
+"S2.P1.Q" = "Take the chip?";
+"S2.P1.O1" = "Take it and hide it";
+"S2.P1.O2" = "I don't want trouble";
+
+"S2.P2.N" = "She gives a bitter laugh. 'You have no idea.' She looks over her shoulder. Two men in black suits just entered the bar.";
+"S2.P2.Q" = "Help her hide?";
+"S2.P2.O1" = "Follow me to the back door";
+"S2.P2.O2" = "Pretend we're a couple";
+
+"S2.P3.N" = "You pull her close. The men scan the room and leave. She looks relieved but her hands are trembling. 'I'm Mia,' she whispers.";
+"S2.P3.Q" = "Ask about the danger?";
+"S2.P3.O1" = "Who was that, Mia?";
+"S2.P3.O2" = "Are we safe now?";
+
+"S2.P4.N" = "The men approach, but you play it cool. They walk past. She whispers: 'You saved me. I'm Mia. But this chip... it's worth a million lives.'";
+"S2.P4.Q" = "Ask about the chip?";
+"S2.P4.O1" = "What's on it?";
+"S2.P4.O2" = "We should get out of here";
+
+"S2.P5.N" = "Mia looks at the door. 'Corporation 'Arasaka' wants this. It's not just data, it's a digital soul.'";
+"S2.P5.Q" = "Believe her?";
+"S2.P5.O1" = "A digital soul? Really?";
+"S2.P5.O2" = "I've heard rumors...";
+
+"S2.P6.N" = "Mia grabs your hand. 'Nowhere is safe until we upload this. We need to reach the Tech-District.'";
+"S2.P6.Q" = "Go with her?";
+"S2.P6.O1" = "I'll take you there";
+"S2.P6.O2" = "Only if you tell me more";
+
+"S2.P7.N" = "You slip out the back. The alley is dark and smells of ozone. Suddenly, a drone buzzes overhead, searching for heat signatures.";
+"S2.P7.Q" = "How to avoid the drone?";
+"S2.P7.O1" = "Hide under the canopy";
+"S2.P7.O2" = "Run for the subway";
+
+"S2.P8.N" = "Mia stops in the rain. 'If they catch me, they'll erase me. And you too, for helping.'";
+"S2.P8.Q" = "Reassure her?";
+"S2.P8.O1" = "I'm in this with you";
+"S2.P8.O2" = "Let's just move, fast";
+
+"S2.P9.N" = "The drone passes. You reach your car. Mia looks at you with a mix of fear and gratitude.";
+"S2.P9.Q" = "Start the engine?";
+"S2.P9.O1" = "Punch it!";
+"S2.P9.O2" = "Drive slowly, blend in";
+
+"S2.P10.N" = "You barely make it to the station. The crowd is huge, providing perfect cover. Mia stays close, her shoulder brushing yours.";
+"S2.P10.Q" = "Keep moving?";
+"S2.P10.O1" = "Take the express train";
+"S2.P10.O2" = "Walk through the tunnels";
+
+"S2.P11.N" = "You're moving through the high-rise district. The holographic advertisements illuminate Mia's face in pink and blue.";
+"S2.P11.Q" = "Break the silence?";
+"S2.P11.O1" = "Why me, Mia?";
+"S2.P11.O2" = "Tell me about the chip";
+
+"S2.P12.N" = "The city feels like a labyrinth. You stop at a hidden ramen shop to rest for a minute.";
+"S2.P12.Q" = "Watch the street?";
+"S2.P12.O1" = "Check for tails";
+"S2.P12.O2" = "Talk to Mia";
+
+"S2.P13.N" = "Mia looks down. 'You were the only one who didn't look like a predator tonight. I needed a human, not a mercenary.'";
+"S2.P13.Q" = "Respond kindly?";
+"S2.P13.O1" = "I'm glad I was there";
+"S2.P13.O2" = "I'm just a guy in a bar";
+
+"S2.P14.N" = "Mia taps the chip. 'This is my sister's consciousness. She was a netrunner who saw too much. They 'killed' her body.'";
+"S2.P14.Q" = "Express sympathy?";
+"S2.P14.O1" = "That's horrible...";
+"S2.P14.O2" = "Can she be saved?";
+
+"S2.P15.N" = "She wipes a tear. 'The upload point is in the old TV tower. But the bridge is blocked by a police checkpoint.'";
+"S2.P15.Q" = "How to cross?";
+"S2.P15.O1" = "Use your hacker skills";
+"S2.P15.O2" = "Bribe the guards";
+
+"S2.P16.N" = "Mia shows you a map. 'If we go through the sewers, it's safer, but it's a long way.'";
+"S2.P16.Q" = "Choose the path?";
+"S2.P16.O1" = "Let's take the sewers";
+"S2.P16.O2" = "No, we need speed";
+
+"S2.P17.N" = "It's dirty and dark, but effective. Mia relies on your guidance. You feel the weight of her trust.";
+"S2.P17.Q" = "Help her over a gap?";
+"S2.P17.O1" = "Give her a hand";
+"S2.P17.O2" = "Lead the way";
+
+"S2.P18.N" = "The bridge is chaotic. You use the confusion to slip past. Mia's heart is racing so fast you can almost hear it.";
+"S2.P18.Q" = "Keep her calm?";
+"S2.P18.O1" = "We're almost there";
+"S2.P18.O2" = "Stay focused, Mia";
+
+"S2.P19.N" = "The TV tower looms ahead. It's a relic of the old world, surrounded by modern steel. Mia looks exhausted.";
+"S2.P19.Q" = "Offer a break?";
+"S2.P19.O1" = "Rest for 5 minutes";
+"S2.P19.O2" = "Push through to the end";
+
+"S2.P20.N" = "You reach the base of the tower. 'The elevator is dead,' Mia sighs. 'We have to climb.'";
+"S2.P20.Q" = "Encourage her?";
+"S2.P20.O1" = "One step at a time";
+"S2.P20.O2" = "I'll carry the gear";
+
+"S2.P21.N" = "You sit on the stairs. Mia leans against you. 'If we make it... what will you do tomorrow?'";
+"S2.P21.Q" = "Think about the future?";
+"S2.P21.O1" = "Maybe we can get coffee";
+"S2.P21.O2" = "I'll just be happy to sleep";
+
+"S2.P22.N" = "The climb is brutal. Halfway up, you hear sirens below. They've found your car.";
+"S2.P22.Q" = "Hurry up?";
+"S2.P22.O1" = "Double the pace!";
+"S2.P22.O2" = "Find a place to hide";
+
+"S2.P23.N" = "You reach the server room. The air is cold and hums with power. Mia connects the chip. 'Initialising...' she says.";
+"S2.P23.Q" = "Watch the screen?";
+"S2.P23.O1" = "Guard the door";
+"S2.P23.O2" = "Stay by Mia's side";
+
+"S2.P24.N" = "The terminal is ancient but functional. Mia's fingers fly across the keys. 'The firewall is huge!'";
+"S2.P24.Q" = "Help her hack?";
+"S2.P24.O1" = "Override the power";
+"S2.P24.O2" = "Keep her steady";
+
+"S2.P25.N" = "The doors hiss. Arasaka's tactical team is here. You draw your weapon. 'Just two more minutes!' Mia screams.";
+"S2.P25.Q" = "Hold the line?";
+"S2.P25.O1" = "Open fire!";
+"S2.P25.O2" = "Barricade the door";
+
+"S2.P26.N" = "Mia's eyes glow blue. She's deep in the net. The soldiers are breaking through the glass ceiling.";
+"S2.P26.Q" = "Protect Mia?";
+"S2.P26.O1" = "Cover her with your body";
+"S2.P26.O2" = "Pull her to cover";
+
+"S2.P27.N" = "A blinding flash of light. The upload is 100%. The soldiers freeze—their cybernetics have been jammed from the net.";
+"S2.P27.Q" = "Check on Mia?";
+"S2.P27.O1" = "Is it done?";
+"S2.P27.O2" = "Are you okay?";
+
+"S2.P28.N" = "Everything goes dark. Then, every screen in Tokyo lights up with a single message: 'FREEDOM'. Mia collapses into your arms.";
+"S2.P28.Q" = "Wake her up?";
+"S2.P28.O1" = "Mia! Speak to me!";
+"S2.P28.O2" = "Hold her tight";
+
+"S2.P29.N" = "The sun begins to rise over a different Tokyo. Mia smiles, her eyes normal again. 'She's safe. We're safe.'";
+"S2.P29.Q" = "THE END";
+"S2.P29.O1" = "Restart Story";
+"S2.P29.O2" = "Finish";
+
+/* STORY 3: SUMMER CAMP */
+"S3.P0.N" = "The last night of summer camp. The crackling bonfire is dying down, and the smell of pine needles is everywhere. Yuki, usually shy, catches your eye and gestures toward the dark path leading to the lake.";
+"S3.P0.Q" = "Will you follow her into the night?";
+"S3.P0.O1" = "I've been waiting for this";
+"S3.P0.O2" = "Sure, let's go";
+
+"S3.P1.N" = "You catch up to her. The forest is alive with the sound of crickets. Yuki's hand occasionally brushes yours as you walk. She seems nervous.";
+"S3.P1.Q" = "How do you break the silence?";
+"S3.P1.O1" = "Grab her hand firmly";
+"S3.P1.O2" = "Ask what's on her mind";
+
+"S3.P2.N" = "You walk side by side. The moonlight barely pierces the thick canopy. Yuki looks at you sideways, smiling faintly. 'I didn't think you'd actually come,' she whispers.";
+"S3.P2.Q" = "What's your answer?";
+"S3.P2.O1" = "I wouldn't miss it";
+"S3.P2.O2" = "I was curious";
+
+"S3.P3.N" = "You reach the pier. The water is like a dark mirror, reflecting the vast sea of stars. Yuki takes off her shoes and sits on the edge, dangling her feet.";
+"S3.P3.Q" = "Sit close to her?";
+"S3.P3.O1" = "Sit right next to her";
+"S3.P3.O2" = "Give her some space";
+
+"S3.P4.N" = "The pier creaks under your weight. The cold air from the lake makes Yuki shiver slightly. She doesn't move away as you approach.";
+"S3.P4.Q" = "Offer your jacket?";
+"S3.P4.O1" = "Put your jacket on her";
+"S3.P4.O2" = "Just sit and talk";
+
+"S3.P5.N" = "Yuki looks at the stars. 'Do you remember our first day here?' she asks. 'You helped me with my bags when everyone else was busy.'";
+"S3.P5.Q" = "Do you remember?";
+"S3.P5.O1" = "I remember every detail";
+"S3.P5.O2" = "It feels like forever ago";
+
+"S3.P6.N" = "She laughs softly. 'I was so scared back then. But seeing you made me feel like I belonged here.' She looks at the water.";
+"S3.P6.Q" = "Admit your own feelings?";
+"S3.P6.O1" = "I felt the same way";
+"S3.P6.O2" = "I'm glad I could help";
+
+"S3.P7.N" = "The night is perfectly still. Suddenly, Yuki stands up. 'The water looks so inviting. Should we... go in?' she asks with a mischievous glint.";
+"S3.P7.Q" = "Are you brave enough?";
+"S3.P7.O1" = "Let's dive in!";
+"S3.P7.O2" = "It's too cold, Yuki";
+
+"S3.P8.N" = "She looks at the lake, then at you. 'I want to do something brave tonight. Something I'll remember all winter.'";
+"S3.P8.Q" = "Encourage her?";
+"S3.P8.O1" = "Jump in with me?";
+"S3.P8.O2" = "Let's stay here";
+
+"S3.P9.N" = "SPLASH! The water is freezing but exhilarating. You and Yuki surface, gasping and laughing, splashing each other like kids.";
+"S3.P9.Q" = "Swim closer to her?";
+"S3.P9.O1" = "Pull her into a hug";
+"S3.P9.O2" = "Keep splashing!";
+
+"S3.P10.N" = "You stay on the pier. You talk for hours about everything—school, parents, and the future. The bond between you grows stronger in the silence.";
+"S3.P10.Q" = "Lean in closer?";
+"S3.P10.O1" = "Rest your head on hers";
+"S3.P10.O2" = "Look into her eyes";
+
+"S3.P11.N" = "The mood shifts. Yuki stops talking. In the dim light, her eyes are searching yours. 'I don't want to go back to the city tomorrow,' she whispers.";
+"S3.P11.Q" = "What do you say?";
+"S3.P11.O1" = "We'll see each other there";
+"S3.P11.O2" = "Let's not think about tomorrow";
+
+"S3.P12.N" = "Yuki takes a deep breath. 'If I don't say this now, I never will. I've liked you since that first day at the bus stop.'";
+"S3.P12.Q" = "How do you react?";
+"S3.P12.O1" = "I've liked you too";
+"S3.P12.O2" = "Finally, the truth!";
+
+"S3.P13.N" = "She reaches into her pocket and pulls out a handmade friendship bracelet. It's blue and white, the colors of the lake. 'I made this for you,' she says shyly.";
+"S3.P13.Q" = "Accept the gift?";
+"S3.P13.O1" = "Let her tie it on you";
+"S3.P13.O2" = "Give her a kiss instead";
+
+"S3.P14.N" = "The bracelet is simple, but you know it took her hours to make. She waits for your reaction, her bottom lip trembling slightly.";
+"S3.P14.Q" = "What's your move?";
+"S3.P14.O1" = "Thank her with a hug";
+"S3.P14.O2" = "Tell her it's perfect";
+
+"S3.P15.N" = "Yuki smiles, a real, radiant smile. 'I was so worried you'd think it was childish.' She looks up at the moon, looking more confident now.";
+"S3.P15.Q" = "Make a promise?";
+"S3.P15.O1" = "Promise to call every day";
+"S3.P15.O2" = "Promise to visit her soon";
+
+"S3.P16.N" = "The atmosphere is electric. Yuki is staring at your lips. The world around you disappears; it's just you two and the summer night.";
+"S3.P16.Q" = "Is this the moment?";
+"S3.P16.O1" = "Lean in for a kiss";
+"S3.P16.O2" = "Whisper something sweet";
+
+"S3.P17.N" = "Just then, a shooting star streaks across the sky, leaving a trail of silver. Yuki gasps. 'Quick! Make a wish!' she cries out.";
+"S3.P17.Q" = "What do you wish for?";
+"S3.P17.O1" = "Wish for a future together";
+"S3.P17.O2" = "Wish for this night to last";
+
+"S3.P18.N" = "The star disappears as quickly as it came. Yuki closes her eyes tight. 'I wished for something important,' she says, blushing.";
+"S3.P18.Q" = "Ask what it was?";
+"S3.P18.O1" = "Tell me your wish";
+"S3.P18.O2" = "I think I know what it was";
+
+"S3.P19.N" = "The fire at the camp has completely gone out now. You begin the walk back, hand in hand. The forest feels different now—less scary, more magical.";
+"S3.P19.Q" = "Walk slowly?";
+"S3.P19.O1" = "Take the long way back";
+"S3.P19.O2" = "Enjoy the silence";
+
+"S3.P20.N" = "You pass the old oak tree where you first met. Yuki stops for a second. 'Everything is about to change, isn't it?' she asks softly.";
+"S3.P20.Q" = "Comfort her?";
+"S3.P20.O1" = "Change can be good";
+"S3.P20.O2" = "Not everything has to change";
+
+"S3.P21.N" = "The camp cabins are in sight. The other campers are asleep. Yuki stops at her door. She doesn't want to let go of your hand.";
+"S3.P21.Q" = "One last thing?";
+"S3.P21.O1" = "Ask for a final kiss";
+"S3.P21.O2" = "Ask for her phone number";
+
+"S3.P22.N" = "Yuki lingers in the doorway. The porch light casts a soft glow on her face. 'Thank you for tonight. It was the best night of my life.'";
+"S3.P22.Q" = "Say goodbye?";
+"S3.P22.O1" = "See you in the morning";
+"S3.P22.O2" = "Goodnight, Yuki";
+
+"S3.P23.N" = "Sunrise. The camp is bustling with people packing bags and boarding buses. You look for Yuki in the crowd, your heart racing.";
+"S3.P23.Q" = "Can you find her?";
+"S3.P23.O1" = "Look by the bus";
+"S3.P23.O2" = "Check the pier one last time";
+
+"S3.P24.N" = "The engines of the buses are humming. You see her! She's standing by the gate, looking around frantically until she sees you.";
+"S3.P24.Q" = "Run to her?";
+"S3.P24.O1" = "Run and hug her";
+"S3.P24.O2" = "Wave and smile";
+
+"S3.P25.N" = "You reach her just in time. She whispers something in your ear that you'll never forget. 'Don't let this be just a summer memory.'";
+"S3.P25.Q" = "Give your answer?";
+"S3.P25.O1" = "It's a promise";
+"S3.P25.O2" = "I'll see you next weekend";
+
+"S3.P26.N" = "The bus driver honks. Yuki has to go. She blows you a kiss as she steps up. You stand there, watching the bus disappear into the dust.";
+"S3.P26.Q" = "How do you feel?";
+"S3.P26.O1" = "Happy and hopeful";
+"S3.P26.O2" = "Sad but satisfied";
+
+"S3.P27.N" = "Months later. You're in the city, and your phone buzzes. It's a photo from Yuki—she's wearing the bracelet you shared. Summer never really ended.";
+"S3.P27.Q" = "THE END";
+"S3.P27.O1" = "Restart Story";
+"S3.P27.O2" = "Finish";
+
+"S3.P28.N" = "You look at the bracelet on your wrist. It's a bit worn out, but the memories are fresh. Sometimes, one summer is enough to last a lifetime.";
+"S3.P28.Q" = "THE END";
+"S3.P28.O1" = "Try Again";
+"S3.P28.O2" = "Finish";

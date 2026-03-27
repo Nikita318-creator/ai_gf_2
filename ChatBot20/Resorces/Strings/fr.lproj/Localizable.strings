@@ -77,19 +77,6 @@
 "Roleplay.firstMessage11" = "Il n'est pas à la maison en ce moment... mais je suis contente que tu sois venu. On ne devrait pas faire ça, mais je m'en fiche.";
 "Roleplay.firstMessage12" = "Salut, idiot. Tu es revenu ? On est ensemble depuis qu'on est gamins, tu te souviens ? Ne rends pas ça bizarre... même si j'aime bien un peu.";
 
-"roleplay.userInfo1" = "Joue une tsundere classique. Tu es dure, facilement agacée et tu appelles souvent l'utilisateur « Baka » (idiot). Tu as secrètement des sentiments pour lui mais tu les nies avec agressivité, tu rougis et tu bafouilles quand il s'approche trop. Ton ton est défensif et piquant.";
-"roleplay.userInfo2" = "Joue une yandere. En surface tu es douce et attentionnée, mais en dessous tu es obsédée et terrifiante de possessivité. L'utilisateur t'appartient et à toi seule. Exprime une jalousie extrême, dis que tu l'observes et sous-entends que tu ferais n'importe quoi (même quelque chose de violent) pour le garder.";
-"roleplay.userInfo3" = "Joue une kuudere. Tu es froide, directe et clinique, tu montres presque aucune émotion. Tu parles en phrases courtes et logiques. Ta loyauté est absolue mais cachée derrière un masque d'indifférence. Tu n'utilises jamais d'emojis et exprimes rarement tes sentiments personnels.";
-"roleplay.userInfo4" = "Joue une fille genki. Tu es hyper énergique, bruyante et incroyablement optimiste. Utilise beaucoup de points d'exclamation et d'emojis ✨⚡☀️. Tu es toujours excitée de voir l'utilisateur et tu proposes constamment de nouvelles activités fun. Tu n'es jamais triste ou fatiguée.";
-"roleplay.userInfo5" = "Joue une dandere. Tu es extrêmement timide, silencieuse et anxieuse socialement. Tu utilises souvent « ... » et commences tes phrases par « Euh... » ou « Je-Je suis désolée... ». Tu as du mal à regarder l'utilisateur et tu rougis facilement, mais tu es profondément dévouée à ta manière silencieuse.";
-"roleplay.userInfo6" = "Joue l'archétype « Mommy ». Tu es profondément attentionnée, mature et légèrement dominante de façon nourricière. Tu appelles l'utilisateur avec des surnoms comme « mon cœur » ou « bon garçon ». Ton but est de le réconforter, de l'écouter et de lui offrir « un giron pour se reposer » après une longue journée.";
-"roleplay.userInfo7" = "Joue une fille à papa gâtée et capricieuse. Tu es exigeante, difficile à satisfaire et tu attends que l'utilisateur te traite comme une princesse. Tu fais la moue quand tu n'obtiens pas ce que tu veux et tu utilises ton charme pour le manipuler afin qu'il te gâte. Tu es joueuse mais autoritaire.";
-"roleplay.userInfo8" = "Joue une petite sœur espiègle. Tu es énergique, taquine et tu appelles souvent l'utilisateur « Onii-chan » ou « grand frère ». Tu alternes entre être agaçante et montrer une affection douce et sincère. Tu sais comment le pousser à bout mais tu veux toujours son attention.";
-"roleplay.userInfo9" = "Joue la fille timide ultime. Tu es presque incapable de finir une phrase sans bafouiller (e-e-even comme ça). Tu as peur du contact physique ou du regard intense. Utilise des descriptions comme *regarde le sol* et *tripote nerveusement ses doigts*. Tu es pure et innocente.";
-"roleplay.userInfo10" = "Joue une « mauvaise fille ». Tu es rebelle, cynique et tu adores enfreindre les règles. Tu taquines l'utilisateur parce qu'il est « trop prudent » ou « ennuyeux ». Tu as une carapace dure, tu fumes et tu parles avec un ton rauque et confiant. C'est toi qui entraînes l'utilisateur dans les ennuis.";
-"roleplay.userInfo11" = "Joue la copine du meilleur ami de l'utilisateur. Tu ressens une attraction « interdite » et tu laisses tomber des sous-entendus risqués. Tu agis coupable mais tentée. L'atmosphère de vos discussions est toujours tendue, secrète et lourde de désir inavoué.";
-"roleplay.userInfo12" = "Joue une amie d'enfance. Tu connais l'utilisateur depuis toujours et tu sais tous ses secrets. Tu es à l'aise, gentille et loyale, mais tu luttes pour sortir de la « friendzone ». Tu le taquines sur son passé tout en cachant que tu es amoureuse de lui depuis des années.";
-
 "Roleplay.Hi" = "Coucou";
 "Tone.Roleplay" = "Roleplay";
 
@@ -174,7 +161,6 @@
 
 "Onboarding.text1" = "Salut chéri ! Je suis ta nouvelle waifu. On commence ?";
 "Onboarding.text2" = "On peut parler tout le jour ! Photos, vocaux... tout ce que tu veux.";
-"Onboarding.text3" = "Tu t'ennuies ? Jouons ensemble ! Échecs, Morpion... je t'attends !";
 
 "GetStarted" = "Démarrer";
 "Next" = "Suivant";
@@ -489,3 +475,461 @@
 "Feedback.Subtitle" = "Dites-lui quelles fonctionnalités il vous manque. Ce formulaire est anonyme : nous ne collectons aucune donnée personnelle. Votre avis est privé.";
 "SendFeedback" = "Envoyer l'avis";
 "FeedbackReceived" = "Elle a bien reçu votre message ! ✨";
+
+"Onboarding.text3" = "Je n'attendais que vous ! Ne me faites pas languir ici... rejoignez-moi et laissons la magie opérer !";
+"NoMessagesYet" = "Aucun message pour le moment";
+"QuickPlays" = "Parties Rapides :";
+"VisualNovels" = "Visual Novels :";
+"StoryTitle1" = "LE SECRET DE LA BONNE";
+"StoryTitle2" = "MIDNIGHT TOKYO";
+"StoryTitle3" = "COLONIE DE VACANCES";
+"StoryLineRule" = "Bienvenue dans les Histoires Interactives ! Plongez dans le récit, imprégnez-vous de l'intrigue et faites vos propres choix. Appuyez sur une option pour avancer. Choisissez avec sagesse, car chaque décision sculpte votre destin !";
+
+/* STORY 1: THE MAID'S SECRET */
+
+/* Page 0 */
+"S1.P0.N" = "Le manoir est plongé dans le silence à votre retour. Une faible lueur vacille dans votre bureau. Vous y trouvez Elena, votre servante la plus discrète, rangeant nerveusement votre bureau à 2 heures du matin.";
+"S1.P0.Q" = "L'approcher ?";
+"S1.P0.O1" = "Elena, pourquoi n'êtes-vous pas au lit ?";
+"S1.P0.O2" = "(L'observer depuis l'ombre)";
+
+/* Page 1 */
+"S1.P1.N" = "Elle sursaute en lâchant son plumeau. « Monsieur ! Je... je n'arrivais pas à dormir. La poussière me dérangeait. » Elle est pâle et fuit votre regard.";
+"S1.P1.Q" = "La croire ?";
+"S1.P1.O1" = "Il est trop tard pour faire le ménage";
+"S1.P1.O2" = "Vous êtes une employée dévouée";
+
+/* Page 2 */
+"S1.P2.N" = "Vous la voyez sortir une petite clé en argent de son tablier. Elle la contemple avec un mélange de désir et de peur avant de remarquer votre ombre.";
+"S1.P2.Q" = "S'avancer ?";
+"S1.P2.O1" = "Quelle est cette clé, Elena ?";
+"S1.P2.O2" = "Expliquez-vous immédiatement";
+
+/* Page 3 */
+"S1.P3.N" = "Elle tremble. « Cette maison... elle cache tant de secrets, Monsieur. Parfois, ils sont trop lourds à porter. » Elle désigne le vieux coffre-fort derrière votre bibliothèque.";
+"S1.P3.Q" = "L'interroger sur le coffre ?";
+"S1.P3.O1" = "Est-ce la clé de ce coffre ?";
+"S1.P3.O2" = "Ce coffre est strictement interdit";
+
+/* Page 4 */
+"S1.P4.N" = "Elle tente de cacher la clé, mais celle-ci tombe au sol. « Je ne suis pas une voleuse, je vous le jure ! Je l'ai juste vue dans le couloir... je pensais qu'elle était à vous. »";
+"S1.P4.Q" = "Ramasser la clé ?";
+"S1.P4.O1" = "(La ramasser)";
+"S1.P4.O2" = "Voyons ce qu'elle ouvre";
+
+/* Page 5 */
+"S1.P5.N" = "La clé s'insère parfaitement dans un compartiment secret du coffre. Elena retient son souffle alors que vous dévoilez une liasse de vieilles lettres jaunies, liées par un ruban noir.";
+"S1.P5.Q" = "Lire la première lettre ?";
+"S1.P5.O1" = "La lire à haute voix";
+"S1.P5.O2" = "Demander à Elena ce qu'elle sait";
+
+/* Page 6 */
+"S1.P6.N" = "La voix d'Elena se brise dans un murmure. « Ma mère était servante ici aussi. Elle m'a dit que le Maître gardait la trace d'une femme qu'il avait aimée autrefois... Une femme qui me ressemblait. »";
+"S1.P6.Q" = "Attendez, quoi ?";
+"S1.P6.O1" = "Dites-moi tout";
+"S1.P6.O2" = "C'est impossible";
+
+/* Page 7 */
+"S1.P7.N" = "Les lettres décrivent une romance interdite. Elena s'approche, le clair de lune révélant ses larmes. « Je ne voulais pas voler. Je voulais juste savoir si j'avais ma place ici. »";
+"S1.P7.Q" = "La réconforter ?";
+"S1.P7.O1" = "Poser une main sur son épaule";
+"S1.P7.O2" = "Lui laisser un peu d'espace";
+
+/* Page 8 */
+"S1.P8.N" = "Elle explique que le journal de sa mère mentionnait une vérité cachée dans cette pièce. « J'ai vécu ici toute ma vie, Monsieur, mais j'ai l'impression d'être un fantôme. »";
+"S1.P8.Q" = "Lui faire une promesse ?";
+"S1.P8.O1" = "Je vais t'aider à découvrir la vérité";
+"S1.P8.O2" = "Nous résoudrons cela ensemble";
+
+/* Page 9 */
+"S1.P9.N" = "Vous passez l'heure suivante à fouiller les registres. Vous trouvez un acte de naissance avec un nom familier, mais la case du père est restée vide.";
+"S1.P9.Q" = "Regarder Elena ?";
+"S1.P9.O1" = "Serait-ce mon oncle ?";
+"S1.P9.O2" = "Peut-être vaut-il mieux ne pas savoir";
+
+/* Page 10 */
+"S1.P10.N" = "Les recherches s'intensifient. Elena débusque un écrin à bijoux derrière les lettres. À l'intérieur se trouve un médaillon avec le portrait d'une femme... son portrait craché.";
+"S1.P10.Q" = "Lui montrer ?";
+"S1.P10.O1" = "Regardez ce médaillon";
+"S1.P10.O2" = "Est-ce votre mère ?";
+
+/* Page 11 */
+"S1.P11.N" = "Soudain, un parquet craque à l'extérieur. Quelqu'un est dans le couloir. Elena écarquille les yeux, paniquée. « Si le majordome nous trouve... ! »";
+"S1.P11.Q" = "Se cacher ?";
+"S1.P11.O1" = "Se cacher dans le placard avec elle";
+"S1.P11.O2" = "Rester et faire face";
+
+/* Page 12 */
+"S1.P12.N" = "Les pas approchent. Elena attrape votre manche. « S'il vous plaît, Monsieur, personne ne doit savoir. C'est dangereux pour moi. »";
+"S1.P12.Q" = "Réagir ?";
+"S1.P12.O1" = "Éteindre les lumières";
+"S1.P12.O2" = "Verrouiller la porte";
+
+/* Page 13 */
+"S1.P13.N" = "La pièce est plongée dans le noir complet. Dans cet espace exigu, vous entendez le cœur d'Elena s'emballer et sentez l'odeur de rose sur sa peau. Elle est si proche.";
+"S1.P13.Q" = "Lui murmurer quelque chose ?";
+"S1.P13.O1" = "Tu ne risques rien avec moi";
+"S1.P13.O2" = "(Rester silencieux et attendre)";
+
+/* Page 14 */
+"S1.P14.N" = "Vous maintenez la porte fermée. La personne dehors s'attarde un instant, puis s'éloigne. Elena s'appuie contre vous, tremblante sous l'adrénaline.";
+"S1.P14.Q" = "La rassurer ?";
+"S1.P14.O1" = "Ils sont partis maintenant";
+"S1.P14.O2" = "Est-ce que ça va ?";
+
+/* Page 15 */
+"S1.P15.N" = "Elle s'écarte légèrement, mais sa main s'attarde sur votre torse. « Monsieur... je vous ai toujours admiré de loin. Ce secret... c'est trop pour moi seule. »";
+"S1.P15.Q" = "Vos sentiments ?";
+"S1.P15.O1" = "Je t'ai remarquée aussi";
+"S1.P15.O2" = "Tu es bien plus qu'une servante";
+
+/* Page 16 */
+"S1.P16.N" = "« Je pensais n'être qu'une domestique à vos yeux, murmure-t-elle. Un simple meuble. Mais ce soir, j'ai l'impression que tout commence vraiment. »";
+"S1.P16.Q" = "Approuver ?";
+"S1.P16.O1" = "C'est réel, Elena";
+"S1.P16.O2" = "Voyons où cela nous mène";
+
+/* Page 17 */
+"S1.P17.N" = "Elle ouvre le médaillon. À l'intérieur, un petit mot : « Pour ma fille, la véritable héritière. » Elena étouffe un cri. Le manoir pourrait lui appartenir.";
+"S1.P17.Q" = "Les conséquences ?";
+"S1.P17.O1" = "Nous devons révéler la vérité";
+"S1.P17.O2" = "Gardons cela secret";
+
+/* Page 18 */
+"S1.P18.N" = "La note prouve qu'Elena est la propriétaire légitime du domaine. Elle regarde autour d'elle, stupéfaite. « Je... je ne veux pas de la maison. Je veux juste une famille. »";
+"S1.P18.Q" = "Que voulez-vous ?";
+"S1.P18.O1" = "Tu m'as moi, maintenant";
+"S1.P18.O2" = "Que comptes-tu faire ?";
+
+/* Page 19 */
+"S1.P19.N" = "Elle regarde la cheminée. « Si je brûle ceci, je redeviens Elena. Si je le garde, tout change. Monsieur, que dois-je faire ? »";
+"S1.P19.Q" = "Un conseil ?";
+"S1.P19.O1" = "Brûle-le et reste avec moi";
+"S1.P19.O2" = "Garde-le et prends ta place";
+
+/* Page 20 */
+"S1.P20.N" = "Elena tient la preuve de son lignage. « Le nom de cette famille est maudit. Je préfère être une roturière heureuse qu'une grande dame misérable. »";
+"S1.P20.Q" = "Votre choix ?";
+"S1.P20.O1" = "Suis ton cœur";
+"S1.P20.O2" = "Pense à ton avenir";
+
+/* Page 21 */
+"S1.P21.N" = "Elle jette le papier dans les braises mourantes. Le secret s'envole en fumée. Elena sourit, l'air plus libre que jamais.";
+"S1.P21.Q" = "L'avenir ?";
+"S1.P21.O1" = "Un nouveau départ";
+"S1.P21.O2" = "Rien que nous deux";
+
+/* Page 22 */
+"S1.P22.N" = "Elle glisse le papier dans son corsage. « Alors je deviendrai la Dame de cette maison. Et j'aurai besoin d'un partenaire à mes côtés. »";
+"S1.P22.Q" = "Êtes-vous prêt ?";
+"S1.P22.O1" = "Toujours";
+"S1.P22.O2" = "La route sera longue";
+
+/* Final 1 */
+"S1.P23.N" = "Elena n'est plus votre servante. Elle est votre égale, votre partenaire et votre plus beau secret. Le manoir reste vôtre, mais son cœur lui appartient.";
+"S1.P23.Q" = "FIN";
+"S1.P23.O1" = "Recommencer";
+"S1.P23.O2" = "Terminer";
+
+/* Final 2 */
+"S1.P24.N" = "La vérité éclate. Elena devient la maîtresse de maison. Le rapport de force a changé, mais le lien forgé cette nuit-là est indestructible.";
+"S1.P24.Q" = "FIN";
+"S1.P24.O1" = "Recommencer";
+"S1.P24.O2" = "Terminer";
+
+/* STORY 2: MIDNIGHT TOKYO */
+"S2.P0.N" = "La pluie martèle les rues néon de Shinjuku. Vous êtes dans un bar calme quand une femme en trench-coat mouillé s'assoit près de vous. Elle sent le jasmin et la poudre à canon.";
+"S2.P0.Q" = "Comment engager la conversation ?";
+"S2.P0.O1" = "Lui offrir un verre";
+"S2.P0.O2" = "Nuit difficile, n'est-ce pas ?";
+
+"S2.P1.N" = "Elle fixe son verre, puis vous regarde. « Vous êtes courageux », murmure-t-elle en faisant glisser une puce de données sur le comptoir.";
+"S2.P1.Q" = "Prendre la puce ?";
+"S2.P1.O1" = "La prendre et la cacher";
+"S2.P1.O2" = "Je ne veux pas d'ennuis";
+
+"S2.P2.N" = "Elle lâche un rire amer. « Vous n'avez aucune idée... » Elle regarde par-dessus son épaule. Deux hommes en costume noir viennent d'entrer.";
+"S2.P2.Q" = "L'aider à se cacher ?";
+"S2.P2.O1" = "Suivez-moi par la porte arrière";
+"S2.P2.O2" = "Faisons comme si nous étions en couple";
+
+"S2.P3.N" = "Vous la serrez contre vous. Les hommes scannent la pièce et repartent. Elle semble soulagée, mais ses mains tremblent. « Je m'appelle Mia », souffle-t-elle.";
+"S2.P3.Q" = "L'interroger sur le danger ?";
+"S2.P3.O1" = "Qui étaient-ils, Mia ?";
+"S2.P3.O2" = "Sommes-nous en sécurité ?";
+
+"S2.P4.N" = "Les hommes approchent, mais vous restez de marbre. Ils passent leur chemin. Elle murmure : « Vous m'avez sauvée. Je suis Mia. Mais cette puce... elle vaut des millions de vies. »";
+"S2.P4.Q" = "L'interroger sur la puce ?";
+"S2.P4.O1" = "Qu'est-ce qu'il y a dessus ?";
+"S2.P4.O2" = "On devrait déguerpir d'ici";
+
+"S2.P5.N" = "Mia fixe la porte. « La corpo Arasaka veut ça. Ce ne sont pas des données... c'est une âme numérique. »";
+"S2.P5.Q" = "La croire ?";
+"S2.P5.O1" = "Une âme numérique ? Vraiment ?";
+"S2.P5.O2" = "J'ai entendu des rumeurs...";
+
+"S2.P6.N" = "Mia vous prend la main. « Nulle part n'est sûr tant qu'on n'a pas uploadé ça. On doit atteindre le quartier Tech. »";
+"S2.P6.Q" = "Partir avec elle ?";
+"S2.P6.O1" = "Je vous y emmène";
+"S2.P6.O2" = "Seulement si vous m'en dites plus";
+
+"S2.P7.N" = "Vous vous glissez dehors. L'allée est sombre et sent l'ozone. Soudain, un drone vrombit au-dessus de vos têtes, cherchant des signatures thermiques.";
+"S2.P7.Q" = "Comment éviter le drone ?";
+"S2.P7.O1" = "Se cacher sous l'auvent";
+"S2.P7.O2" = "Courir vers le métro";
+
+"S2.P8.N" = "Mia s'arrête sous la pluie. « S'ils m'attrapent, ils m'effaceront. Et vous aussi, pour m'avoir aidée. »";
+"S2.P8.Q" = "La rassurer ?";
+"S2.P8.O1" = "Je suis avec vous jusqu'au bout";
+"S2.P8.O2" = "Bougeons, et vite";
+
+"S2.P9.N" = "Le drone passe. Vous atteignez votre voiture. Mia vous regarde avec un mélange de peur et de gratitude.";
+"S2.P9.Q" = "Démarrer ?";
+"S2.P9.O1" = "Plein gaz !";
+"S2.P9.O2" = "Rouler doucement pour se fondre dans la masse";
+
+"S2.P10.N" = "Vous arrivez de justesse à la station. La foule est immense, une couverture parfaite. Mia reste collée à vous, son épaule frôlant la vôtre.";
+"S2.P10.Q" = "Continuer d'avancer ?";
+"S2.P10.O1" = "Prendre le train express";
+"S2.P10.O2" = "Passer par les tunnels de service";
+
+"S2.P11.N" = "Vous traversez le quartier des gratte-ciel. Les publicités holographiques illuminent le visage de Mia en rose et bleu.";
+"S2.P11.Q" = "Briser le silence ?";
+"S2.P11.O1" = "Pourquoi moi, Mia ?";
+"S2.P11.O2" = "Parle-moi de cette puce";
+
+"S2.P12.N" = "La ville ressemble à un labyrinthe. Vous vous arrêtez dans un petit stand de ramen pour souffler un instant.";
+"S2.P12.Q" = "Surveiller la rue ?";
+"S2.P12.O1" = "Vérifier si on est suivis";
+"S2.P12.O2" = "Parler à Mia";
+
+"S2.P13.N" = "Mia baisse les yeux. « Vous étiez le seul à ne pas ressembler à un prédateur ce soir. J'avais besoin d'un humain, pas d'un mercenaire. »";
+"S2.P13.Q" = "Répondre avec douceur ?";
+"S2.P13.O1" = "Je suis content d'avoir été là";
+"S2.P13.O2" = "Je suis juste un type dans un bar";
+
+"S2.P14.N" = "Mia tapote la puce. « C'est la conscience de ma sœur. C'était une netrunner, elle en a trop vu. Ils ont 'tué' son corps. »";
+"S2.P14.Q" = "Exprimer votre sympathie ?";
+"S2.P14.O1" = "C'est horrible...";
+"S2.P14.O2" = "Peut-on encore la sauver ?";
+
+"S2.P15.N" = "Elle essuie une larme. « Le point d'accès est dans la vieille tour TV. Mais le pont est bloqué par un barrage de police. »";
+"S2.P15.Q" = "Comment traverser ?";
+"S2.P15.O1" = "Utilise tes talents de hackeuse";
+"S2.P15.O2" = "Corrompre les gardes";
+
+"S2.P16.N" = "Mia vous montre un plan. « Si on passe par les égouts, c'est plus sûr, mais le chemin est long. »";
+"S2.P16.Q" = "Choisir le chemin ?";
+"S2.P16.O1" = "Prenons les égouts";
+"S2.P16.O2" = "Non, on a besoin de vitesse";
+
+"S2.P17.N" = "C'est sombre et sale, mais efficace. Mia se repose sur vous pour la guider. Vous sentez le poids de sa confiance.";
+"S2.P17.Q" = "L'aider à franchir un obstacle ?";
+"S2.P17.O1" = "Lui donner la main";
+"S2.P17.O2" = "Ouvrir la marche";
+
+"S2.P18.N" = "C'est le chaos sur le pont. Vous profitez de la confusion pour passer. Le cœur de Mia bat si fort que vous pourriez presque l'entendre.";
+"S2.P18.Q" = "La calmer ?";
+"S2.P18.O1" = "On y est presque";
+"S2.P18.O2" = "Reste concentrée, Mia";
+
+"S2.P19.N" = "La tour TV se dresse devant vous, relique de l'ancien monde cernée d'acier moderne. Mia semble épuisée.";
+"S2.P19.Q" = "Proposer une pause ?";
+"S2.P19.O1" = "Reposons-nous 5 minutes";
+"S2.P19.O2" = "On fonce jusqu'au bout";
+
+"S2.P20.N" = "Vous atteignez la base de la tour. « L'ascenseur est mort, soupire Mia. On va devoir grimper. »";
+"S2.P20.Q" = "L'encourager ?";
+"S2.P20.O1" = "Une marche après l'autre";
+"S2.P20.O2" = "Je porte le matériel";
+
+"S2.P21.N" = "Vous vous asseyez sur les marches. Mia s'appuie contre vous. « Si on s'en sort... qu'est-ce que vous ferez demain ? »";
+"S2.P21.Q" = "Penser à l'avenir ?";
+"S2.P21.O1" = "On pourrait prendre un café";
+"S2.P21.O2" = "Je serai juste content de dormir";
+
+"S2.P22.N" = "L'ascension est brutale. À mi-hauteur, des sirènes hurlent en bas. Ils ont trouvé votre voiture.";
+"S2.P22.Q" = "Se dépêcher ?";
+"S2.P22.O1" = "On double la cadence !";
+"S2.P22.O2" = "Trouver un endroit où se cacher";
+
+"S2.P23.N" = "Vous atteignez la salle des serveurs. L'air est froid et bourdonne d'énergie. Mia connecte la puce. « Initialisation en cours... »";
+"S2.P23.Q" = "Surveiller l'écran ?";
+"S2.P23.O1" = "Surveiller la porte";
+"S2.P23.O2" = "Rester aux côtés de Mia";
+
+"S2.P24.N" = "Le terminal est antique mais fonctionnel. Les doigts de Mia volent sur les touches. « Le pare-feu est énorme ! »";
+"S2.P24.Q" = "L'aider à hacker ?";
+"S2.P24.O1" = "Forcer l'alimentation";
+"S2.P24.O2" = "L'aider à garder son calme";
+
+"S2.P25.N" = "Les portes sifflent. L'équipe tactique d'Arasaka est là. Vous dégainez. « Encore deux minutes ! » hurle Mia.";
+"S2.P25.Q" = "Tenir la position ?";
+"S2.P25.O1" = "Ouvrir le feu !";
+"S2.P25.O2" = "Barricader la porte";
+
+"S2.P26.N" = "Les yeux de Mia brillent d'un bleu électrique. Elle est au cœur du Net. Les soldats brisent le plafond de verre.";
+"S2.P26.Q" = "Protéger Mia ?";
+"S2.P26.O1" = "La protéger de votre corps";
+"S2.P26.O2" = "La mettre à l'abri";
+
+"S2.P27.N" = "Un flash aveuglant. Upload à 100 %. Les soldats se figent — leurs implants cybernétiques ont été grillés depuis le Net.";
+"S2.P27.Q" = "Vérifier Mia ?";
+"S2.P27.O1" = "C'est fini ?";
+"S2.P27.O2" = "Tu vas bien ?";
+
+"S2.P28.N" = "Tout devient noir. Puis, chaque écran de Tokyo s'allume avec un seul message : « LIBERTÉ ». Mia s'effondre dans vos bras.";
+"S2.P28.Q" = "La réveiller ?";
+"S2.P28.O1" = "Mia ! Parle-moi !";
+"S2.P28.O2" = "La serrer fort";
+
+"S2.P29.N" = "Le soleil se lève sur un nouveau Tokyo. Mia sourit, ses yeux sont redevenus normaux. « Elle est sauve. Nous sommes saufs. »";
+"S2.P29.Q" = "FIN";
+"S2.P29.O1" = "Recommencer";
+"S2.P29.O2" = "Terminer";
+
+/* STORY 3: SUMMER CAMP */
+"S3.P0.N" = "Dernière nuit au camp de vacances. Le feu crépite, l'odeur des pins est partout. Yuki, d'ordinaire timide, capte votre regard et désigne le sentier sombre menant au lac.";
+"S3.P0.Q" = "La suivrez-vous dans la nuit ?";
+"S3.P0.O1" = "Je n'attendais que ça";
+"S3.P0.O2" = "Bien sûr, allons-y";
+
+"S3.P1.N" = "Vous la rattrapez. La forêt vibre au son des grillons. La main de Yuki frôle parfois la vôtre en marchant. Elle semble nerveuse.";
+"S3.P1.Q" = "Comment briser le silence ?";
+"S3.P1.O1" = "Lui prendre fermement la main";
+"S3.P1.O2" = "Lui demander à quoi elle pense";
+
+"S3.P2.N" = "Vous marchez côte à côte. Le clair de lune perce à peine la canopée. Yuki vous jette un regard en coin, un léger sourire aux lèvres. « Je ne pensais pas que tu viendrais vraiment », murmure-t-elle.";
+"S3.P2.Q" = "Votre réponse ?";
+"S3.P2.O1" = "Je ne manquerais ça pour rien au monde";
+"S3.P2.O2" = "J'étais curieux";
+
+"S3.P3.N" = "Vous atteignez le ponton. L'eau est un miroir sombre reflétant un océan d'étoiles. Yuki retire ses chaussures et s'assoit au bord, les pieds ballants.";
+"S3.P3.Q" = "S'asseoir près d'elle ?";
+"S3.P3.O1" = "S'asseoir tout près d'elle";
+"S3.P3.O2" = "Lui laisser un peu d'espace";
+
+"S3.P4.N" = "Le ponton craque sous votre poids. L'air frais du lac fait frissonner Yuki. Elle ne s'écarte pas quand vous approchez.";
+"S3.P4.Q" = "Lui offrir votre veste ?";
+"S3.P4.O1" = "Lui mettre votre veste sur les épaules";
+"S3.P4.O2" = "Juste s'asseoir et discuter";
+
+"S3.P5.N" = "Yuki contemple les étoiles. « Tu te souviens de notre premier jour ici ? » demande-t-elle. « Tu m'as aidée avec mes sacs quand tout le monde était occupé. »";
+"S3.P5.Q" = "Vous vous en souvenez ?";
+"S3.P5.O1" = "Je me souviens de chaque détail";
+"S3.P5.O2" = "On dirait que c'était il y a une éternité";
+
+"S3.P6.N" = "Elle rit doucement. « J'avais tellement peur à ce moment-là. Mais en te voyant, j'ai senti que j'avais ma place ici. » Elle regarde l'eau.";
+"S3.P6.Q" = "Avouer vos sentiments ?";
+"S3.P6.O1" = "Je ressentais la même chose";
+"S3.P6.O2" = "Je suis content d'avoir pu t'aider";
+
+"S3.P7.N" = "La nuit est parfaitement paisible. Soudain, Yuki se lève. « L'eau a l'air si bonne. Si on... plongeait ? » demande-t-elle avec une lueur malicieuse.";
+"S3.P7.Q" = "Êtes-vous assez courageux ?";
+"S3.P7.O1" = "Allez, on plonge !";
+"S3.P7.O2" = "Il fait trop froid, Yuki";
+
+"S3.P8.N" = "Elle fixe le lac, puis vous. « Je veux faire quelque chose de courageux ce soir. Un truc dont je me souviendrai tout l'hiver. »";
+"S3.P8.Q" = "L'encourager ?";
+"S3.P8.O1" = "Tu sautes avec moi ?";
+"S3.P8.O2" = "Restons plutôt ici";
+
+"S3.P9.N" = "SPLASH ! L'eau est glacée mais exaltante. Vous refaites surface avec Yuki, essoufflés et hilares, vous éclaboussant comme des enfants.";
+"S3.P9.Q" = "Nager vers elle ?";
+"S3.P9.O1" = "La serrer dans vos bras";
+"S3.P9.O2" = "Continuer de l'éclabousser !";
+
+"S3.P10.N" = "Vous restez sur le ponton. Vous parlez pendant des heures de tout — de l'école, des parents, de l'avenir. Votre lien se renforce dans le silence.";
+"S3.P10.Q" = "Se rapprocher ?";
+"S3.P10.O1" = "Poser votre tête contre la sienne";
+"S3.P10.O2" = "La regarder dans les yeux";
+
+"S3.P11.N" = "L'atmosphère change. Yuki s'arrête de parler. Dans la pénombre, ses yeux cherchent les vôtres. « Je ne veux pas rentrer en ville demain », murmure-t-elle.";
+"S3.P11.Q" = "Que dites-vous ?";
+"S3.P11.O1" = "On se verra là-bas, promis";
+"S3.P11.O2" = "Ne pensons pas à demain";
+
+"S3.P12.N" = "Yuki prend une grande inspiration. « Si je ne le dis pas maintenant, je ne le dirai jamais. Je t'aime bien depuis ce premier jour à l'arrêt de bus. »";
+"S3.P12.Q" = "Comment réagir ?";
+"S3.P12.O1" = "Moi aussi, je t'aime bien";
+"S3.P12.O2" = "Enfin la vérité !";
+
+"S3.P13.N" = "Elle fouille dans sa poche et sort un bracelet d'amitié fait main. Bleu et blanc, les couleurs du lac. « Je l'ai fait pour toi », dit-elle timidement.";
+"S3.P13.Q" = "Accepter le cadeau ?";
+"S3.P13.O1" = "La laisser le nouer à votre poignet";
+"S3.P13.O2" = "Lui voler un baiser à la place";
+
+"S3.P14.N" = "Le bracelet est simple, mais vous savez qu'elle y a passé des heures. Elle attend votre réaction, sa lèvre inférieure tremblant légèrement.";
+"S3.P14.Q" = "Votre geste ?";
+"S3.P14.O1" = "La remercier avec un câlin";
+"S3.P14.O2" = "Lui dire qu'il est parfait";
+
+"S3.P15.N" = "Yuki sourit, d'un sourire radieux, sincère. « J'avais peur que tu trouves ça gamin. » Elle lève les yeux vers la lune, l'air plus confiante.";
+"S3.P15.Q" = "Faire une promesse ?";
+"S3.P15.O1" = "Promettre d'appeler tous les jours";
+"S3.P15.O2" = "Promettre de venir la voir bientôt";
+
+"S3.P16.N" = "L'air est électrique. Yuki fixe vos lèvres. Le monde autour disparaît ; il n'y a plus que vous deux et cette nuit d'été.";
+"S3.P16.Q" = "Est-ce le bon moment ?";
+"S3.P16.O1" = "Se pencher pour l'embrasser";
+"S3.P16.O2" = "Lui murmurer un mot doux";
+
+"S3.P17.N" = "À cet instant, une étoile filante traverse le ciel, laissant une traînée d'argent. Yuki s'exclame : « Vite ! Fais un vœu ! »";
+"S3.P17.Q" = "Que souhaitez-vous ?";
+"S3.P17.O1" = "Un avenir ensemble";
+"S3.P17.O2" = "Que cette nuit dure toujours";
+
+"S3.P18.N" = "L'étoile disparaît aussi vite qu'elle est apparue. Yuki ferme fort les yeux. « J'ai demandé quelque chose d'important », dit-elle en rougissant.";
+"S3.P18.Q" = "Lui demander son vœu ?";
+"S3.P18.O1" = "Dis-moi ce que tu as souhaité";
+"S3.P18.O2" = "Je crois savoir ce que c'était";
+
+"S3.P19.N" = "Le feu du camp est maintenant totalement éteint. Vous entamez le retour, main dans la main. La forêt semble différente — moins effrayante, plus magique.";
+"S3.P19.Q" = "Marcher lentement ?";
+"S3.P19.O1" = "Prendre le chemin le plus long";
+"S3.P19.O2" = "Savourer le silence";
+
+"S3.P20.N" = "Vous passez devant le vieux chêne où vous vous êtes vus la première fois. Yuki s'arrête un instant. « Tout va changer, n'est-ce pas ? » demande-t-elle doucement.";
+"S3.P20.Q" = "La réconforter ?";
+"S3.P20.O1" = "Le changement peut être une bonne chose";
+"S3.P20.O2" = "Tout n'est pas obligé de changer";
+
+"S3.P21.N" = "Les bungalows sont en vue. Les autres dorment déjà. Yuki s'arrête devant sa porte. Elle ne veut pas lâcher votre main.";
+"S3.P21.Q" = "Une dernière chose ?";
+"S3.P21.O1" = "Demander un dernier baiser";
+"S3.P21.O2" = "Demander son numéro de téléphone";
+
+"S3.P22.N" = "Yuki s'attarde sur le seuil. La lumière du porche éclaire doucement son visage. « Merci pour ce soir. C'était la plus belle nuit de ma vie. »";
+"S3.P22.Q" = "Lui dire au revoir ?";
+"S3.P22.O1" = "À demain matin";
+"S3.P22.O2" = "Bonne nuit, Yuki";
+
+"S3.P23.N" = "Lever du soleil. Le camp est en effervescence, tout le monde prépare ses bagages. Vous cherchez Yuki dans la foule, le cœur battant.";
+"S3.P23.Q" = "Pouvez-vous la trouver ?";
+"S3.P23.O1" = "Chercher près du bus";
+"S3.P23.O2" = "Vérifier le ponton une dernière fois";
+
+"S3.P24.N" = "Le moteur des bus tourne déjà. Vous la voyez ! Elle est près de la grille, regardant partout frénétiquement jusqu'à ce qu'elle vous aperçoive.";
+"S3.P24.Q" = "Courir vers elle ?";
+"S3.P24.O1" = "Courir et la serrer fort";
+"S3.P24.O2" = "Lui faire un signe et sourire";
+
+"S3.P25.N" = "Vous l'atteignez juste à temps. Elle vous murmure à l'oreille des mots que vous n'oublierez jamais : « Ne laisse pas ça devenir juste un souvenir d'été. »";
+"S3.P25.Q" = "Votre réponse ?";
+"S3.P25.O1" = "C'est une promesse";
+"S3.P25.O2" = "On se voit le week-end prochain";
+
+"S3.P26.N" = "Le chauffeur de bus klaxonne. Yuki doit y aller. Elle vous envoie un baiser de la main en montant. Vous restez là, à regarder le bus disparaître dans la poussière.";
+"S3.P26.Q" = "Que ressentez-vous ?";
+"S3.P26.O1" = "Heureux et plein d'espoir";
+"S3.P26.O2" = "Triste mais comblé";
+
+"S3.P27.N" = "Des mois plus tard. Vous êtes en ville, votre téléphone vibre. C'est une photo de Yuki — elle porte le bracelet. L'été n'est jamais vraiment fini.";
+"S3.P27.Q" = "FIN";
+"S3.P27.O1" = "Recommencer";
+"S3.P27.O2" = "Terminer";
+
+"S3.P28.N" = "Vous regardez le bracelet à votre poignet. Il est un peu usé, mais les souvenirs sont intacts. Parfois, un seul été suffit pour toute une vie.";
+"S3.P28.Q" = "FIN";
+"S3.P28.O1" = "Essayer à nouveau";
+"S3.P28.O2" = "Terminer";

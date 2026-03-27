@@ -94,19 +94,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         rootNavController.tabBarItem = UITabBarItem(
             title: "Messages".localize(),
-            image: UIImage(systemName: "message"),
+            image: UIImage(systemName: "bubble.left.and.bubble.right.fill"),
             tag: 0
         )
         
         roleplayNavController.tabBarItem = UITabBarItem(
             title: "Roleplay".localize(),
-            image: UIImage(systemName: "sparkles"),
+            image: UIImage(systemName: "square.grid.2x2.fill"),
             tag: 1
         )
         
         gamesGFNavController.tabBarItem = UITabBarItem(
             title: "Games".localize(),
-            image: UIImage(systemName: "gamecontroller"),
+            image: UIImage(systemName: "theatermasks"),
             tag: 2
         )
         

@@ -92,11 +92,11 @@ class StorylineVC: UIViewController {
         
         // --- Narration Bubble (Облачко) ---
         narrationBubbleView.backgroundColor = TelegramColors.cardBackground
-        narrationBubbleView.layer.cornerRadius = 16
+        narrationBubbleView.layer.cornerRadius = view.isCurrentDeviceiPad() ? 26 : 16
         narrationBubbleView.clipsToBounds = true
         view.addSubview(narrationBubbleView)
         
-        narrationLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        narrationLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 26 : 16, weight: .medium)
         narrationLabel.textColor = TelegramColors.textPrimary
         narrationLabel.numberOfLines = 0
         narrationBubbleView.addSubview(narrationLabel)
@@ -108,7 +108,7 @@ class StorylineVC: UIViewController {
         bottomBlurView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.addSubview(bottomBlurView)
         
-        questionLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        questionLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 28 : 18, weight: .bold)
         questionLabel.textColor = .white
         questionLabel.numberOfLines = 0
         questionLabel.textAlignment = .center
@@ -121,7 +121,7 @@ class StorylineVC: UIViewController {
     }
     
     private func setupOptionButton(_ button: UIButton, action: Selector) {
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.titleLabel?.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 26 : 16, weight: .semibold)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(white: 1, alpha: 0.1)
         button.layer.cornerRadius = 12
@@ -186,7 +186,7 @@ class StorylineVC: UIViewController {
         questionLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(24)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(22)
+            make.height.equalTo(view.isCurrentDeviceiPad() ? 32 : 22)
         }
         
         option1Button.snp.makeConstraints { make in
@@ -231,7 +231,7 @@ class StorylineVC: UIViewController {
     }
     
     @objc private func showRules() {
-        let rulesText = "Welcome to Interactive Stories! Read the narration, immerse yourself in the plot, and make choices to decide what happens next. Tap an option to advance the story. Choose wisely, as your decisions shape the ending!"
+        let rulesText = "StoryLineRule".localize()
         
         let alert = UIAlertController(title: "HowPlay".localize(), message: rulesText, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "GotIt".localize(), style: .default))

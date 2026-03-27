@@ -229,7 +229,7 @@ extension GamesViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         if ConfigService.shared.isTestB && indexPath.section == 0 {
+         if ConfigService.shared.isTestB && indexPath.section == 1 {
              let gameData = games[indexPath.item]
              guard let type = GameType(rawValue: gameData.id) else { return }
              let vc = type.controller
