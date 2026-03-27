@@ -10,6 +10,9 @@
 		100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 100544DF2DFA62B9006D8C3C /* ApphudSDK */; };
 		100AB6FD2E39A58400B8DCD5 /* UIImage+loadCustomAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */; };
 		1017D5AE2EEF75C4009A32E2 /* LoopingPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D5AD2EEF75C4009A32E2 /* LoopingPlayerManager.swift */; };
+		101FBD772F76FBC7001E6C2A /* StorylineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101FBD762F76FBC7001E6C2A /* StorylineCell.swift */; };
+		101FBD792F7701EB001E6C2A /* StorylineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101FBD782F7701E6001E6C2A /* StorylineVC.swift */; };
+		101FBD7B2F77042B001E6C2A /* StorylineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101FBD7A2F77042A001E6C2A /* StorylineViewModel.swift */; };
 		10335FC62DF2685C0075D699 /* MessageHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10335FC52DF268510075D699 /* MessageHistoryService.swift */; };
 		1035BD882E5919260053486C /* BlurryOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD872E5919250053486C /* BlurryOverlayView.swift */; };
 		1035BD952E592FB00053486C /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD942E592FAF0053486C /* BubbleView.swift */; };
@@ -142,6 +145,9 @@
 		100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+loadCustomAvatar.swift"; sourceTree = "<group>"; };
 		1017D5AA2EEF68F6009A32E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1017D5AD2EEF75C4009A32E2 /* LoopingPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingPlayerManager.swift; sourceTree = "<group>"; };
+		101FBD762F76FBC7001E6C2A /* StorylineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineCell.swift; sourceTree = "<group>"; };
+		101FBD782F7701E6001E6C2A /* StorylineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineVC.swift; sourceTree = "<group>"; };
+		101FBD7A2F77042A001E6C2A /* StorylineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorylineViewModel.swift; sourceTree = "<group>"; };
 		10335FC52DF268510075D699 /* MessageHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryService.swift; sourceTree = "<group>"; };
 		1035BD872E5919250053486C /* BlurryOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryOverlayView.swift; sourceTree = "<group>"; };
 		1035BD942E592FAF0053486C /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
@@ -287,6 +293,16 @@
 				1017D5AD2EEF75C4009A32E2 /* LoopingPlayerManager.swift */,
 			);
 			path = LoopingPlayerManager;
+			sourceTree = "<group>";
+		};
+		101FBD752F76FBC0001E6C2A /* Storyline */ = {
+			isa = PBXGroup;
+			children = (
+				101FBD7A2F77042A001E6C2A /* StorylineViewModel.swift */,
+				101FBD782F7701E6001E6C2A /* StorylineVC.swift */,
+				101FBD762F76FBC7001E6C2A /* StorylineCell.swift */,
+			);
+			path = Storyline;
 			sourceTree = "<group>";
 		};
 		104492842E65C93C00237274 /* Subviews */ = {
@@ -519,6 +535,7 @@
 		1087316A2F01BFBF00DD3177 /* Games */ = {
 			isa = PBXGroup;
 			children = (
+				101FBD752F76FBC0001E6C2A /* Storyline */,
 				108731702F01C20200DD3177 /* AllGames */,
 				1087316D2F01C0AA00DD3177 /* Subviews */,
 				1087316B2F01BFD300DD3177 /* GamesViewController.swift */,
@@ -884,6 +901,7 @@
 				1017D5AE2EEF75C4009A32E2 /* LoopingPlayerManager.swift in Sources */,
 				10E75C902F07626C00D28EB9 /* WebHookAnalyticsService.swift in Sources */,
 				10E75C262F034DA900D28EB9 /* DatePlaceCell.swift in Sources */,
+				101FBD772F76FBC7001E6C2A /* StorylineCell.swift in Sources */,
 				108731782F01C22700DD3177 /* JigsawGameVC.swift in Sources */,
 				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
 				1061A27C2DF0EE8F00206F61 /* NetworkMonitor.swift in Sources */,
@@ -923,6 +941,7 @@
 				10E75C692F04FDA700D28EB9 /* DressUpVC.swift in Sources */,
 				105F10372E28272D002CF2FF /* AllChatsViewController.swift in Sources */,
 				10D1C4AC2E3FEC88005557CF /* UnreadMessagesService.swift in Sources */,
+				101FBD792F7701EB001E6C2A /* StorylineVC.swift in Sources */,
 				1059C34D2E2865AE00720A0A /* FullScreenImageView.swift in Sources */,
 				1055A5422F0A2350004FF05B /* ReversiGameVC.swift in Sources */,
 				10E75C972F07725500D28EB9 /* OnboardingViewController.swift in Sources */,
@@ -939,6 +958,7 @@
 				10E75C732F05F44100D28EB9 /* CreateDreamWaifuVC.swift in Sources */,
 				10E75C242F034CDB00D28EB9 /* DateVC.swift in Sources */,
 				105672032DFCD1AF00ECF0DE /* CustomAlertView.swift in Sources */,
+				101FBD7B2F77042B001E6C2A /* StorylineViewModel.swift in Sources */,
 				10DE771B2E5E63800062F74D /* CoinsPackageCell.swift in Sources */,
 				1061A1B02DF0EA2900206F61 /* MainChatVC.swift in Sources */,
 				10DE77212E5E6B750062F74D /* CoinsService.swift in Sources */,
