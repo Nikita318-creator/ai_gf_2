@@ -2,20 +2,20 @@ import ApphudSDK
 import UIKit
 
 enum SubsIDs {
-    static let weeklyPROSubsId = "weeklyPROSubsId"
-    static let monthlyPROSubsId = "monthlyPROSubsId"
+    static let weeklyPROSubsId = ""
+    static let monthlyPROSubsId = ""
     
-    static let weeklySubsId =  "weeklySubsIdNew"
-    static let monthlySubsId = "monthlySubsIdNew"
+    static let weeklySubsId =  "com.NatalliaUvarova.myWaifu.app.week"
+    static let monthlySubsId = "com.NatalliaUvarova.myWaifu.app.month"
 }
 
 enum CoinsIDs {
-    static let coins10   = "IAP.coins10"
-    static let coins20   = "IAP.coins20"
-    static let coins50   = "IAP.coins50"
-    static let coins100  = "IAP.coins100"
-    static let coins500  = "IAP.coins500"
-    static let coins1000 = "IAP.coins1000"
+    static let coins10   = "com.NatalliaUvarova.myWaifu.app.coins10"
+    static let coins20   = "com.NatalliaUvarova.myWaifu.app.coins20"
+    static let coins50   = "com.NatalliaUvarova.myWaifu.app.coins50"
+    static let coins100  = "com.NatalliaUvarova.myWaifu.app.coins100"
+    static let coins500  = "com.NatalliaUvarova.myWaifu.app.coins500"
+    static let coins1000 = "com.NatalliaUvarova.myWaifu.app.coins1000"
 }
 
 enum InAppPurchaseResult {
