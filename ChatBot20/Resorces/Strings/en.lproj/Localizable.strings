@@ -23,6 +23,7 @@
 "AIMessageType.recordingVideo" = "recording a video…";
 "AIMessageType.recordingAudio" = "recording voice…";
 "you" = "you";
+"waifu" = "waifu";
 "Reset" = "Reset";
 "Expertise.Neutral" = "Empty chat";
 "BugReportText" = "Found a bug or want to suggest something?\nContact us";

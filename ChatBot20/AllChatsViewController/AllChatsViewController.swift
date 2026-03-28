@@ -278,7 +278,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
         let label = UILabel()
         label.text = "NoMessagesYet".localize()
         label.textColor = .gray
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 26 : 16, weight: .medium)
         label.numberOfLines = 0
         label.textAlignment = .center
         

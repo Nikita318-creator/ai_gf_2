@@ -68,11 +68,11 @@ class ChatListItemCell: UITableViewCell {
         avatarContainer.addSubview(avatarImageView)
 
         // Текстовый блок
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 28 : 18, weight: .bold)
         titleLabel.textColor = TelegramColors.textPrimary
         containerView.addSubview(titleLabel)
 
-        lastMessageLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        lastMessageLabel.font = .systemFont(ofSize: isCurrentDeviceiPad() ? 24 : 14, weight: .medium)
         lastMessageLabel.textColor = TelegramColors.textSecondary
         lastMessageLabel.numberOfLines = 2 // Даем больше контекста
         containerView.addSubview(lastMessageLabel)
@@ -91,12 +91,12 @@ class ChatListItemCell: UITableViewCell {
         avatarContainer.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(12)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(56)
+            make.width.height.equalTo(isCurrentDeviceiPad() ? 78 : 56)
         }
 
         avatarImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(48)
+            make.width.height.equalTo(isCurrentDeviceiPad() ? 70 : 48)
         }
 
         timeLabel.snp.makeConstraints { make in

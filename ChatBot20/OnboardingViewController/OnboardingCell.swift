@@ -46,10 +46,14 @@ class OnboardingCell: UICollectionViewCell {
         blurView.layer.cornerCurve = .continuous
         blurView.clipsToBounds = true
         
+        // В OnboardingCell внутри setupUI измени привязку blurView:
         blurView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-140)
-            make.left.right.equalToSuperview().inset(24)
-            make.height.greaterThanOrEqualTo(100)
+            // Вместо жесткого offset(-140), который на iPad в горизонте убьет всё
+            make.bottom.lessThanOrEqualToSuperview().offset(-150)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.85).priority(.high) // На iPad не растягиваем на весь экран
+            make.width.lessThanOrEqualTo(600) // Ограничиваем макс ширину для iPad
+            make.left.right.equalToSuperview().inset(24).priority(.medium)
         }
         
         // 4. Title внутри Blur

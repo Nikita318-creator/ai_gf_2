@@ -35,6 +35,19 @@ class OnboardingViewController: UIViewController {
         animateInitialAppearance()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { _ in
+            // 1. Инвалидируем лейаут, чтобы вызвался sizeForItemAt с новыми размерами
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            
+            // 2. Возвращаем коллекцию на нужную страницу после поворота
+            let indexPath = IndexPath(item: self.pageControl.currentPage, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        }, completion: nil)
+    }
+    
     private func setupGradientBackground() {
         gradientBackground.colors = [
             TelegramColors.background.cgColor,
@@ -216,11 +229,7 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
         cell.configure(with: slides[indexPath.item])
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return view.bounds.size
-    }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.frame.width)
         pageControl.currentPage = page
@@ -259,5 +268,9 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
         if index >= 0 && nextIndex < colors.count {
             gradientBackground.colors = [colors[index], colors[nextIndex]]
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionView.bounds.size
     }
 }

@@ -69,7 +69,7 @@ class BaseGameViewController: UIViewController {
 
         self.waifuScore = waifu
         self.userScore = user
-        scoreLabel.text = "\("Roleplay".localize()) \(waifuScore) : \(userScore) \("you".localize())"
+        scoreLabel.text = "\("waifu".localize()) \(waifuScore) : \(userScore) \("you".localize())"
         
         saveProgress()
     }
@@ -111,7 +111,7 @@ class BaseGameViewController: UIViewController {
         }
         
         // Счёт (Текст покрупнее)
-        scoreLabel.text = "\("Roleplay".localize()) \(waifuScore) : \(userScore) \("you".localize())"
+        scoreLabel.text = "\("waifu".localize()) \(waifuScore) : \(userScore) \("you".localize())"
         scoreLabel.font = .systemFont(ofSize: 20, weight: .black) // Жирный и крупный
         scoreLabel.textColor = .white
         scoreLabel.textAlignment = .center
@@ -160,7 +160,7 @@ class BaseGameViewController: UIViewController {
         view.addSubview(chatBubbleView)
         
         bubbleLabel.textColor = .white
-        bubbleLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        bubbleLabel.font = .systemFont(ofSize: view.isCurrentDeviceiPad() ? 24 : 14, weight: .medium)
         bubbleLabel.numberOfLines = 0
         chatBubbleView.addSubview(bubbleLabel)
         
