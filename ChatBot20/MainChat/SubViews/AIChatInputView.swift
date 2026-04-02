@@ -35,7 +35,7 @@ class AIChatInputView: UIView {
     private let maxTextViewHeight: CGFloat = 120
     private lazy var minTextViewHeight: CGFloat = isCurrentDeviceiPad() ? 50 : 36
     private var isHandlingImage = false
-    private var canSendMessage = true
+    var canSendMessage = true
     private var needScrollTotTheEnd: Bool = true // for RTL (arabic)
 
     weak var vc: UIViewController?
@@ -508,6 +508,20 @@ class AIChatInputView: UIView {
             dateVC.dismiss(animated: true)
         }
         vc?.present(dateVC, animated: true, completion: nil)
+    }
+    
+    func hideAllPromptsExceptGift() {
+        promptsStackView.arrangedSubviews.forEach { view in
+            if let button = view as? UIButton {
+                // Если это НЕ кнопка подарка — скрываем
+                let isGift = button.accessibilityIdentifier == "giftButton"
+                button.isHidden = !isGift
+            }
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
+        }
     }
 }
 

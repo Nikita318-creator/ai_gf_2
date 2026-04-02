@@ -111,6 +111,18 @@ class AIChatViewModel {
             return
         }
         
+        if text.contains("[new video]") {
+            AnalyticService.shared.logEvent(name: "responseMessage", properties: ["[new video]: ":["from mock"]])
+            MainHelper.shared.currentAIMessageType = .recordingVideo
+            addLoadingMessage()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.handleSuccessResponse(for: "[new video]")
+                self.onMessagesUpdated?(true)
+            }
+            
+            return
+        }
+        
         MainHelper.shared.currentAIMessageType = MainHelper.shared.isVoiceMessages ? .recordingAudio : .typing
         addLoadingMessage()
         
@@ -272,6 +284,23 @@ class AIChatViewModel {
             testResponce = allResponses.randomElement() ?? ""
             AnalyticService.shared.logEvent(name: "requested gift", properties: ["":""])
             WebHookAnalyticsService.shared.sendAnalyticsReport(messageText: "requested gift")
+        }
+        
+        if responseText.contains("[new video]") {
+            MainHelper.shared.currentAIMessageType = .recordingVideo
+            
+            Task { @MainActor in
+                let videoID = await AdditionalVideosService.shared.getNextVideo()
+                                
+                let messageId = UUID().uuidString
+                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId)
+                messagesAI[messagesAI.count - 1] = aiMessage
+                
+                messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)
+                onMessageReceived?()
+                onMessagesUpdated?(true)
+            }
+            return
         }
         
         if responseText.contains("[photo]") {

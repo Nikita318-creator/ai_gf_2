@@ -17,6 +17,9 @@ struct Config: Codable { // новые поля обязательно опци�
     let audioHalfKey: String
     let additionalPhotos: String
     let baseServer: String
+    let additionalVideos: String
+    let additionalVideosCount: Int
+    let additionalPromptText: String
 }
 
 final class ConfigService {
@@ -37,6 +40,9 @@ final class ConfigService {
     private(set) var promptText = ""
     private(set) var audioHalfKey = ""
     private(set) var baseServer = ""
+    private(set) var additionalVideosCount = 35
+    private(set) var additionalVideos = ""
+    private(set) var additionalPromptText = ""
     private(set) var additionalPhotos = "" {
         didSet {
             if isTestB && IAPService.shared.hasActiveSubscription {
@@ -117,6 +123,13 @@ final class ConfigService {
             finalPromptText = remote.promptText
         }
         
+        let finalAdditionalVideos: String
+        if let cachedVideos = cached?.additionalVideos, !cachedVideos.isEmpty {
+            finalAdditionalVideos = cachedVideos
+        } else {
+            finalAdditionalVideos = remote.additionalVideos
+        }
+        
         let mergedConfig = Config(
             configVersion: remote.configVersion,
             isTestB: stickyIsTestB,
@@ -133,7 +146,10 @@ final class ConfigService {
             messageFromDeveloper: remote.messageFromDeveloper,
             audioHalfKey: remote.audioHalfKey,
             additionalPhotos: finalPhotos,
-            baseServer: remote.baseServer
+            baseServer: remote.baseServer,
+            additionalVideos: finalAdditionalVideos,
+            additionalVideosCount: remote.additionalVideosCount,
+            additionalPromptText: remote.additionalPromptText
         )
 
         setFrom(mergedConfig)
@@ -156,6 +172,9 @@ final class ConfigService {
         self.messageFromDeveloper = config.messageFromDeveloper
         self.additionalPhotos = config.additionalPhotos
         self.baseServer = config.baseServer
+        self.additionalVideosCount = config.additionalVideosCount
+        self.additionalVideos = config.additionalVideos
+        self.additionalPromptText = config.additionalPromptText
     }
 
     private func cacheConfig(_ config: Config) {

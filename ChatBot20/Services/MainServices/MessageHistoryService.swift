@@ -3,7 +3,7 @@ import Foundation
 import RealmSwift
 
 enum SchemaVersion {
-    static let currentSchemaVersion: UInt64 = 2
+    static let currentSchemaVersion: UInt64 = 1
 }
 
 class MessageHistoryServiceObject: Object {

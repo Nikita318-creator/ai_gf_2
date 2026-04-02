@@ -125,6 +125,7 @@ class ChatCell: UITableViewCell {
 
     private var messageID = ""
     private var isVideoCell = false
+    private var isNewVideoCell = false
     private var videoID: String?
     private var isVoiceMessage = false
     private let service = GoogleTTSManager.shared
@@ -228,6 +229,7 @@ class ChatCell: UITableViewCell {
     func configure(message: String, isUserMessage: Bool, photoID: String, needHideActionButtons: Bool, isVoiceMessage: Bool, reaction: String?, id: String) {
         messageID = id
         isVideoCell = message.contains("[video]")
+        isNewVideoCell = message.contains("[new video]")
         loadingIndicator.stopAnimating()
         loadingIndicator.isHidden = true
         avatarView.isHidden = isUserMessage
@@ -298,6 +300,19 @@ class ChatCell: UITableViewCell {
                 playIconImageView.isHidden = false
                 if let thumbnailData = RemoteRealmVideoService.shared.getThumbnailData(name: photoID) {
                     self.messageImageView.image = UIImage(data: thumbnailData)
+                }
+            } else if message.contains("[new video]") {
+                videoID = photoID
+                playIconImageView.isHidden = false
+                
+                let url = AdditionalVideosService.shared.getFullUrl(for: photoID)
+                let asset = AVAsset(url: url)
+                let imageGenerator = AVAssetImageGenerator(asset: asset)
+                imageGenerator.appliesPreferredTrackTransform = true
+                
+                let time = CMTime(seconds: 1, preferredTimescale: 60)
+                if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
+                    self.messageImageView.image = UIImage(cgImage: imageRef)
                 }
             } else {
                 messageImageView.image = UIImage(named: photoID)
@@ -446,6 +461,24 @@ class ChatCell: UITableViewCell {
             AnalyticService.shared.logEvent(name: "messageImageTapped", properties: ["isVideo":"\(true)"])
 
             guard let player = makePlayer(from: videoID ?? "") else { return }
+            
+            let audioManager = LoopingAudioManager()
+            self.loopingPlayerManager = LoopingPlayerManager(player: player, audioManager: audioManager)
+
+            let playerVC = HardcorePlayerViewController()
+            playerVC.player = player
+            playerVC.modalPresentationStyle = .fullScreen
+            playerVC.delegate = self
+            
+            vc.present(playerVC, animated: true) {
+                player.play()
+            }
+        } else if isNewVideoCell {
+            AnalyticService.shared.logEvent(name: "messageImageTapped", properties: ["isNewVideo": "\(true)"])
+            
+            let url = AdditionalVideosService.shared.getFullUrl(for: videoID ?? "")
+            
+            let player = AVPlayer(url: url)
             
             let audioManager = LoopingAudioManager()
             self.loopingPlayerManager = LoopingPlayerManager(player: player, audioManager: audioManager)

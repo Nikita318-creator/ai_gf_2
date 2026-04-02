@@ -1,5 +1,4 @@
 import UIKit
-import MessageUI
 import SnapKit
 
 class AllChatsViewController: UIViewController {
@@ -12,6 +11,7 @@ class AllChatsViewController: UIViewController {
     private enum RowType {
         case customHeader
         case stories
+        case promoChat
         case emptyState
         case chat(index: Int)
     }
@@ -105,6 +105,13 @@ class AllChatsViewController: UIViewController {
         if ConfigService.shared.isTestB {
             rows.append(.stories)
         }
+
+        // Проверка 8 часов для рекламной ячейки
+        if let savedDate = UserDefaults.standard.object(forKey: "RemotePhotoServiceFirstLaunchDate") as? Date {
+            if Date().timeIntervalSince(savedDate) > 8 * 60 * 60, !ConfigService.shared.additionalVideos.isEmpty, IAPService.shared.hasActiveSubscription {
+                rows.append(.promoChat)
+            }
+        }
         
         if viewModel.chats.isEmpty {
             rows.append(.emptyState)
@@ -194,6 +201,13 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
             return cell
+        case .promoChat:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListItemCell.identifier, for: indexPath) as? ChatListItemCell else { return UITableViewCell() }
+            
+            cell.configure(with: viewModel.promoChatData)
+            cell.setUnread(true)
+            
+            return cell
         case .chat(let index):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ChatListItemCell.identifier, for: indexPath) as? ChatListItemCell else { return UITableViewCell() }
             let chat = viewModel.chats[index]
@@ -223,7 +237,7 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
             return 50 + topPadding
         case .stories:
             return view.isCurrentDeviceiPad() ? 140 : 115
-        case .chat:
+        case .chat, .promoChat:
             return view.isCurrentDeviceiPad() ? 150 : 100
         case .emptyState:
             return 250
@@ -252,20 +266,51 @@ extension AllChatsViewController: UITableViewDataSource, UITableViewDelegate {
             aiChatViewController.modalPresentationStyle = .fullScreen
             aiChatViewController.isModalInPresentation = true
             present(aiChatViewController, animated: false)
+        } else if case .promoChat = rows[indexPath.row] {
+            let chat = viewModel.promoChatData
+            
+            var selectedAssistant = AssistantsService().getAllConfigs().first(where: { $0.avatarImageName == chat.assistantAvatar })
+            
+            if selectedAssistant == nil {
+                let selectedAssistantID = UUID().uuidString
+                selectedAssistant = AssistantConfig(
+                    id: selectedAssistantID,
+                    assistantName: chat.assistantName,
+                    expertise: .roleplay,
+                    assistantInfo: "",
+                    userInfo: "",
+                    avatarImageName: chat.assistantAvatar
+                )
+                if let selectedAssistant {
+                    AssistantsService().addConfig(selectedAssistant)
+                }
+                
+                let messageId = UUID().uuidString
+                MessageHistoryService().addMessage(
+                    Message(
+                        role: "assistant",
+                        content: "newChatMessage".localize(),
+                        id: messageId
+                    ),
+                    assistantId: selectedAssistantID,
+                    messageId: messageId
+                )
+            } else {
+                MainHelper.shared.currentAssistant = selectedAssistant
+                MainHelper.shared.isFirstMessageInChat = true
+            }
+            
+            AnalyticService.shared.logEvent(name: "promoChat chat selected", properties: [
+                "index:": "promoChat",
+                "name:": "\(selectedAssistant?.assistantName ?? "")"
+            ])
+            
+            let aiChatViewController = MainChatVC()
+            aiChatViewController.modalPresentationStyle = .fullScreen
+            aiChatViewController.isModalInPresentation = true
+            present(aiChatViewController, animated: false)
         }
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        // Твои анимации только для ячеек чата
-//        if case .chat = rows[indexPath.row] {
-//            cell.alpha = 0
-//            cell.transform = CGAffineTransform(translationX: 0, y: 20)
-//            UIView.animate(withDuration: 0.4, delay: 0.05 * Double(indexPath.row), options: .curveEaseOut, animations: {
-//                cell.alpha = 1
-//                cell.transform = .identity
-//            })
-//        }
-//    }
     
     private func createEmptyStateView() -> UIView {
         let container = UIView()

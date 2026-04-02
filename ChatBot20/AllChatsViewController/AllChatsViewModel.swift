@@ -8,6 +8,15 @@ class AllChatsViewModel {
         }
     }
 
+    var promoChatData = ChatModel(
+        id: "promo",
+        assistantName: "newChatName".localize(),
+        lastMessage: "newChatMessage".localize(),
+        lastMessageTime: "",
+        assistantAvatar: "addsBannerAvatar",
+        isUnread: true
+    )
+    
     var onChatsUpdated: (() -> Void)?
     var moveOnChatsTabHandler: (() -> Void)?
 
@@ -33,11 +42,16 @@ class AllChatsViewModel {
     }
     
     func loadChats() {
-        chats = assistantsService.getAllConfigs().map {
+        chats = assistantsService.getAllConfigs().compactMap {
             let lastMessage = messageHistoryService.getAllMessages(
                 forAssistantId: $0.id ?? ""
             ).last?.content ?? $0.expertise.rawValue.localize()
 
+            guard $0.avatarImageName != "addsBannerAvatar" else {
+                promoChatData.lastMessage = lastMessage
+                return nil
+            }
+            
             return ChatModel(
                 id: $0.id ?? "",
                 assistantName: $0.assistantName,

@@ -4,7 +4,7 @@ import SnapKit
 struct ChatModel {
     let id: String
     let assistantName: String
-    let lastMessage: String
+    var lastMessage: String
     let lastMessageTime: String
     let assistantAvatar: String
     var isUnread: Bool = false

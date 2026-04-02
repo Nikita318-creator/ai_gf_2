@@ -85,6 +85,10 @@ class AIChatView: UIView {
         setupSwipeToDismiss()
         updateTextForIPadIfNeeded()
         checkForeStreak()
+        
+        if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+            inputTextView.hideAllPromptsExceptGift()
+        }
     }
 
     func updateForRLTIfNeeded() {
@@ -272,8 +276,13 @@ class AIChatView: UIView {
                 
                 viewModel.systemPrompt = baseRulePrompt + instructions + previousMessages
             } else {
-                self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant() + previousMessages
-                self?.viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForCurrentAssistant(isSafe: true) + previousMessages
+                if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+                    self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner() + previousMessages
+                    self?.viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true) + previousMessages
+                } else {
+                    self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant() + previousMessages
+                    self?.viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForCurrentAssistant(isSafe: true) + previousMessages
+                }
             }
 
             self?.viewModel.sendMessageViaCustomServer(text)
@@ -360,8 +369,12 @@ class AIChatView: UIView {
         if availableImages.isEmpty {
             availableImages = cachedImages
         }
-
-        if RemotePhotoService.shared.isTestPhotosReady, let selectedImage = availableImages.randomElement(), UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
+        
+        inputTextView.canSendMessage = false
+        
+        if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
+            viewModel.sendMessageViaCustomServer("[new video]", isNeedOnlyReply: true)
+        } else if RemotePhotoService.shared.isTestPhotosReady, let selectedImage = availableImages.randomElement(), UserDefaults.standard.bool(forKey: "didRequestSuchPhoto") {
             WebHookAnalyticsService.shared.sendAnalyticsReport(messageText: "THANKS for gift with photo")
             AnalyticService.shared.logEvent(name: "THANKS for gift with photo", properties: ["imageName: ":"\(selectedImage.imageName)"])
 
