@@ -53,7 +53,7 @@ final class ConfigService {
         }
     }
 
-    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analiticsWaifu3.json")
+    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analiticsWaifu4.json")
     private let cachedConfigKey = "cachedConfigKey"
 
     private init() {}

@@ -2,8 +2,8 @@ import ApphudSDK
 import UIKit
 
 enum SubsIDs {
-    static let weeklyPROSubsId = ""
-    static let monthlyPROSubsId = ""
+    static let weeklyPROSubsId = "com.NatalliaUvarova.myWaifu.app.pro_week"
+    static let monthlyPROSubsId = "com.NatalliaUvarova.myWaifu.app.pro_month"
     
     static let weeklySubsId =  "com.NatalliaUvarova.myWaifu.app.week"
     static let monthlySubsId = "com.NatalliaUvarova.myWaifu.app.month"
