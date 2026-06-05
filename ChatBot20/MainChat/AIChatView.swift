@@ -855,6 +855,7 @@ class AIChatView: UIView {
     }
     
     @objc private func streakTapped() {
+        inputTextView.textView.resignFirstResponder()
         showStreakPopup()
     }
 
