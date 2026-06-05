@@ -4,10 +4,10 @@ import SnapKit
 class CheckersGameVC: BaseGameViewController {
     
     // MARK: - Constants
-    private var aiDepth = 4 // Глубина просчета
+    private var aiDepth = 4
     
     // MARK: - Models
-    enum PieceColor { case white, black }
+    enum PieceColor: String { case white, black }
     
     struct Piece: Equatable {
         var color: PieceColor
@@ -26,7 +26,6 @@ class CheckersGameVC: BaseGameViewController {
         let becomesKing: Bool
     }
     
-    // Typealias для удобства работы с копиями доски
     typealias Board = [[Piece?]]
     
     // MARK: - Game State
@@ -36,11 +35,14 @@ class CheckersGameVC: BaseGameViewController {
     private var validMoves: [Move] = []
     
     private var isUserTurn = true
-    private var mustContinueCapture = false // Если игрок сбил, но может бить дальше той же шашкой
+    private var mustContinueCapture = false
     
-    // Счетчики для правила ничьей (40 ходов без взятия)
     private var consecutiveNonCaptures = 0
     private var userStartsNextGame = true
+    
+    // Ключ для сохранения поля (на базе boardSaveKey, который мы обсудили)
+    private var checkersBoardKey: String { return boardSaveKey + "_matrix" }
+    private var checkersTurnKey: String { return boardSaveKey + "_turn" }
     
     // UI Elements
     private var boardContainer: UIView!
@@ -52,16 +54,32 @@ class CheckersGameVC: BaseGameViewController {
 
     override func didResetProgress() {
         updateDifficultyBasedOnScore()
+        // При полном сбросе — очищаем сохраненную доску
+        UserDefaults.standard.removeObject(forKey: checkersBoardKey)
+        UserDefaults.standard.removeObject(forKey: checkersTurnKey)
         resetGame()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupInitialBoardState()
-        renderBoard()
-        loadProgress()
-        
+        loadProgress() // Сначала грузим очки, чтобы знать userScore
         updateDifficultyBasedOnScore()
+        
+        // Пытаемся загрузить сохраненную сессию
+        if !loadGameState() {
+            // Если сохранения нет — стартуем новую доску с нуля
+            setupInitialBoardState()
+            isUserTurn = true
+        }
+        
+        renderBoard()
+        
+        // Если восстановили состояние, и сейчас ход AI — запускаем его
+        if !isUserTurn {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+                self?.aiTurn()
+            }
+        }
     }
     
     private func updateDifficultyBasedOnScore() {
@@ -72,7 +90,7 @@ class CheckersGameVC: BaseGameViewController {
         case 3...: aiDepth = 4
         default: aiDepth = 4
         }
-        print("Текущая сложность AI: \(aiDepth)") // Для твоего контроля в консоли
+        print("Текущая сложность AI: \(aiDepth)")
     }
     
     override func updateScore(waifu: Int, user: Int) {
@@ -124,6 +142,9 @@ class CheckersGameVC: BaseGameViewController {
     
     // MARK: - UI Rendering
     private func renderBoard() {
+        // Защита от дублирования вьюх при пересоздании доски
+        boardContainer?.removeFromSuperview()
+        
         boardContainer = UIView()
         boardContainer.backgroundColor = .black
         boardContainer.layer.cornerRadius = 12
@@ -187,7 +208,6 @@ class CheckersGameVC: BaseGameViewController {
         let cell = cellViews[pos.row][pos.col]
         cell.subviews.forEach { $0.removeFromSuperview() }
         
-        // Highlight valid move destinations
         if let selected = selectedPosition {
             let isValidDest = validMoves.contains { $0.from == selected && $0.to == pos }
             if isValidDest {
@@ -212,7 +232,6 @@ class CheckersGameVC: BaseGameViewController {
         pieceView.layer.shadowRadius = 4
         pieceView.layer.shadowOpacity = 0.3
         
-        // Selection highlight
         if let selected = selectedPosition, selected == pos {
             pieceView.layer.borderWidth = 3
             pieceView.layer.borderColor = UIColor.systemYellow.cgColor
@@ -245,7 +264,6 @@ class CheckersGameVC: BaseGameViewController {
         let col = cell.tag % 10
         let tappedPos = Position(row: row, col: col)
         
-        // 1. Попытка хода
         if let selected = selectedPosition {
             if let move = validMoves.first(where: { $0.from == selected && $0.to == tappedPos }) {
                 executeUserMove(move)
@@ -253,17 +271,13 @@ class CheckersGameVC: BaseGameViewController {
             }
         }
         
-        // Если мы в середине серии взятий, нельзя менять шашку
         if mustContinueCapture { return }
         
-        // 2. Выбор шашки
         if board[row][col]?.color == .white {
             selectedPosition = tappedPos
             calculateUserMoves()
             updateAllCells()
         } else {
-            // Сброс выбора, если тапнули в пустоту или во врага
-            // (но только если не обязаны бить)
             if !mustContinueCapture {
                 selectedPosition = nil
                 validMoves = []
@@ -273,21 +287,13 @@ class CheckersGameVC: BaseGameViewController {
     }
     
     // MARK: - Move Generation Logic (Engine)
-    
     private func calculateUserMoves() {
         validMoves = []
         guard let selected = selectedPosition else { return }
-        
-        // Генерируем все легальные ходы для белых
         let allMoves = getLegalMoves(for: board, color: .white)
-        
-        // Фильтруем только те, что относятся к выбранной шашке
         validMoves = allMoves.filter { $0.from == selected }
     }
     
-    /// Основная функция правил.
-    /// Если на доске есть хоть один бой для цвета, возвращает ТОЛЬКО бои.
-    /// Иначе возвращает обычные ходы.
     private func getLegalMoves(for currentBoard: Board, color: PieceColor) -> [Move] {
         var captureMoves: [Move] = []
         var regularMoves: [Move] = []
@@ -297,11 +303,9 @@ class CheckersGameVC: BaseGameViewController {
                 guard let piece = currentBoard[row][col], piece.color == color else { continue }
                 let pos = Position(row: row, col: col)
                 
-                // Ищем бои
                 let captures = getCaptureMoves(board: currentBoard, from: pos)
                 captureMoves.append(contentsOf: captures)
                 
-                // Ищем обычные ходы (только если пока нет боев, для оптимизации можно и сразу, но по правилам бои приоритетнее)
                 if captureMoves.isEmpty {
                     let walks = getRegularMoves(board: currentBoard, from: pos)
                     regularMoves.append(contentsOf: walks)
@@ -309,11 +313,9 @@ class CheckersGameVC: BaseGameViewController {
             }
         }
         
-        // Если есть взятия - только их и возвращаем (Правило обязательного боя)
         if !captureMoves.isEmpty {
             return captureMoves
         }
-        
         return regularMoves
     }
     
@@ -344,21 +346,15 @@ class CheckersGameVC: BaseGameViewController {
     
     private func getCaptureMoves(board: Board, from pos: Position) -> [Move] {
         guard let piece = board[pos.row][pos.col] else { return [] }
-        
-        // Начинаем рекурсивный поиск цепочек
         return findJumps(board: board, currentPos: pos, color: piece.color, isKing: piece.isKing, capturedSoFar: [])
     }
     
     private func findJumps(board: Board, currentPos: Position, color: PieceColor, isKing: Bool, capturedSoFar: [Position]) -> [Move] {
         var moves: [Move] = []
         
-        // ИСПРАВЛЕННАЯ ЛОГИКА: Обычная шашка бьет только вперед, Дамка — во все стороны
         let directions: [(Int, Int)] = isKing ?
             [(-1, -1), (-1, 1), (1, -1), (1, 1)] :
             (color == .white ? [(-1, -1), (-1, 1)] : [(1, -1), (1, 1)])
-        
-        // Чтобы нельзя было бить одну и ту же шашку дважды за ход
-        // мы проверяем capturedSoFar
         
         for (dRow, dCol) in directions {
             let enemyRow = currentPos.row + dRow
@@ -368,42 +364,29 @@ class CheckersGameVC: BaseGameViewController {
             
             let enemyPos = Position(row: enemyRow, col: enemyCol)
             
-            // Проверки валидности прыжка
             if isValid(landRow, landCol),
                let enemyPiece = board[enemyRow][enemyCol],
                enemyPiece.color != color,
                board[landRow][landCol] == nil,
                !capturedSoFar.contains(enemyPos) {
                 
-                // Симулируем прыжок
                 var nextBoard = board
                 nextBoard[landRow][landCol] = nextBoard[currentPos.row][currentPos.col]
                 nextBoard[currentPos.row][currentPos.col] = nil
-                nextBoard[enemyRow][enemyCol] = nil // Временно убираем, чтобы не мешала
+                nextBoard[enemyRow][enemyCol] = nil
                 
                 let landPos = Position(row: landRow, col: landCol)
                 var newCaptures = capturedSoFar
                 newCaptures.append(enemyPos)
                 
-                // Проверяем, стала ли дамкой ПРЯМО СЕЙЧАС
                 let promoted = willBecomeKing(at: landPos, color: color, isKing: isKing)
                 
-                // Если шашка стала дамкой в процессе боя, по большинству правил ход завершается
                 if promoted && !isKing {
-                    moves.append(Move(from: currentPos,
-                                      to: landPos,
-                                      captures: newCaptures,
-                                      becomesKing: true))
+                    moves.append(Move(from: currentPos, to: landPos, captures: newCaptures, becomesKing: true))
                 } else {
-                    // Рекурсивно ищем продолжение
                     let subMoves = findJumps(board: nextBoard, currentPos: landPos, color: color, isKing: isKing, capturedSoFar: newCaptures)
-                    
                     if subMoves.isEmpty {
-                        // Цепочка закончилась
-                        moves.append(Move(from: currentPos,
-                                          to: landPos,
-                                          captures: newCaptures,
-                                          becomesKing: isKing)) // Остается какой была
+                        moves.append(Move(from: currentPos, to: landPos, captures: newCaptures, becomesKing: isKing))
                     } else {
                         moves.append(contentsOf: subMoves)
                     }
@@ -411,19 +394,17 @@ class CheckersGameVC: BaseGameViewController {
             }
         }
         
-        // Пересоберем moves, чтобы from был правильным
         return moves.map { move in
             return Move(from: currentPos, to: move.to, captures: move.captures, becomesKing: move.becomesKing)
         }
     }
     
     // MARK: - Game Loop
-    
     private func executeUserMove(_ move: Move) {
-        animateMove(move) {
+        animateMove(move) { [weak self] in
+            guard let self = self else { return }
             self.finalizeMove(move)
             
-            // Проверка мульти-джампа
             if !move.captures.isEmpty {
                 let canCaptureMore = !self.getCaptureMoves(board: self.board, from: move.to).isEmpty
                 if canCaptureMore && !move.becomesKing {
@@ -431,15 +412,16 @@ class CheckersGameVC: BaseGameViewController {
                     self.selectedPosition = move.to
                     self.calculateUserMoves()
                     self.updateAllCells()
+                    self.saveGameState() // Фиксируем промежуточное состояние серии боев
                     return
                 }
             }
             
             self.mustContinueCapture = false
-            // Передаем ход
             self.isUserTurn = false
             
-            // ПРОВЕРКА: может ли AI ходить после нашего хода?
+            self.saveGameState() // Фиксируем окончание хода юзера
+            
             if self.checkWinCondition() { return }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -449,26 +431,20 @@ class CheckersGameVC: BaseGameViewController {
     }
     
     private func finalizeMove(_ move: Move) {
-        // Remove captures
         for capture in move.captures {
             board[capture.row][capture.col] = nil
         }
         
-        // Move piece
         let movingPiece = board[move.from.row][move.from.col]
         board[move.to.row][move.to.col] = movingPiece
         board[move.from.row][move.from.col] = nil
         
-        // Promote
         if move.becomesKing {
             board[move.to.row][move.to.col]?.isKing = true
         }
         
-        // Stats
         if !move.captures.isEmpty {
             consecutiveNonCaptures = 0
-            
-            // Phrases
             if isUserTurn {
                 let messages = ["GamePhrases19".localize(), "GamePhrases20".localize(), "GamePhrases21".localize()]
                 setWaifuMessage(messages.randomElement()!)
@@ -485,19 +461,18 @@ class CheckersGameVC: BaseGameViewController {
         updateAllCells()
     }
     
-    // MARK: - SUPERIOR AI Logic (Minimax + AlphaBeta)
-    
+    // MARK: - AI Logic
     private func aiTurn() {
-        guard !isUserTurn else { return } // Защита от случайного вызова
+        guard !isUserTurn else { return }
         
         setWaifuMessage("GamePhrases18".localize())
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
             let bestMove = self.runMinimax()
             
             DispatchQueue.main.async {
                 guard let move = bestMove else {
-                    // Если ходов нет вообще
                     self.handleAILoss()
                     return
                 }
@@ -508,39 +483,31 @@ class CheckersGameVC: BaseGameViewController {
     }
 
     private func executeAIMove(_ move: Move) {
-        animateMove(move) {
+        animateMove(move) { [weak self] in
+            guard let self = self else { return }
             self.finalizeMove(move)
             
-            // После хода AI отдаем ход игроку
             self.isUserTurn = true
+            self.saveGameState() // Фиксируем окончание хода AI
             
-            // ПРОВЕРКА: может ли человек ходить после хода AI?
             if self.checkWinCondition() { return }
             
             self.setWaifuMessage("GamePhrases19".localize())
         }
     }
     
-    // --- Minimax Engine ---
-    
     private func runMinimax() -> Move? {
-        // Белые (User) - minimizing, Черные (AI) - maximizing
         let possibleMoves = getLegalMoves(for: board, color: .black)
-        
-        // Если только один ход - не тратим время
         if possibleMoves.count == 1 { return possibleMoves.first }
         if possibleMoves.isEmpty { return nil }
         
         var bestMove: Move?
         var maxEval = Int.min
-        
-        // Alpha-Beta
         let alpha = Int.min
         let beta = Int.max
         
         for move in possibleMoves {
             let simulatedBoard = applyMoveToBoard(board, move: move)
-            // Запускаем рекурсию
             let eval = minimax(board: simulatedBoard, depth: aiDepth - 1, alpha: alpha, beta: beta, isMaximizing: false)
             
             if eval > maxEval {
@@ -553,20 +520,13 @@ class CheckersGameVC: BaseGameViewController {
     }
     
     private func minimax(board: Board, depth: Int, alpha: Int, beta: Int, isMaximizing: Bool) -> Int {
-        if depth == 0 {
-            return evaluateBoard(board)
-        }
+        if depth == 0 { return evaluateBoard(board) }
         
-        // Проверка победы/поражения в узле
         let color: PieceColor = isMaximizing ? .black : .white
         let moves = getLegalMoves(for: board, color: color)
         
         if moves.isEmpty {
-            if isMaximizing {
-                return -100000 + (aiDepth - depth)
-            } else {
-                return 100000 - (aiDepth - depth)
-            }
+            return isMaximizing ? (-100000 + (aiDepth - depth)) : (100000 - (aiDepth - depth))
         }
         
         var currentAlpha = alpha
@@ -579,9 +539,7 @@ class CheckersGameVC: BaseGameViewController {
                 let eval = minimax(board: nextBoard, depth: depth - 1, alpha: currentAlpha, beta: currentBeta, isMaximizing: false)
                 maxEval = max(maxEval, eval)
                 currentAlpha = max(currentAlpha, eval)
-                if currentBeta <= currentAlpha {
-                    break // Alpha Cutoff
-                }
+                if currentBeta <= currentAlpha { break }
             }
             return maxEval
         } else {
@@ -591,9 +549,7 @@ class CheckersGameVC: BaseGameViewController {
                 let eval = minimax(board: nextBoard, depth: depth - 1, alpha: currentAlpha, beta: currentBeta, isMaximizing: true)
                 minEval = min(minEval, eval)
                 currentBeta = min(currentBeta, eval)
-                if currentBeta <= currentAlpha {
-                    break // Beta Cutoff
-                }
+                if currentBeta <= currentAlpha { break }
             }
             return minEval
         }
@@ -624,7 +580,6 @@ class CheckersGameVC: BaseGameViewController {
                 guard let piece = board[row][col] else { continue }
                 let pos = Position(row: row, col: col)
                 
-                // Базовый вес
                 let value = piece.isKing ? 500 : 100
                 let sideMult = (piece.color == .black ? 1 : -1)
                 score += value * sideMult
@@ -634,12 +589,10 @@ class CheckersGameVC: BaseGameViewController {
             }
         }
 
-        // Если у юзера мало фигур, заставляем AI "давить"
         if whitePieces.count <= 2 && !blackPieces.isEmpty {
             for bPos in blackPieces {
                 for wPos in whitePieces {
                     let dist = abs(bPos.row - wPos.row) + abs(bPos.col - wPos.col)
-                    // Чем меньше дистанция, тем больше очков черным (AI)
                     score += (14 - dist) * 5
                 }
             }
@@ -648,7 +601,6 @@ class CheckersGameVC: BaseGameViewController {
     }
     
     // MARK: - Helpers & Animation
-    
     private func animateMove(_ move: Move, completion: @escaping () -> Void) {
         let fromCell = cellViews[move.from.row][move.from.col]
         let toCell = cellViews[move.to.row][move.to.col]
@@ -709,24 +661,20 @@ class CheckersGameVC: BaseGameViewController {
         let whitePieces = board.flatMap { $0 }.compactMap { $0 }.filter { $0.color == .white }
         let blackPieces = board.flatMap { $0 }.compactMap { $0 }.filter { $0.color == .black }
         
-        // 1. Проверка на полное съедение
-        if whitePieces.isEmpty { handleAIWin(); return true }
-        if blackPieces.isEmpty { handleUserWin(); return true }
+        if whitePieces.isEmpty { clearGameState(); handleAIWin(); return true }
+        if blackPieces.isEmpty { clearGameState(); handleUserWin(); return true }
         
-        // 2. Проверка на отсутствие ходов (Запирание)
         let currentTurnColor: PieceColor = isUserTurn ? .white : .black
         let availableMoves = getLegalMoves(for: board, color: currentTurnColor)
         
         if availableMoves.isEmpty {
-            if isUserTurn {
-                handleAIWin()
-            } else {
-                handleUserWin()
-            }
+            clearGameState()
+            if isUserTurn { handleAIWin() } else { handleUserWin() }
             return true
         }
         
         if consecutiveNonCaptures >= 40 {
+            clearGameState()
             setWaifuMessage("GamePhrases27".localize())
             showGameOverAlert(title: "Draw", message: "GamePhrases27".localize())
             return true
@@ -764,17 +712,80 @@ class CheckersGameVC: BaseGameViewController {
         isUserTurn = userStartsNextGame
         setupInitialBoardState()
         updateAllCells()
+        
+        clearGameState() // Чистим старый сейв, так как пошел новый раунд
+        
         setWaifuMessage(isUserTurn ? "GamePhrases34".localize() : "GamePhrases35".localize())
         if !isUserTurn {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { self.aiTurn() }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                self?.aiTurn()
+            }
         }
     }
     
     private func showGameOverAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "GamePhrases38".localize(), style: .default) { _ in
-            self.resetGame()
+        alert.addAction(UIAlertAction(title: "GamePhrases38".localize(), style: .default) { [weak self] _ in
+            self?.resetGame()
         })
         present(alert, animated: true)
+    }
+    
+    // MARK: - State Persistence Serialization
+    
+    private func saveGameState() {
+        var stringRows: [String] = []
+        for row in 0..<8 {
+            var rowItems: [String] = []
+            for col in 0..<8 {
+                if let piece = board[row][col] {
+                    let typeStr = piece.color.rawValue // "white" или "black"
+                    let kingStr = piece.isKing ? "_king" : ""
+                    rowItems.append("\(typeStr)\(kingStr)")
+                } else {
+                    rowItems.append("empty")
+                }
+            }
+            stringRows.append(rowItems.joined(separator: ","))
+        }
+        
+        let boardStringRepresentation = stringRows.joined(separator: "|")
+        UserDefaults.standard.set(boardStringRepresentation, forKey: checkersBoardKey)
+        UserDefaults.standard.set(isUserTurn, forKey: checkersTurnKey)
+    }
+    
+    private func loadGameState() -> Bool {
+        guard let savedStr = UserDefaults.standard.string(forKey: checkersBoardKey) else { return false }
+        
+        let rows = savedStr.components(separatedBy: "|")
+        guard rows.count == 8 else { return false }
+        
+        var loadedBoard: Board = Array(repeating: Array(repeating: nil, count: 8), count: 8)
+        
+        for (rowIndex, rowStr) in rows.enumerated() {
+            let items = rowStr.components(separatedBy: ",")
+            guard items.count == 8 else { return false }
+            
+            for (colIndex, item) in items.enumerated() {
+                if item == "empty" {
+                    loadedBoard[rowIndex][colIndex] = nil
+                } else if item.hasPrefix("white") {
+                    let isKing = item.contains("_king")
+                    loadedBoard[rowIndex][colIndex] = Piece(color: .white, isKing: isKing)
+                } else if item.hasPrefix("black") {
+                    let isKing = item.contains("_king")
+                    loadedBoard[rowIndex][colIndex] = Piece(color: .black, isKing: isKing)
+                }
+            }
+        }
+        
+        self.board = loadedBoard
+        self.isUserTurn = UserDefaults.standard.bool(forKey: checkersTurnKey)
+        return true
+    }
+    
+    private func clearGameState() {
+        UserDefaults.standard.removeObject(forKey: checkersBoardKey)
+        UserDefaults.standard.removeObject(forKey: checkersTurnKey)
     }
 }

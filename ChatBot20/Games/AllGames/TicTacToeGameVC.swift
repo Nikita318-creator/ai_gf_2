@@ -4,7 +4,7 @@ import SnapKit
 class TicTacToeGameVC: BaseGameViewController {
     
     // MARK: - State
-    enum Player {
+    enum Player: String {
         case user   // "X"
         case waifu  // "O"
     }
@@ -16,11 +16,18 @@ class TicTacToeGameVC: BaseGameViewController {
     private var userStartsNextGame = true
     private var isUserTurn = true
 
+    // Дополнительные ключи для UserDefaults на базе базового boardSaveKey
+    private var boardStateKey: String { return boardSaveKey + "_grid" }
+    private var isUserTurnKey: String { return boardSaveKey + "_turn" }
+    private var nextGameStartKey: String { return boardSaveKey + "_next_start" }
+
     override var gameRules: String {
         "gameRules4".localize()
     }
 
     override func didResetProgress() {
+        // Принудительно чистим весь кэш игры
+        clearSavedBoardState()
         resetGame(sender: nil)
     }
     
@@ -28,7 +35,28 @@ class TicTacToeGameVC: BaseGameViewController {
         super.viewDidLoad()
         setupGameGrid()
         loadProgress()
-        isUserTurn = userStartsNextGame
+        
+        // Попытка загрузить неоконченную игру
+        if loadBoardState() {
+            // Если игра успешно восстановлена
+            if isGameOver {
+                showRestartButton()
+            } else if !isUserTurn {
+                // Если мы вышли в момент, когда должна была ходить вайфу — даем ей сходить
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+                    self?.waifuMove()
+                }
+            }
+        } else {
+            // Если это абсолютно новый раунд
+            isUserTurn = userStartsNextGame
+            if !isUserTurn {
+                setWaifuMessage("GamePhrases8".localize())
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                    self?.waifuMove()
+                }
+            }
+        }
     }
     
     override func updateScore(waifu: Int, user: Int) {
@@ -108,11 +136,11 @@ class TicTacToeGameVC: BaseGameViewController {
     @objc private func cellTapped(_ sender: UIButton) {
         let index = sender.tag
         
-        // Добавлена проверка isUserTurn
         guard board[index] == nil, !isGameOver, isUserTurn else { return }
         
-        isUserTurn = false // Блокируем ход юзера
+        isUserTurn = false
         makeMove(at: index, for: .user)
+        saveCurrentBoardState() // Сохраняем ход юзера
         
         if !checkWinner() {
             setWaifuMessage("GamePhrases1".localize())
@@ -143,8 +171,9 @@ class TicTacToeGameVC: BaseGameViewController {
         makeMove(at: bestMove, for: .waifu)
         
         if !checkWinner() {
-            isUserTurn = true // Возвращаем ход игроку
+            isUserTurn = true
             setWaifuMessage("GamePhrases2".localize())
+            saveCurrentBoardState() // Сохраняем ход вайфу и передачу хода юзеру
         }
     }
     
@@ -212,10 +241,17 @@ class TicTacToeGameVC: BaseGameViewController {
             setWaifuMessage("GamePhrases5".localize())
         }
         
+        // Матч окончен -> Кэш текущего раунда больше не нужен
+        clearSavedBoardState()
         showRestartButton()
     }
     
     private func showRestartButton() {
+        // Защита от дублирования кнопок при перезаходе на экран завершенного матча
+        if view.subviews.contains(where: { ($0 as? UIButton)?.titleLabel?.text == "GamePhrases6".localize() }) {
+            return
+        }
+        
         let btn = UIButton(type: .system)
         btn.setTitle("GamePhrases6".localize(), for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
@@ -242,9 +278,11 @@ class TicTacToeGameVC: BaseGameViewController {
         isGameOver = false
         sender?.removeFromSuperview()
         
-        // ЛОГИКА ЧЕРЕДОВАНИЯ ХОДОВ
         userStartsNextGame.toggle()
         isUserTurn = userStartsNextGame
+        
+        // Фиксируем переменные нового раунда
+        saveCurrentBoardState()
         
         if isUserTurn {
             setWaifuMessage("GamePhrases7".localize())
@@ -254,5 +292,60 @@ class TicTacToeGameVC: BaseGameViewController {
                 self?.waifuMove()
             }
         }
+    }
+    
+    // MARK: - Save/Load State Logic
+    private func saveCurrentBoardState() {
+        // Конвертируем [Player?] в [String], потому что UserDefaults не жрет кастомные Енумы напрямую
+        let rawBoard = board.map { $0?.rawValue ?? "nil" }
+        UserDefaults.standard.set(rawBoard, forKey: boardStateKey)
+        UserDefaults.standard.set(isUserTurn, forKey: isUserTurnKey)
+        UserDefaults.standard.set(userStartsNextGame, forKey: nextGameStartKey)
+    }
+    
+    private func loadBoardState() -> Bool {
+        guard let rawBoard = UserDefaults.standard.array(forKey: boardStateKey) as? [String],
+              rawBoard.count == 9 else { return false }
+        
+        // Разворачиваем строки обратно в массив Player?
+        self.board = rawBoard.map { Player(rawValue: $0) }
+        self.isUserTurn = UserDefaults.standard.bool(forKey: isUserTurnKey)
+        self.userStartsNextGame = UserDefaults.standard.bool(forKey: nextGameStartKey)
+        
+        // Отрисовываем восстановленные символы на кнопках
+        for (index, player) in board.enumerated() {
+            if let player = player {
+                let symbol = (player == .user) ? "X" : "O"
+                let color = (player == .user) ? .white : TelegramColors.primary
+                buttons[index].setTitle(symbol, for: .normal)
+                buttons[index].setTitleColor(color, for: .normal)
+            } else {
+                buttons[index].setTitle(nil, for: .normal)
+            }
+        }
+        
+        // Проверяем, не была ли игра завершена на момент выхода
+        let winPatterns: [[Int]] = [
+            [0,1,2], [3,4,5], [6,7,8],
+            [0,3,6], [1,4,7], [2,5,8],
+            [0,4,8], [2,4,6]
+        ]
+        let hasWinner = winPatterns.contains { pattern in
+            if let p0 = board[pattern[0]], p0 == board[pattern[1]], p0 == board[pattern[2]] { return true }
+            return false
+        }
+        let isDraw = !board.contains(nil)
+        
+        if hasWinner || isDraw {
+            self.isGameOver = true
+        }
+        
+        return true
+    }
+    
+    private func clearSavedBoardState() {
+        UserDefaults.standard.removeObject(forKey: boardStateKey)
+        UserDefaults.standard.removeObject(forKey: isUserTurnKey)
+        UserDefaults.standard.removeObject(forKey: nextGameStartKey)
     }
 }

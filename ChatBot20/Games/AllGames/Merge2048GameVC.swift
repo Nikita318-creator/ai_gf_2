@@ -13,12 +13,13 @@ class Merge2048GameVC: BaseGameViewController {
     private let spacing: CGFloat = 8
     private var cellSize: CGFloat = 0
     private let gridContainer = UIView()
-    
+
     override var gameRules: String {
         "gameRules3".localize()
     }
 
     override func didResetProgress() {
+        clearSavedBoard()
         resetBoard()
     }
     
@@ -26,7 +27,12 @@ class Merge2048GameVC: BaseGameViewController {
         super.viewDidLoad()
         loadProgress()
         setupGameField()
-        resetBoard()
+        
+        // Пытаемся восстановить сессию, если она есть
+        if !loadSavedBoard() {
+            resetBoard()
+        }
+        
         addSwipeGestures()
     }
 
@@ -90,6 +96,7 @@ class Merge2048GameVC: BaseGameViewController {
     }
 
     private func resetBoard() {
+        clearSavedBoard()
         board = Array(repeating: Array(repeating: 0, count: gridSize), count: gridSize)
         tileIds = Array(repeating: Array(repeating: nil, count: gridSize), count: gridSize)
         tileViews.values.forEach { $0.removeFromSuperview() }
@@ -98,6 +105,7 @@ class Merge2048GameVC: BaseGameViewController {
         isGameOver = false
         addRandomTile()
         addRandomTile()
+        saveBoardState()
     }
 
     private func addRandomTile() {
@@ -178,6 +186,7 @@ class Merge2048GameVC: BaseGameViewController {
             renderBoard()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                 self.addRandomTile()
+                self.saveBoardState() // Сохраняем актуальную матрицу после появления новой плитки
                 self.checkGameState()
             }
         }
@@ -223,6 +232,7 @@ class Merge2048GameVC: BaseGameViewController {
             updateScore(waifu: waifuScore, user: userScore)
             setWaifuMessage("GamePhrases10".localize())
             isGameOver = true
+            clearSavedBoard() // Стираем прогресс текущей катки, так как уровень успешно выигран
             showRestartButton()
             return
         }
@@ -232,6 +242,7 @@ class Merge2048GameVC: BaseGameViewController {
             updateScore(waifu: waifuScore, user: userScore)
             setWaifuMessage("GamePhrases11".localize())
             isGameOver = true
+            clearSavedBoard() // Поражение — стираем поле
             showRestartButton()
         }
     }
@@ -248,7 +259,13 @@ class Merge2048GameVC: BaseGameViewController {
     }
 
     private func showRestartButton() {
+        // Защита от дублирования кнопок при перезаходах на экран Game Over
+        if let existingBtn = view.subviews.first(where: { $0.accessibilityIdentifier == "restart_btn" }) {
+            existingBtn.removeFromSuperview()
+        }
+        
         let btn = UIButton(type: .system)
+        btn.accessibilityIdentifier = "restart_btn"
         btn.setTitle("GamePhrases12".localize(), for: .normal)
         btn.backgroundColor = TelegramColors.primary
         btn.tintColor = .white
@@ -266,6 +283,57 @@ class Merge2048GameVC: BaseGameViewController {
         sender.removeFromSuperview()
         resetBoard()
         setWaifuMessage("GamePhrases13".localize())
+    }
+    
+    // MARK: - Local Save Logic
+    private func saveBoardState() {
+        UserDefaults.standard.set(board, forKey: boardSaveKey)
+    }
+    
+    private func clearSavedBoard() {
+        UserDefaults.standard.removeObject(forKey: boardSaveKey)
+    }
+    
+    private func loadSavedBoard() -> Bool {
+        // Извлекаем массив массивов [[Int]] из UserDefaults
+        guard let savedBoard = UserDefaults.standard.array(forKey: boardSaveKey) as? [[Int]],
+              savedBoard.count == gridSize else {
+            return false
+        }
+        
+        // Очищаем старые вьюшки, если они вдруг отрисовались
+        tileViews.values.forEach { $0.removeFromSuperview() }
+        tileViews.removeAll()
+        
+        self.board = savedBoard
+        self.tileIds = Array(repeating: Array(repeating: nil, count: gridSize), count: gridSize)
+        
+        var hasTiles = false
+        
+        // Восстанавливаем плитки на экране на основе сохраненной матрицы числовых значений
+        for r in 0..<gridSize {
+            for c in 0..<gridSize {
+                let value = board[r][c]
+                if value > 0 {
+                    let id = UUID()
+                    tileIds[r][c] = id
+                    
+                    let tile = TileView(frame: frameForCell(atRow: r, col: c), value: value)
+                    tile.backgroundColor = getTileColor(value)
+                    gridContainer.addSubview(tile)
+                    tileViews[id] = tile
+                    hasTiles = true
+                }
+            }
+        }
+        
+        // Если игра была сохранена в состоянии GameOver, вешаем кнопку рестарта
+        if !canMove() || board.flatMap({ $0 }).contains(targetValue) {
+            isGameOver = true
+            showRestartButton()
+        }
+        
+        return hasTiles
     }
 }
 

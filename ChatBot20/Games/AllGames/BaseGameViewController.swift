@@ -17,8 +17,12 @@ class BaseGameViewController: UIViewController {
     var waifuScore = 0
     var userScore = 0
     
-    private var gameSaveKey: String {
+    var gameSaveKey: String {
         return String(describing: type(of: self)) + "_progress"
+    }
+    
+    var boardSaveKey: String {
+        return gameSaveKey + "_board_state"
     }
     
     // Custom Navigation Elements

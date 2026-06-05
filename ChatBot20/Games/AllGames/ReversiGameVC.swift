@@ -22,7 +22,12 @@ class ReversiGameVC: BaseGameViewController {
     private let currentScoreLabel = UILabel()
     private let boardContainer = UIView()
     
-    // Матрица весов (НЕ ТРОГАЛ)
+    // Ключ для сохранения флага: чей сейчас ход (чтобы ИИ не ходил вместо юзера после перезапуска)
+    private var turnSaveKey: String {
+        return gameSaveKey + "_turn_state"
+    }
+    
+    // Матрица весов
     private let positionWeights: [[Int]] = [
         [100, -20, 10,  5,  5, 10, -20, 100],
         [-20, -50, -2, -2, -2, -2, -50, -20],
@@ -43,10 +48,14 @@ class ReversiGameVC: BaseGameViewController {
         setupGameUI()
         loadProgress()
         updateDifficultyBasedOnScore()
-        startNewGame(isFirstGame: true)
+        
+        // Пытаемся восстановить игру, если сохранения нет — запустится чистая
+        if !restoreGameState() {
+            startNewGame(isFirstGame: true)
+        }
     }
     
-    // MARK: - Restore User Score Logic (НЕ ТРОГАЛ)
+    // MARK: - Restore User Score Logic
     override func updateScore(waifu: Int, user: Int) {
         super.updateScore(waifu: waifu, user: user)
         
@@ -82,17 +91,20 @@ class ReversiGameVC: BaseGameViewController {
     }
     
     override func didResetProgress() {
+        // При полном сбросе прогресса полностью вычищаем кэш текущей партии
+        UserDefaults.standard.removeObject(forKey: boardSaveKey)
+        UserDefaults.standard.removeObject(forKey: turnSaveKey)
         updateDifficultyBasedOnScore()
         startNewGame(isFirstGame: false)
     }
     
     private func updateDifficultyBasedOnScore() {
         switch userScore {
-        case 0: aiDepth = 1 // Но по факту будет рандом (см. логику выше)
-        case 1: aiDepth = 1 // Будет Greedy-алгоритм
-        case 2: aiDepth = 2 // Начинает думать по матрице весов
-        case 3: aiDepth = 3 // Глубже
-        default: aiDepth = 4 // Максимальный уровень
+        case 0: aiDepth = 1
+        case 1: aiDepth = 1
+        case 2: aiDepth = 2
+        case 3: aiDepth = 3
+        default: aiDepth = 4
         }
     }
 
@@ -203,6 +215,8 @@ class ReversiGameVC: BaseGameViewController {
         if !isFirstGame {
             setWaifuMessage("reversi.start".localize())
         }
+        
+        saveGameState() // Сохраняем начальное состояние
         updateUI()
     }
 
@@ -250,45 +264,38 @@ class ReversiGameVC: BaseGameViewController {
         }
     }
 
-    // ИСПРАВЛЕННАЯ ЛОГИКА ПЕРЕДАЧИ ХОДА (FIX DEADLOCK)
     private func finalizeTurn(after currentPiece: Piece) {
         guard !isGameOver else { return }
         
         let nextPlayer: Piece = (currentPiece == .user) ? .waifu : .user
         
-        // 1. Проверяем, может ли ходить следующий игрок
         if hasMoves(for: nextPlayer, on: board) {
             isUserTurn = (nextPlayer == .user)
+            
+            saveGameState() // Сохраняем состояние доски и чей сейчас ход
             updateUI()
             
             if !isUserTurn {
-                // Ход ИИ
                 setWaifuMessage("reversi.waifuThinking".localize())
                 runAI()
             } else {
-                // Ход Юзера
                 setWaifuMessage("reversi.yourTurn".localize())
             }
-        }
-        // 2. Если у следующего игрока НЕТ ходов (ПАС)
-        else {
-            // Проверяем, остались ли ходы у текущего игрока (чтобы ходить повторно)
+        } else {
             if hasMoves(for: currentPiece, on: board) {
                 setWaifuMessage("reversi.noMoves".localize())
                 
-                // Ход остается у того же игрока
                 isUserTurn = (currentPiece == .user)
+                
+                saveGameState() // Сохраняем состояние даже при пропуске хода
                 updateUI()
                 
                 if !isUserTurn {
-                    // ИИ ходит снова
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         self.runAI()
                     }
                 }
-            }
-            // 3. Если ни у кого нет ходов - Конец Игры
-            else {
+            } else {
                 checkEndGame()
             }
         }
@@ -296,7 +303,6 @@ class ReversiGameVC: BaseGameViewController {
     
     private func runAI() {
         DispatchQueue.global(qos: .userInitiated).async {
-            // Гарантируем актуальность сложности
             self.updateDifficultyBasedOnScore()
             let bestMove = self.getBestMoveMinimax()
             
@@ -304,32 +310,22 @@ class ReversiGameVC: BaseGameViewController {
                 if let move = bestMove {
                     self.applyMove(row: move.0, col: move.1, piece: .waifu)
                 } else {
-                    // Страховка на случай рассинхрона hasMoves и реального AI
                     self.finalizeTurn(after: .waifu)
                 }
             }
         }
     }
 
-    // MARK: - Smart AI (Minimax) - Logic preserved
-    private struct MoveScore {
-        let r: Int; let c: Int; let score: Int
-    }
-    
-    // MARK: - Smart AI (Minimax) - Progressive Difficulty
+    // MARK: - Smart AI (Minimax)
     private func getBestMoveMinimax() -> (Int, Int)? {
         let validMoves = getAllValidMoves(for: .waifu, on: board)
         if validMoves.isEmpty { return nil }
         
-        // ОБНОВЛЕННАЯ ЛОГИКА СЛОЖНОСТИ
         switch userScore {
         case 0:
-            // УРОВЕНЬ 0: Полный рандом. Вайфу поддается.
             return validMoves.randomElement()
             
         case 1:
-            // УРОВЕНЬ 1: Жадность (Greedy). Берем ход с макс. количеством переворотов.
-            // Игнорируем матрицу весов, просто "едим" как можно больше.
             var bestM = validMoves[0]
             var maxFlips = -1
             for move in validMoves {
@@ -342,13 +338,11 @@ class ReversiGameVC: BaseGameViewController {
             return bestM
             
         default:
-            // УРОВЕНЬ 2+: Minimax с матрицей весов
             var bestScore = Int.min
             var bestMove = validMoves[0]
             let alpha = Int.min
             let beta = Int.max
             
-            // Сортируем ходы, чтобы сначала проверять углы (оптимизация)
             let sortedMoves = validMoves.sorted {
                 positionWeights[$0.0][$0.1] > positionWeights[$1.0][$1.1]
             }
@@ -498,6 +492,10 @@ class ReversiGameVC: BaseGameViewController {
         isGameOver = true
         updateUI()
         
+        // Стираем сохранение текущей партии, так как она завершена
+        UserDefaults.standard.removeObject(forKey: boardSaveKey)
+        UserDefaults.standard.removeObject(forKey: turnSaveKey)
+        
         let flatBoard = board.flatMap { $0 }
         let uCount = flatBoard.filter { $0 == .user }.count
         let wCount = flatBoard.filter { $0 == .waifu }.count
@@ -539,19 +537,79 @@ class ReversiGameVC: BaseGameViewController {
         startNewGame(isFirstGame: false)
     }
     
+    // MARK: - Save & Restore Progress Logic
+    
+    private func saveGameState() {
+        // Конвертируем матрицу [[Piece?]] в плоский массив [Int]
+        var flatBoardRepresentation: [Int] = []
+        for r in 0..<gridSize {
+            for c in 0..<gridSize {
+                if let piece = board[r][c] {
+                    flatBoardRepresentation.append(piece.rawValue)
+                } else {
+                    flatBoardRepresentation.append(0) // 0 означает пустую клетку
+                }
+            }
+        }
+        
+        UserDefaults.standard.set(flatBoardRepresentation, forKey: boardSaveKey)
+        UserDefaults.standard.set(isUserTurn, forKey: turnSaveKey)
+    }
+    
+    private func restoreGameState() -> Bool {
+        guard let flatBoard = UserDefaults.standard.array(forKey: boardSaveKey) as? [Int],
+              flatBoard.count == gridSize * gridSize else {
+            return false
+        }
+        
+        isUserTurn = UserDefaults.standard.bool(forKey: turnSaveKey)
+        isGameOver = false
+        
+        // Восстанавливаем матрицу board и отрисовываем фишки на UI
+        for index in 0..<flatBoard.count {
+            let r = index / gridSize
+            let c = index % gridSize
+            let rawValue = flatBoard[index]
+            
+            let cell = cells[r][c]
+            let chip = cell.viewWithTag(999)
+            cell.viewWithTag(888)?.isHidden = true // Сбрасываем старые подсказки
+            
+            if let piece = Piece(rawValue: rawValue) {
+                board[r][c] = piece
+                chip?.alpha = 1
+                chip?.transform = .identity
+                chip?.backgroundColor = (piece == .user) ? .white : TelegramColors.primary
+            } else {
+                board[r][c] = nil
+                chip?.alpha = 0
+                chip?.transform = .identity
+            }
+        }
+        
+        updateUI()
+        
+        // Если при выходе был ход Ваифу — запускаем ей мыслительный процесс заново
+        if !isUserTurn && !isGameOver {
+            setWaifuMessage("reversi.waifuThinking".localize())
+            runAI()
+        } else {
+            setWaifuMessage("reversi.yourTurn".localize())
+        }
+        
+        return true
+    }
+    
     // MARK: - New Professional Animations
     
     private func flipAnimation(row: Int, col: Int, newPiece: Piece) {
         guard let chip = cells[row][col].viewWithTag(999) else { return }
         
-        // 1. Сжимаем фишку до линии (имитация поворота боком)
         UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn, animations: {
             chip.transform = CGAffineTransform(scaleX: 0.01, y: 1.0)
         }) { _ in
-            // 2. Меняем цвет в момент "невидимости"
             chip.backgroundColor = (newPiece == .user) ? .white : TelegramColors.primary
             
-            // 3. Разжимаем обратно с легким эффектом пружины
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                 chip.transform = .identity
             }, completion: nil)
@@ -562,10 +620,8 @@ class ReversiGameVC: BaseGameViewController {
         let chip = cells[row][col].viewWithTag(999)
         chip?.backgroundColor = (piece == .user) ? .white : TelegramColors.primary
         chip?.alpha = 1
-        // Стартуем с маленького размера
         chip?.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
         
-        // Эффект удара об доску (Pop-up)
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.8, options: [], animations: {
             chip?.transform = .identity
         })

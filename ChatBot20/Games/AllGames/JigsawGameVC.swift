@@ -17,6 +17,8 @@ class JigsawGameVC: BaseGameViewController {
     }
 
     override func didResetProgress() {
+        // При полном сбросе очков — принудительно чистим и поле
+        UserDefaults.standard.removeObject(forKey: boardSaveKey)
         setupGame()
     }
     
@@ -61,23 +63,46 @@ class JigsawGameVC: BaseGameViewController {
         tileButtons.removeAll()
         
         let totalTiles = gridSize * gridSize
-        tiles = Array(0..<totalTiles)
         
-        let boardView = UIView()
-        boardView.backgroundColor = TelegramColors.cardBackground
-        boardView.layer.cornerRadius = 16 // Чуть мягче углы
-        boardView.clipsToBounds = true
-        gameContainerView.addSubview(boardView)
-        
-        boardView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(min(view.frame.width - 40, 350))
-        }
-        
-        createTiles(in: boardView)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.shuffleTiles()
+        // 1. Проверяем, есть ли сохраненное состояние поля в UserDefaults
+        if let savedTiles = UserDefaults.standard.array(forKey: boardSaveKey) as? [Int],
+           savedTiles.count == totalTiles {
+            // Если сохраненный массив совпадает по размеру сетки — восстанавливаем его
+            tiles = savedTiles
+            
+            let boardView = UIView()
+            boardView.backgroundColor = TelegramColors.cardBackground
+            boardView.layer.cornerRadius = 16
+            boardView.clipsToBounds = true
+            gameContainerView.addSubview(boardView)
+            
+            boardView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+                make.width.height.equalTo(min(view.frame.width - 40, 350))
+            }
+            
+            createTiles(in: boardView)
+            // Важно: shuffleTiles() НЕ вызываем, поле уже в актуальном состоянии!
+        } else {
+            // 2. Если сохранения нет (новый уровень или сброс) — генерим дефолт и мешаем
+            tiles = Array(0..<totalTiles)
+            
+            let boardView = UIView()
+            boardView.backgroundColor = TelegramColors.cardBackground
+            boardView.layer.cornerRadius = 16
+            boardView.clipsToBounds = true
+            gameContainerView.addSubview(boardView)
+            
+            boardView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+                make.width.height.equalTo(min(view.frame.width - 40, 350))
+            }
+            
+            createTiles(in: boardView)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.shuffleTiles()
+            }
         }
     }
     
@@ -130,7 +155,9 @@ class JigsawGameVC: BaseGameViewController {
         if isAdjacent(pos1: currentPos, pos2: emptyPos) {
             tiles.swapAt(currentPos, emptyPos)
             
-            // Эффект "нажатия" перед перемещением
+            // Сохраняем состояние массива после каждого успешного хода
+            saveBoardState()
+            
             UIView.animate(withDuration: 0.1, animations: {
                 sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
             }) { _ in
@@ -158,12 +185,11 @@ class JigsawGameVC: BaseGameViewController {
             let col = pos % gridSize
             
             let newFrame = CGRect(x: CGFloat(col) * tileSide,
-                                y: CGFloat(row) * tileSide,
-                                width: tileSide,
-                                height: tileSide)
+                                  y: CGFloat(row) * tileSide,
+                                  width: tileSide,
+                                  height: tileSide)
             
             if animated {
-                // Использование Spring анимации для "физического" полета
                 UIView.animate(withDuration: 0.35,
                                delay: 0,
                                usingSpringWithDamping: 0.75,
@@ -171,7 +197,7 @@ class JigsawGameVC: BaseGameViewController {
                                options: [.beginFromCurrentState, .curveEaseInOut],
                                animations: {
                     button.frame = newFrame
-                    button.transform = .identity // Возвращаем масштаб к 1.0
+                    button.transform = .identity
                 })
             } else {
                 button.frame = newFrame
@@ -184,7 +210,6 @@ class JigsawGameVC: BaseGameViewController {
         let totalTilesCount = gridSize * gridSize
         let emptyValue = totalTilesCount - 1
         
-        // Логика перемешивания остается прежней
         for _ in 0..<totalTilesCount * 15 {
             let emptyPos = tiles.firstIndex(of: emptyValue)!
             var possibleMoves: [Int] = []
@@ -203,12 +228,17 @@ class JigsawGameVC: BaseGameViewController {
         }
         
         updateTilePositions(animated: true)
+        // После первоначального перемешивания тоже фиксируем состояние в памяти
+        saveBoardState()
         isShuffling = false
     }
     
     private func checkWinCondition() {
         let win = tiles.enumerated().allSatisfy { $0.offset == $0.element }
         if win {
+            // Если выиграл — затираем сохранение поля, чтобы следующий уровень начался с перемешивания
+            UserDefaults.standard.removeObject(forKey: boardSaveKey)
+            
             playWinAnimation()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.updateScore(waifu: self.waifuScore, user: self.userScore + 1)
@@ -219,7 +249,6 @@ class JigsawGameVC: BaseGameViewController {
     }
 
     private func playWinAnimation() {
-        // Эффект вспышки всех плиток при победе
         for (_, button) in tileButtons {
             UIView.animate(withDuration: 0.3, animations: {
                 button.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
@@ -253,5 +282,10 @@ class JigsawGameVC: BaseGameViewController {
             return UIImage(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
         }
         return nil
+    }
+    
+    // MARK: - Save Helpers
+    private func saveBoardState() {
+        UserDefaults.standard.set(tiles, forKey: boardSaveKey)
     }
 }
