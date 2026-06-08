@@ -47,7 +47,7 @@ class AllChatsViewModel {
                 forAssistantId: $0.id ?? ""
             ).last?.content ?? $0.expertise.rawValue.localize()
 
-            guard $0.avatarImageName != "addsBannerAvatar" else {
+            guard $0.avatarImageName != "addsBannerAvatar", $0.id?.contains("_group") == false else {
                 promoChatData.lastMessage = lastMessage
                 return nil
             }
@@ -70,7 +70,7 @@ class AllChatsViewModel {
     @objc private func handleAppDidBecomeActive() {
         // вначале смотрим нужно ли ставить анрид мессадж
         if UnreadMessagesService.shared.needSetUnreadMessageInChats() {
-            guard assistantsService.getAllConfigs().first?.id != nil else { return }
+            guard assistantsService.getAllConfigs().filter({$0.id?.contains("_group") == false && $0.avatarImageName != "addsBannerAvatar"}).first?.id != nil else { return }
             fetchUnreadMessage()
         }
         

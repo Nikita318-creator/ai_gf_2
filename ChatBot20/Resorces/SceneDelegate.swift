@@ -83,18 +83,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let rootVC = AllChatsViewController()
         let roleplayVC = RoleplayVC()
         let gamesViewController = GamesViewController()
-        
+        let groupChatViewController = GroupChatListVC()
         let rootNavController = UINavigationController(rootViewController: rootVC)
         let roleplayNavController = UINavigationController(rootViewController: roleplayVC)
         let gamesGFNavController = UINavigationController(rootViewController: gamesViewController)
-        
+        let groupChatNavController = UINavigationController(rootViewController: groupChatViewController)
+
         roleplayNavController.setNavigationBarHidden(true, animated: false)
         
         tabBarController.delegate = self
         
         rootNavController.tabBarItem = UITabBarItem(
             title: "Messages".localize(),
-            image: UIImage(systemName: "bubble.left.and.bubble.right.fill"),
+            image: UIImage(systemName: "bubble.left.and.text.bubble.right.fill"),
             tag: 0
         )
         
@@ -110,7 +111,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tag: 2
         )
         
-        tabBarController.viewControllers = [rootNavController, roleplayNavController, gamesGFNavController]
+        groupChatNavController.tabBarItem = UITabBarItem(
+            title: "Groups".localize(),
+            image: UIImage(systemName: "person.2.wave.2.fill"),
+            tag: 2
+        )
+        
+        tabBarController.viewControllers = [rootNavController, roleplayNavController, groupChatNavController, gamesGFNavController]
         tabBarController.selectedIndex = 1
         return tabBarController
     }

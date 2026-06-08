@@ -46,22 +46,19 @@ class StreaksService {
             if let lastDate = streak.lastUpdateDate {
                 if calendar.isDateInToday(lastDate) {
                     return nil // Уже заходил, не спамим
-                } else if calendar.isDateInYesterday(lastDate) {
+                } else {
                     streak.count += 1
                     streak.lastUpdateDate = now
                     
                     // Если стало 2 — это визуальный старт, если 3+ — продолжение
                     currentStreakType = (streak.count == 2) ? .streakStarted : .streakContinued
-                } else {
-                    currentStreakType = .streakEnded
-                    streak.count = 1 // Сбрасываем на 1
-                    streak.lastUpdateDate = now
                 }
             } else {
                 // Самый первый раз в жизни
                 streak.count = 1
                 streak.lastUpdateDate = now
-                currentStreakType = nil // Тут реально ничего не показываем
+                // Сразу возвращаем старт стрика, чтобы UI мог красиво отреагировать/анимировать
+                currentStreakType = .streakStarted
             }
             
             realm.add(streak, update: .modified)

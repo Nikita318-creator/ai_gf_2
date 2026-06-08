@@ -3,7 +3,7 @@ import Foundation
 import RealmSwift
 
 enum SchemaVersion {
-    static let currentSchemaVersion: UInt64 = 1
+    static let currentSchemaVersion: UInt64 = 2
 }
 
 class MessageHistoryServiceObject: Object {
@@ -17,6 +17,7 @@ class MessageHistoryServiceObject: Object {
     @Persisted var createdAt: Date
     @Persisted var updatedAt: Date
     @Persisted var reaction: String?
+    @Persisted var avatarName: String?
 
     convenience init(message: Message, assistantId: String, id: String) {
         self.init()
@@ -28,6 +29,7 @@ class MessageHistoryServiceObject: Object {
         self.isVoiceMessage = message.isVoiceMessage
         self.photoID = message.photoID
         self.reaction = message.reaction
+        self.avatarName = message.avatarName
         self.createdAt = Date()
         self.updatedAt = Date()
     }
@@ -40,7 +42,8 @@ class MessageHistoryServiceObject: Object {
             photoID: photoID,
             isVoiceMessage: isVoiceMessage,
             id: id,
-            reaction: reaction
+            reaction: reaction,
+            avatarName: avatarName
         )
     }
 }
@@ -100,7 +103,8 @@ class MessageHistoryService {
                 object.isLoading = message.isLoading
                 object.reaction = message.reaction
                 object.photoID = message.photoID
-                object.isVoiceMessage = message.isVoiceMessage                
+                object.isVoiceMessage = message.isVoiceMessage
+                object.avatarName = message.avatarName
                 object.updatedAt = Date()
             }
         } catch {

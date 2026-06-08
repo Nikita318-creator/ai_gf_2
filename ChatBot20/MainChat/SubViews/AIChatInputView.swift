@@ -9,7 +9,7 @@ class AIChatInputView: UIView {
     private let backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private let separatorView = UIView()
 
-    private let promptsScrollView = UIScrollView()
+    let promptsScrollView = UIScrollView()
     let promptsStackView = UIStackView()
 
     var sendMessageHandler: ((String) -> Void)?
@@ -20,7 +20,8 @@ class AIChatInputView: UIView {
     var placeSelectedHandler: ((String, String) -> Void)?
     var endDateHandlerHandler: (() -> Void)?
     var needPremiumForAudioHandler: (() -> Void)?
-
+    var heightChangedHandler: (() -> Void)?
+    
     // Telegram цвета
     private struct TelegramColors {
         static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0) // #3390DC
@@ -39,7 +40,8 @@ class AIChatInputView: UIView {
     private var needScrollTotTheEnd: Bool = true // for RTL (arabic)
 
     weak var vc: UIViewController?
-
+    private var isGroupChat: Bool = false
+    
     private var promptsHeightConstraint: Constraint?
     var isPromptsHidden: Bool = false {
         didSet {
@@ -65,9 +67,12 @@ class AIChatInputView: UIView {
         }
     }
     
-    func setup() {
+    func setup(isGroupChat: Bool = false) {
+        self.isGroupChat = isGroupChat
         setupBackground()
-        setupPromptsScrollView()
+        if !isGroupChat {
+            setupPromptsScrollView()
+        }
         setupInputContainer()
         setupTextView()
         setupButtons()
@@ -308,7 +313,7 @@ class AIChatInputView: UIView {
         textView.showsVerticalScrollIndicator = false
         textView.showsHorizontalScrollIndicator = false
         textView.isScrollEnabled = true
-        textView.returnKeyType = .send
+        textView.returnKeyType = .default
         textView.enablesReturnKeyAutomatically = true
         
         placeholderLabel.text = "WriteMessage".localize()
@@ -338,16 +343,18 @@ class AIChatInputView: UIView {
             make.height.equalTo(0.5)
         }
         
-        // 1. Промпты теперь прижаты к низу (к SafeArea)
-        promptsScrollView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(8) // Нижняя точка теперь тут
-            promptsHeightConstraint = make.height.equalTo(isCurrentDeviceiPad() ? 60 : 50).constraint
-        }
-        
-        promptsStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.height.equalToSuperview()
+        if !isGroupChat {
+            // 1. Промпты теперь прижаты к низу (к SafeArea)
+            promptsScrollView.snp.makeConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(16)
+                make.bottom.equalTo(safeAreaLayoutGuide).inset(8) // Нижняя точка теперь тут
+                promptsHeightConstraint = make.height.equalTo(isCurrentDeviceiPad() ? 60 : 50).constraint
+            }
+            
+            promptsStackView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+                make.height.equalToSuperview()
+            }
         }
         
         // 2. Кнопка отправки привязана к контейнеру инпута
@@ -361,7 +368,11 @@ class AIChatInputView: UIView {
         inputContainer.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalTo(sendButton.snp.leading).offset(-16) // Исправил inset на offset для корректного отступа
-            make.bottom.equalTo(promptsScrollView.snp.top).offset(-12) // Привязка к верху промптов
+            if !isGroupChat {
+                make.bottom.equalTo(promptsScrollView.snp.top).offset(-12) // Привязка к верху промптов
+            } else {
+                make.bottom.equalTo(safeAreaLayoutGuide).inset(8) // Нижняя точка теперь тут
+            }
             make.top.equalToSuperview().inset(12) // Даем отступ сверху, чтобы контейнер расширял вьюху
         }
         
@@ -412,6 +423,9 @@ class AIChatInputView: UIView {
         
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
             self.layoutIfNeeded()
+        } completion: { _ in
+            // Сообщаем наружу, что наша внутренняя высота изменилась
+            self.heightChangedHandler?()
         }
         
         textView.isScrollEnabled = true

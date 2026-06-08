@@ -8,6 +8,7 @@ struct Message {
     var isVoiceMessage: Bool = false
     var id: String? = nil
     var reaction: String? = nil
+    var avatarName: String?
 }
 
 struct AIMessage: Codable {
@@ -49,7 +50,7 @@ class AIChatViewModel {
         if !isNeedOnlyReply, !isReplyOnGift {
             DispatchQueue.main.async { [self] in
                 let messageId = UUID().uuidString
-                let userMessage = Message(role: "user", content: text, id: messageId)
+                let userMessage = Message(role: "user", content: text, id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI.append(userMessage)
                 messageIds[messagesAI.count - 1] = messageId
                 messageService.addMessage(userMessage, assistantId: assistantId, messageId: messageId)
@@ -236,7 +237,7 @@ class AIChatViewModel {
                         WebHookAnalyticsService.shared.sendAnalyticsReport(messageText: "❌ Request failed after retry")
 
                         let messageId = UUID().uuidString
-                        let errorMessage = Message(role: "assistant", content: "LocationError.NewErrorText".localize(), id: messageId)
+                        let errorMessage = Message(role: "assistant", content: "LocationError.NewErrorText".localize(), id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                         
                         // Заменяем лоадер на сообщение об ошибке
                         DispatchQueue.main.async {
@@ -260,7 +261,7 @@ class AIChatViewModel {
     
     private func addLoadingMessage() {
         let messageId = UUID().uuidString
-        let loadingMessage = Message(role: "assistant", content: "", isLoading: true, id: messageId)
+        let loadingMessage = Message(role: "assistant", content: "", isLoading: true, id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
         DispatchQueue.main.async { [self] in
             messagesAI.append(loadingMessage)
             messageIds[messagesAI.count - 1] = messageId
@@ -293,7 +294,7 @@ class AIChatViewModel {
                 let videoID = await AdditionalVideosService.shared.getNextVideo()
                                 
                 let messageId = UUID().uuidString
-                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId)
+                let aiMessage = Message(role: "assistant", content: "[new video]", photoID: videoID ?? "", id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)
@@ -316,7 +317,7 @@ class AIChatViewModel {
                 guard let self else { return }
                 
                 let messageId = UUID().uuidString
-                let aiMessage = Message(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId)
+                let aiMessage = Message(role: "assistant", content: "[video]", photoID: videoID ?? "", id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                 messagesAI[messagesAI.count - 1] = aiMessage
                 
                 messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)
@@ -333,7 +334,7 @@ class AIChatViewModel {
         }
         
         let messageId = UUID().uuidString
-        let aiMessage = Message(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId)
+        let aiMessage = Message(role: "assistant", content: testResponce ?? responseText, photoID: photoID, isVoiceMessage: isVoiceMessage, id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
         messagesAI[messagesAI.count - 1] = aiMessage
         
         messageService.addMessage(aiMessage, assistantId: MainHelper.shared.currentAssistant?.id ?? "", messageId: messageId)

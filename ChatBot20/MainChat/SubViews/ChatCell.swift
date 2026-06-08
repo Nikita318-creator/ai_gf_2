@@ -37,6 +37,16 @@ class ChatCell: UITableViewCell {
 
     // MARK: - UI Elements
     
+    // Новый лейбл для имени персонажа сверху ячейки
+    private let characterNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.textColor = TelegramColors.link // Цвет как у ссылок в ТГ, либо можно поставить любой другой custom
+        label.isHidden = true
+        return label
+    }()
+    private var currentCharacterInGroupAvatarName: String?
+    
     private let messageContainerView = UIView()
     private lazy var messageLabel: UITextView = {
         let messageTextView = UITextView()
@@ -121,7 +131,7 @@ class ChatCell: UITableViewCell {
     var hideKeyboardHandler: (() -> Void)?
     var showSubsHandler: (() -> Void)?
     var reloadDataHandler: (() -> Void)?
-    var avatarTappedHandler: (() -> Void)?
+    var avatarTappedHandler: ((String?) -> Void)?
 
     private var messageID = ""
     private var isVideoCell = false
@@ -167,6 +177,8 @@ class ChatCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
 
+        contentView.addSubview(characterNameLabel)
+        
         messageContainerView.layer.cornerRadius = 18
         messageContainerView.layer.masksToBounds = false
         messageContainerView.layer.shadowColor = UIColor.black.cgColor
@@ -226,10 +238,52 @@ class ChatCell: UITableViewCell {
         }
     }
 
-    func configure(message: String, isUserMessage: Bool, photoID: String, needHideActionButtons: Bool, isVoiceMessage: Bool, reaction: String?, id: String) {
+    func configure(message: String, isUserMessage: Bool, photoID: String, needHideActionButtons: Bool, isVoiceMessage: Bool, reaction: String?, id: String, avatarName: String?) {
         messageID = id
-        isVideoCell = message.contains("[video]")
-        isNewVideoCell = message.contains("[new video]")
+        
+        // Обработка префикса ***[Имя]***
+        var cleanMessage = message
+        var characterName: String? = nil
+        
+        // Регулярное выражение ищет структуры вида ***[...]*** строго в начале строки
+        if let regex = try? NSRegularExpression(pattern: "^\\*\\*\\*(.*?)\\*\\*\\*", options: []) {
+            let nsString = message as NSString
+            let results = regex.matches(in: message, options: [], range: NSRange(location: 0, length: nsString.length))
+            
+            if let match = results.first {
+                // Вытаскиваем то, что внутри звездочек
+                characterName = nsString.substring(with: match.range(at: 1))
+                
+                // Удаляем весь префикс ***[...]*** из финального текста сообщения
+                cleanMessage = nsString.replacingCharacters(in: match.range, with: "")
+                
+                // Выпиливаем лишнее двоеточие и пробелы, которые остались в начале сообщения
+                if cleanMessage.hasPrefix(":") {
+                    cleanMessage.removeFirst() // удаляем само двоеточие
+                    // Убираем оставшиеся пробелы в начале (если они были, например ": Привет")
+                    cleanMessage = cleanMessage.trimmingCharacters(in: .whitespaces)
+                }
+            }
+        }
+        
+        // Настройка лейбла имени персонажа
+        if let name = characterName, !isUserMessage {
+            characterNameLabel.text = name
+            characterNameLabel.isHidden = false
+            
+            let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
+            characterNameLabel.snp.remakeConstraints { make in
+                make.top.equalToSuperview().inset(6)
+                make.leading.equalTo(avatarView.snp.trailing).offset(14)
+                make.trailing.lessThanOrEqualToSuperview().inset(80)
+            }
+        } else {
+            characterNameLabel.text = nil
+            characterNameLabel.isHidden = true
+        }
+        
+        isVideoCell = cleanMessage.contains("[video]")
+        isNewVideoCell = cleanMessage.contains("[new video]")
         loadingIndicator.stopAnimating()
         loadingIndicator.isHidden = true
         avatarView.isHidden = isUserMessage
@@ -259,19 +313,25 @@ class ChatCell: UITableViewCell {
             reactionContainer.isHidden = true
         }
         
+        currentCharacterInGroupAvatarName = nil
         if !isUserMessage {
-            avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? UIImage.loadCustomAvatar(for: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+            if let avatarName {
+                avatarView.image = UIImage(named: avatarName)
+                currentCharacterInGroupAvatarName = avatarName
+            } else {
+                avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+            }
         }
         
         self.isVoiceMessage = isVoiceMessage
-        self.currentMessageText = message
+        self.currentMessageText = cleanMessage
         
         if isVoiceMessage && !isUserMessage {
             messageLabel.isHidden = true
             messageImageView.isHidden = true
             voiceContainerView.isHidden = false
             messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
-            configureAssistantVoiceMessage()
+            configureAssistantVoiceMessage(hasNameLabel: characterName != nil)
             
             // Проверяем: играет ли СЕЙЧАС именно это сообщение?
             self.isSpeak = service.isSpeaking && (service.currentSpeakinID == id)
@@ -293,15 +353,15 @@ class ChatCell: UITableViewCell {
                 blurryOverlayView.isHidden = true
             }
             
-            if message.contains("[new pic]") {
+            if cleanMessage.contains("[new pic]") {
                 messageImageView.image = RemoteRealmPhotoService.shared.getImage(by: photoID)
-            } else if message.contains("[video]") {
+            } else if cleanMessage.contains("[video]") {
                 videoID = photoID
                 playIconImageView.isHidden = false
                 if let thumbnailData = RemoteRealmVideoService.shared.getThumbnailData(name: photoID) {
                     self.messageImageView.image = UIImage(data: thumbnailData)
                 }
-            } else if message.contains("[new video]") {
+            } else if cleanMessage.contains("[new video]") {
                 videoID = photoID
                 playIconImageView.isHidden = false
                 
@@ -323,20 +383,20 @@ class ChatCell: UITableViewCell {
             if isUserMessage {
                 configureUserMessageForImage()
             } else {
-                configureAssistantMessageForImage()
+                configureAssistantMessageForImage(hasNameLabel: characterName != nil)
             }
 
         } else { // Если сообщение - текст
             messageLabel.isHidden = false
             messageImageView.isHidden = true
-            messageLabel.text = message.trimmingCharacters(in: .whitespacesAndNewlines)
+            messageLabel.text = cleanMessage.trimmingCharacters(in: .whitespacesAndNewlines)
                         
             if isUserMessage {
                 messageContainerView.backgroundColor = TelegramColors.userMessageBackground
                 configureUserMessageForText()
             } else {
                 messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
-                configureAssistantMessageForText()
+                configureAssistantMessageForText(hasNameLabel: characterName != nil)
             }
         }
     }
@@ -367,7 +427,7 @@ class ChatCell: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(handleSpeechFinished), name: NSNotification.Name("updateAllAudioCellsOnFinish"), object: nil)
     }
     
-    func configureLoader() {
+    func configureLoader(avatarName: String? = nil) {
         loadingIndicator.stopAnimating()
         loadingIndicator.isHidden = false
         loadingIndicator.startAnimating()
@@ -381,7 +441,11 @@ class ChatCell: UITableViewCell {
         voiceContainerView.isHidden = true
 
         avatarView.isHidden = false
-        avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "") ?? UIImage.loadCustomAvatar(for: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+        if let avatarName {
+            avatarView.image = UIImage(named: avatarName)
+        } else {
+            avatarView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+        }
         
         messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
         
@@ -430,7 +494,7 @@ class ChatCell: UITableViewCell {
     }
     
     @objc private func avatarTapped() {
-        avatarTappedHandler?()
+        avatarTappedHandler?(currentCharacterInGroupAvatarName)
     }
     
     private func makePlayer(from videoName: String) -> AVPlayer? {
@@ -545,7 +609,7 @@ class ChatCell: UITableViewCell {
         }
     }
 
-    private func configureAssistantMessageForText() {
+    private func configureAssistantMessageForText(hasNameLabel: Bool) {
         avatarView.isHidden = false
         
         let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
@@ -557,7 +621,12 @@ class ChatCell: UITableViewCell {
 
         messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
         messageContainerView.snp.remakeConstraints { make in
-            make.top.equalToSuperview().inset(4)
+            // Если отображается имя, сдвигаем пузырь сообщения чуть ниже под имя
+            if hasNameLabel {
+                make.top.equalTo(characterNameLabel.snp.bottom).offset(4)
+            } else {
+                make.top.equalToSuperview().inset(4)
+            }
             make.bottom.equalToSuperview().inset(4)
             make.leading.equalTo(avatarView.snp.trailing).offset(8)
             make.trailing.lessThanOrEqualToSuperview().inset(80)
@@ -570,7 +639,11 @@ class ChatCell: UITableViewCell {
 
         if !loadingIndicator.isHidden {
             messageContainerView.snp.remakeConstraints { make in
-                make.top.equalToSuperview().inset(4)
+                if hasNameLabel {
+                    make.top.equalTo(characterNameLabel.snp.bottom).offset(4)
+                } else {
+                    make.top.equalToSuperview().inset(4)
+                }
                 make.bottom.equalToSuperview().inset(4)
                 make.leading.equalTo(avatarView.snp.trailing).offset(8)
                 make.trailing.lessThanOrEqualToSuperview().inset(80)
@@ -590,7 +663,7 @@ class ChatCell: UITableViewCell {
         }
     }
     
-    private func configureAssistantMessageForImage() {
+    private func configureAssistantMessageForImage(hasNameLabel: Bool) {
         avatarView.isHidden = false
 
         let smallerSide = UIScreen.main.bounds.height < UIScreen.main.bounds.width ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
@@ -605,7 +678,11 @@ class ChatCell: UITableViewCell {
 
         messageContainerView.backgroundColor = TelegramColors.assistantMessageBackground
         messageContainerView.snp.remakeConstraints { make in
-            make.top.equalToSuperview().inset(4)
+            if hasNameLabel {
+                make.top.equalTo(characterNameLabel.snp.bottom).offset(4)
+            } else {
+                make.top.equalToSuperview().inset(4)
+            }
             make.bottom.equalToSuperview().inset(4)
             make.leading.equalTo(avatarView.snp.trailing).offset(8)
             make.trailing.lessThanOrEqualToSuperview().inset(80)
@@ -637,6 +714,10 @@ class ChatCell: UITableViewCell {
         isSpeak = false
         voiceContainerView.isHidden = true
         
+        // Сброс имени персонажа
+        characterNameLabel.isHidden = true
+        characterNameLabel.text = nil
+        
         // Сброс остальных элементов
         loadingIndicator.stopAnimating()
         loadingIndicator.isHidden = true
@@ -651,7 +732,7 @@ class ChatCell: UITableViewCell {
         reactionLabel.text = nil
     }
     
-    private func configureAssistantVoiceMessage() {
+    private func configureAssistantVoiceMessage(hasNameLabel: Bool) {
         avatarView.isHidden = false
         
         let avatarViewSize: CGFloat = isCurrentDeviceiPad() ? 52 : 36
@@ -662,7 +743,12 @@ class ChatCell: UITableViewCell {
         }
         
         messageContainerView.snp.remakeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(4)
+            if hasNameLabel {
+                make.top.equalTo(characterNameLabel.snp.bottom).offset(4)
+            } else {
+                make.top.equalToSuperview().inset(4)
+            }
+            make.bottom.equalToSuperview().inset(4)
             make.leading.equalTo(avatarView.snp.trailing).offset(8)
             make.width.equalTo(220)
             make.height.equalTo(50)
@@ -1041,11 +1127,12 @@ extension ChatCell: UITextViewDelegate {
 }
 
 // MARK: - Device check
-extension ChatCell {    
+extension ChatCell {
     private func updateTextForIPadIfNeeded() {
         if isCurrentDeviceiPad() {
             messageLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
             statusLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+            characterNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         }
     }
 }

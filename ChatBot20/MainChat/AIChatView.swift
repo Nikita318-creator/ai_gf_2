@@ -217,7 +217,6 @@ class AIChatView: UIView {
             }
             
             self?.requestReviewIfNeeded()
-            self?.requestReviewIfNeeded()
 
             guard MainHelper.shared.canMakeRequest() else {
                 self?.showCustomAlert(for: .dailyLimitReached)
@@ -1227,7 +1226,8 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
                 needHideActionButtons: indexPath.row == 0,
                 isVoiceMessage: message.isVoiceMessage,
                 reaction: message.reaction,
-                id: message.id ?? ""
+                id: message.id ?? "",
+                avatarName: nil
             )
         }
 
@@ -1248,7 +1248,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        cell.avatarTappedHandler = { [weak self] in
+        cell.avatarTappedHandler = { [weak self] _ in
             self?.avatarTapped()
         }
         

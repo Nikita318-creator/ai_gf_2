@@ -1,0 +1,424 @@
+//
+//  GroupChatView.swift
+//  ChatBot20
+//
+//  Created by Mikita on 05/06/2026.
+//
+
+import UIKit
+import SnapKit
+
+class GroupChatView: UIView {
+    
+    // MARK: - UI Elements
+    private let navigationBar = UIView()
+    private let titleLabel = UILabel()
+    private let backButton = UIButton(type: .system)
+    private let clearChatHistoryButton = UIButton(type: .system)
+    private let assistantAvatarImageView = UIImageView()
+    
+    private let tableView = UITableView()
+    let inputTextView = AIChatInputView()
+    let subsView = SubsView()
+
+    // MARK: - Dependencies & State
+    weak var vc: UIViewController?
+    let viewModel = AIChatViewModel()
+    
+    private var keyboardOffset: CGFloat = 8
+    
+    // MARK: - Telegram Styling Palette
+    private struct TelegramColors {
+        static let primary = UIColor(red: 0.20, green: 0.63, blue: 0.86, alpha: 1.0)       // #3390DC
+        static let background = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)    // #1C1C1E
+        static let messageBackground = UIColor(red: 0.22, green: 0.22, blue: 0.24, alpha: 1.0) // #38383A
+        static let textPrimary = UIColor.white
+        static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
+    }
+
+    // MARK: - Init
+    init() {
+        super.init(frame: .zero)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Setup Lifecycle
+    func setup() {
+        setupObservers()
+        setupBaseUI()
+        setupNavigationBar()
+        setupTableView()
+        setupInputView()
+        setupConstraints()
+        setupViewModel()
+        setupSwipeToDismiss()
+        
+        setMessagesFromDB()
+    }
+
+    // MARK: - UI & Subviews Setup
+    private func setupBaseUI() {
+        backgroundColor = TelegramColors.background
+    }
+
+    private func setupNavigationBar() {
+        navigationBar.backgroundColor = .black.withAlphaComponent(0.3)
+        addSubview(navigationBar)
+
+        // Аватарка чата / группы
+        assistantAvatarImageView.contentMode = .scaleAspectFill
+        assistantAvatarImageView.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 16
+        assistantAvatarImageView.clipsToBounds = true
+        assistantAvatarImageView.backgroundColor = TelegramColors.textSecondary
+        assistantAvatarImageView.image = UIImage(named: MainHelper.shared.currentAssistant?.avatarImageName ?? "")
+        assistantAvatarImageView.isUserInteractionEnabled = true
+        assistantAvatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTapped)))
+//        navigationBar.addSubview(assistantAvatarImageView)
+
+        // Название чата
+        titleLabel.text = MainHelper.shared.currentAssistant?.assistantName ?? ""
+        titleLabel.textAlignment = .center
+        titleLabel.font = isCurrentDeviceiPad() ? .systemFont(ofSize: 38, weight: .semibold) : .systemFont(ofSize: 18, weight: .semibold)
+        titleLabel.textColor = TelegramColors.textPrimary
+        navigationBar.addSubview(titleLabel)
+
+        // Кнопка Назад
+        let buttonPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 18
+        backButton.setImage(UIImage(systemName: "chevron.backward")?.withConfiguration(
+            UIImage.SymbolConfiguration(pointSize: buttonPointSize, weight: .medium)
+        ), for: .normal)
+        backButton.tintColor = TelegramColors.primary
+        backButton.backgroundColor = TelegramColors.messageBackground
+        backButton.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 20
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        navigationBar.addSubview(backButton)
+
+        // Кнопка Очистить историю
+        let trashPointSize: CGFloat = isCurrentDeviceiPad() ? 30 : 14
+        clearChatHistoryButton.setImage(UIImage(systemName: "trash.slash")?.withConfiguration(
+            UIImage.SymbolConfiguration(pointSize: trashPointSize, weight: .medium)
+        ), for: .normal)
+        clearChatHistoryButton.tintColor = TelegramColors.primary
+        clearChatHistoryButton.backgroundColor = TelegramColors.messageBackground
+        clearChatHistoryButton.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 20
+        clearChatHistoryButton.addTarget(self, action: #selector(clearChatHistoryButtonTapped), for: .touchUpInside)
+        navigationBar.addSubview(clearChatHistoryButton)
+    }
+
+    private func setupTableView() {
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.register(ChatCell.self, forCellReuseIdentifier: ChatCell.identifier)
+        addSubview(tableView)
+    }
+
+    private func setupInputView() {
+        inputTextView.vc = vc
+        addSubview(inputTextView)
+        inputTextView.setup(isGroupChat: true)
+        
+        inputTextView.sendMessageHandler = { [weak self] text in
+            guard let self else { return }
+
+            guard MainHelper.shared.canMakeRequest() else {
+                showCustomAlert(for: .dailyLimitReached)
+                return
+            }
+            
+            let groups = MainHelper.shared.allWaifuGroups
+            if let index = MainHelper.shared.currentWaifuIndex, index < groups.count {
+                MainHelper.shared.currentWaifuNameFromeGroupeChat = groups[index].randomElement()
+            }
+            
+            let previousMessages = "promp.previosMessagesUser".localize() + (viewModel.messagesAI.suffix(12)
+                .map { message in
+                    let prefix = (message.role == "user") ? "user: " : "girlfriend: "
+                    return prefix + message.content
+                }
+                .joined(separator: "\n")) + "promp.previosMessagesUserStarter".localize()
+            viewModel.systemPrompt = MainHelper.shared.getSystemPromptForGroupChat() + previousMessages
+            viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForGroupChat() + previousMessages
+
+            self.viewModel.sendMessageViaCustomServer(text)
+            self.scrollToBottomAnimated()
+        }
+
+        inputTextView.textDidChangedHandler = { [weak self] in
+            guard let self else { return }
+            if self.viewModel.messagesAI.first(where: { $0.isLoading }) == nil {
+                self.inputTextView.enableSendButton()
+            }
+        }
+    }
+    
+    private func setupViewModel() {
+        viewModel.onMessagesUpdated = { [weak self] isSucceed in
+            if isSucceed {
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.scrollToBottomAnimated()
+                }
+            }
+        }
+        
+        viewModel.onMessageReceived = { [weak self] in
+            self?.inputTextView.enableSendButton()
+        }
+    }
+
+    func setMessagesFromDB() {
+        viewModel.messagesAI = viewModel.currentMessagesAI
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.scrollToBottomAnimated(isAnimated: false)
+        }
+    }
+
+    // MARK: - Layout & Constraints
+    private func setupConstraints() {
+        let navBarHeight = isCurrentDeviceiPad() ? 90 : 60
+        let buttonSize = isCurrentDeviceiPad() ? 60 : 40
+        let avatarSize = isCurrentDeviceiPad() ? 60 : 32
+
+        navigationBar.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(navBarHeight)
+        }
+
+        backButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
+            make.width.height.equalTo(buttonSize)
+        }
+
+//        assistantAvatarImageView.snp.makeConstraints { make in
+//            make.width.height.equalTo(avatarSize)
+//            make.centerY.equalToSuperview()
+//            make.trailing.equalTo(titleLabel.snp.leading).offset(isCurrentDeviceiPad() ? -20 : -8)
+//            make.leading.greaterThanOrEqualTo(backButton.snp.trailing).offset(8)
+//        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.greaterThanOrEqualTo(backButton.snp.trailing).offset(2)
+            make.trailing.lessThanOrEqualTo(clearChatHistoryButton.snp.leading).inset(2)
+        }
+
+        clearChatHistoryButton.snp.makeConstraints { make in
+            make.width.height.equalTo(buttonSize)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(16)
+        }
+
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(inputTextView.snp.top)
+        }
+
+        inputTextView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide)
+        }
+    }
+
+    // MARK: - Keyboard Management
+    private func setupObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        keyboardOffset = keyboardFrame.height
+        updateKeyboardConstraints()
+    }
+
+    @objc private func keyboardWillHide() {
+        keyboardOffset = 8
+        updateKeyboardConstraints()
+    }
+
+    private func updateKeyboardConstraints() {
+        var needScroll = false
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+            if self.keyboardOffset == 8 {
+                self.inputTextView.snp.remakeConstraints { make in
+                    make.leading.trailing.equalToSuperview()
+                    make.bottom.equalTo(self.safeAreaLayoutGuide)
+                }
+            } else {
+                needScroll = true
+                self.inputTextView.snp.remakeConstraints { make in
+                    make.leading.trailing.equalToSuperview()
+                    make.bottom.equalToSuperview().inset(self.keyboardOffset)
+                }
+            }
+            self.layoutIfNeeded()
+        } completion: { [weak self] _ in
+            if needScroll {
+                self?.scrollToBottomAnimated()
+            }
+        }
+    }
+
+    @objc private func avatarTapped(_ avatarName: String?) {
+        inputTextView.textView.resignFirstResponder()
+
+        if let vc {
+            let fullScreenView = FullScreenImageView(image: UIImage(named: avatarName ?? MainHelper.shared.currentAssistant?.avatarImageName ?? ""))
+            fullScreenView.vc = vc
+            fullScreenView.show(in: vc.view)
+        }
+    }
+    
+    // MARK: - Actions & Helpers
+    func scrollToBottomAnimated(isAnimated: Bool = true) {
+        let numberOfRows = tableView.numberOfRows(inSection: 0)
+        let targetRow = viewModel.messagesAI.count - 1
+        guard numberOfRows > 0, targetRow >= 0, targetRow < numberOfRows else { return }
+        
+        let indexPath = IndexPath(row: targetRow, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: isAnimated)
+    }
+
+    @objc func backButtonTapped() {
+        inputTextView.textView.resignFirstResponder()
+        vc?.dismiss(animated: true)
+    }
+
+    private func setupSwipeToDismiss() {
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight(_:)))
+        swipeRightGesture.direction = .right
+        self.addGestureRecognizer(swipeRightGesture)
+    }
+
+    @objc private func handleSwipeRight(_ gesture: UISwipeGestureRecognizer) {
+        backButtonTapped()
+    }
+
+    @objc private func clearChatHistoryButtonTapped() {
+        inputTextView.textView.resignFirstResponder()
+        
+        let alertController = UIAlertController(
+            title: "DeleteChatHistoryTitle".localize(),
+            message: "DeleteChatHistoryMessage".localize(),
+            preferredStyle: .alert
+        )
+        
+        let cancelAction = UIAlertAction(title: "Cancel".localize(), style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete".localize(), style: .destructive) { [weak self] _ in
+            let assistantId = MainHelper.shared.currentAssistant?.id ?? ""
+            MessageHistoryService().getAllMessages(forAssistantId: assistantId).forEach {
+                MessageHistoryService().deleteMessage(id: $0.id ?? "")
+            }
+            self?.viewModel.messagesAI = []
+            self?.tableView.reloadData()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        vc?.present(alertController, animated: true, completion: nil)
+    }
+
+    private func showCustomAlert(for type: CustomAlertView.CustomAlertType) {
+        inputTextView.textView.resignFirstResponder()
+        let customAlertView = CustomAlertView(type: type)
+        customAlertView.show(in: self)
+
+        customAlertView.onRateButtonTapped = { [weak self] in
+            self?.showSubs()
+        }
+
+        customAlertView.onLaterButtonTapped = { [weak self] in
+            self?.showSubs()
+        }
+    }
+    
+    private func showSubs() {
+        inputTextView.textView.resignFirstResponder()
+        subsView.vc = vc
+
+        AnalyticService.shared.logEvent(name: "showSubs from chat", properties: ["":""])
+        
+        addSubview(subsView)
+
+        subsView.snp.remakeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        subsView.transform = CGAffineTransform(translationX: 0, y: -UIScreen.main.bounds.height)
+
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.subsView.transform = .identity  // Снимаем трансформацию, чтобы она вернулась в исходное положение
+        }) { [weak self] _ in
+            self?.inputTextView.textView.resignFirstResponder() // для подстраховки!
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            self.subsView.yearlyButtonTapped()
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        MainHelper.shared.currentWaifuNameFromeGroupeChat = nil
+    }
+}
+
+// MARK: - TableView DataSource & Delegate
+extension GroupChatView: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.messagesAI.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard indexPath.row < viewModel.messagesAI.count,
+              let cell = tableView.dequeueReusableCell(withIdentifier: ChatCell.identifier, for: indexPath) as? ChatCell
+        else { return UITableViewCell() }
+        
+        cell.vc = vc
+        let message = viewModel.messagesAI[indexPath.row]
+
+        if message.isLoading {
+            cell.configureLoader(avatarName: message.avatarName)
+        } else {
+            cell.configure(
+                message: message.content,
+                isUserMessage: message.role == "user",
+                photoID: message.photoID,
+                needHideActionButtons: true,
+                isVoiceMessage: message.isVoiceMessage,
+                reaction: message.reaction,
+                id: message.id ?? "",
+                avatarName: message.avatarName
+            )
+        }
+
+        cell.hideKeyboardHandler = { [weak self] in
+            self?.inputTextView.textView.resignFirstResponder()
+        }
+        
+        cell.avatarTappedHandler = { [weak self] avatarName in
+            self?.avatarTapped(avatarName)
+        }
+        
+        return cell
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        inputTextView.textView.resignFirstResponder()
+    }
+}
