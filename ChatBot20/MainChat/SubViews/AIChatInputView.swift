@@ -440,6 +440,11 @@ class AIChatInputView: UIView {
         sendButton.backgroundColor = TelegramColors.primary
     }
     
+    func disableSendButton() {
+        canSendMessage = false
+        sendButton.backgroundColor = TelegramColors.inputBackground
+    }
+    
     private func sendButtonTapped() {
         guard canSendMessage, let text = textView.text, !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             pleaseWaitHandler?()

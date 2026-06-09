@@ -25,6 +25,10 @@ class GroupChatView: UIView {
     weak var vc: UIViewController?
     let viewModel = AIChatViewModel()
     
+    private let backgroundImageView = UIImageView()
+    private let backgroundOverlayView = UIView()
+    private let gradientLayer = CAGradientLayer()
+
     private var keyboardOffset: CGFloat = 8
     
     // MARK: - Telegram Styling Palette
@@ -36,6 +40,8 @@ class GroupChatView: UIView {
         static let textSecondary = UIColor(red: 0.64, green: 0.64, blue: 0.66, alpha: 1.0) // #A4A4A8
     }
 
+    var isMessageOnRepite = false
+    
     // MARK: - Init
     init() {
         super.init(frame: .zero)
@@ -49,6 +55,7 @@ class GroupChatView: UIView {
     // MARK: - Setup Lifecycle
     func setup() {
         setupObservers()
+        setupBackground()
         setupBaseUI()
         setupNavigationBar()
         setupTableView()
@@ -65,10 +72,39 @@ class GroupChatView: UIView {
         backgroundColor = TelegramColors.background
     }
 
+    private func setupBackground() {
+        backgroundColor = TelegramColors.background
+        backgroundImageView.contentMode = .scaleToFill
+        backgroundImageView.clipsToBounds = true
+        addSubview(backgroundImageView)
+        backgroundOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        addSubview(backgroundOverlayView)
+        gradientLayer.colors = [
+            TelegramColors.background.cgColor,
+            UIColor(red: 0.08, green: 0.08, blue: 0.09, alpha: 1.0).cgColor
+        ]
+        gradientLayer.locations = [0.0, 1.0]
+        layer.insertSublayer(gradientLayer, at: 0)
+        
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        backgroundOverlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        guard let avatarName = MainHelper.shared.currentAssistant?.avatarImageName else { return }
+        backgroundImageView.image = UIImage(named: avatarName + "_")
+    }
+    
     private func setupNavigationBar() {
         navigationBar.backgroundColor = .black.withAlphaComponent(0.3)
         addSubview(navigationBar)
 
+        navigationBar.isUserInteractionEnabled = true
+        let headerTap = UITapGestureRecognizer(target: self, action: #selector(headerTapped))
+        navigationBar.addGestureRecognizer(headerTap)
+        
         // Аватарка чата / группы
         assistantAvatarImageView.contentMode = .scaleAspectFill
         assistantAvatarImageView.layer.cornerRadius = isCurrentDeviceiPad() ? 30 : 16
@@ -134,9 +170,10 @@ class GroupChatView: UIView {
                 return
             }
             
+            isMessageOnRepite = false
             let groups = MainHelper.shared.allWaifuGroups
             if let index = MainHelper.shared.currentWaifuIndex, index < groups.count {
-                MainHelper.shared.currentWaifuNameFromeGroupeChat = groups[index].randomElement()
+                MainHelper.shared.currentWaifuNameFromeGroupeChat = groups[index].filter({$0.avatarName != MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName}).randomElement()
             }
             
             let previousMessages = "promp.previosMessagesUser".localize() + (viewModel.messagesAI.suffix(12)
@@ -145,8 +182,9 @@ class GroupChatView: UIView {
                     return prefix + message.content
                 }
                 .joined(separator: "\n")) + "promp.previosMessagesUserStarter".localize()
-            viewModel.systemPrompt = MainHelper.shared.getSystemPromptForGroupChat() + previousMessages
-            viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForGroupChat() + previousMessages
+            let systemPrompt = MainHelper.shared.getSystemPromptForGroupChat() + previousMessages
+            viewModel.systemPrompt = systemPrompt
+            viewModel.systemPromptSafe = systemPrompt
 
             self.viewModel.sendMessageViaCustomServer(text)
             self.scrollToBottomAnimated()
@@ -158,23 +196,63 @@ class GroupChatView: UIView {
                 self.inputTextView.enableSendButton()
             }
         }
+        
+        inputTextView.showInternetErrorAlertHandler = { [weak self] in
+            self?.showInternetError()
+        }
+        
+        inputTextView.pleaseWaitHandler = { [weak self] in
+            self?.showToastMessage("PleaseWait".localize(), alpha: 1)
+        }
     }
     
     private func setupViewModel() {
         viewModel.onMessagesUpdated = { [weak self] isSucceed in
+            guard let self else { return }
+            
             if isSucceed {
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                    self?.scrollToBottomAnimated()
+                    self.tableView.reloadData()
+                    self.scrollToBottomAnimated()
                 }
             }
         }
         
         viewModel.onMessageReceived = { [weak self] in
-            self?.inputTextView.enableSendButton()
+            guard let self else { return }
+
+            inputTextView.enableSendButton()
+            
+            if [false, true, false].randomElement() ?? false, !isMessageOnRepite {
+                isMessageOnRepite = true
+                inputTextView.disableSendButton()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.receiveNextMessage()
+                }
+            }
         }
     }
 
+    func receiveNextMessage() {
+        let groups = MainHelper.shared.allWaifuGroups
+        if let index = MainHelper.shared.currentWaifuIndex, index < groups.count {
+            MainHelper.shared.currentWaifuNameFromeGroupeChat = groups[index].filter({$0.avatarName != MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName}).randomElement()
+        }
+        
+        let previousMessages = "promp.previosMessagesUser".localize() + (viewModel.messagesAI.suffix(12)
+            .map { message in
+                let prefix = (message.role == "user") ? "user: " : "girlfriend: "
+                return prefix + message.content
+            }
+            .joined(separator: "\n"))
+        let systemPrompt = MainHelper.shared.getSystemPromptForGroupChat() + previousMessages
+        viewModel.systemPrompt = systemPrompt
+        viewModel.systemPromptSafe = systemPrompt
+
+        self.viewModel.sendMessageViaCustomServer(" ", isNeedOnlyReply: true)
+        self.scrollToBottomAnimated()
+    }
+    
     func setMessagesFromDB() {
         viewModel.messagesAI = viewModel.currentMessagesAI
         DispatchQueue.main.async {
@@ -332,6 +410,26 @@ class GroupChatView: UIView {
         vc?.present(alertController, animated: true, completion: nil)
     }
 
+    @objc private func headerTapped() {
+        inputTextView.textView.resignFirstResponder()
+        
+        // Получаем текущую группу через сохраненный индекс
+        let groups = MainHelper.shared.allWaifuGroups
+        guard let index = MainHelper.shared.currentWaifuIndex, index < groups.count else { return }
+        let currentGroupMembers = groups[index]
+        
+        // Открываем контроллер списка участников
+        let membersVC = GroupMembersViewController(members: currentGroupMembers)
+        
+        if let sheet = membersVC.sheetPresentationController {
+            sheet.detents = [.medium(), .large()] // Две позиции: на пол-экрана и во весь
+            sheet.prefersGrabberVisible = true    // Черточка сверху шторки
+            sheet.preferredCornerRadius = 24
+        }
+        
+        vc?.present(membersVC, animated: true)
+    }
+    
     private func showCustomAlert(for type: CustomAlertView.CustomAlertType) {
         inputTextView.textView.resignFirstResponder()
         let customAlertView = CustomAlertView(type: type)
@@ -368,6 +466,62 @@ class GroupChatView: UIView {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             self.subsView.yearlyButtonTapped()
+        }
+    }
+    
+    private func showInternetError() {
+        let haptic = UINotificationFeedbackGenerator()
+        haptic.notificationOccurred(.error)
+        
+        let alertController = UIAlertController(
+            title: "InternetError.title".localize(),
+            message: "InternetError.message".localize(),
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK".localize(), style: .default)
+        alertController.addAction(okAction)
+        
+        vc?.present(alertController, animated: true)
+    }
+    
+    private func showToastMessage(_ message: String, alpha: CGFloat = 0.8) {
+        let toastView = UIView()
+        toastView.backgroundColor = UIColor(white: 0.1, alpha: alpha)
+        toastView.layer.cornerRadius = 18
+        toastView.clipsToBounds = true
+        
+        let label = UILabel()
+        label.text = message
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        
+        toastView.addSubview(label)
+        addSubview(toastView)
+        
+        toastView.snp.makeConstraints { make in
+            make.top.equalTo(self.navigationBar.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+            make.width.lessThanOrEqualTo(self).multipliedBy(0.8)
+            make.height.greaterThanOrEqualTo(40)
+        }
+        
+        label.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(12)
+        }
+        
+        toastView.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            toastView.alpha = 1
+        }) { _ in
+            UIView.animate(withDuration: 0.5, delay: 1.0, animations: {
+                toastView.alpha = 0
+            }) { _ in
+                toastView.removeFromSuperview()
+            }
         }
     }
     
@@ -413,6 +567,19 @@ extension GroupChatView: UITableViewDelegate, UITableViewDataSource {
         
         cell.avatarTappedHandler = { [weak self] avatarName in
             self?.avatarTapped(avatarName)
+        }
+        
+        cell.showSubsHandler = { [weak self] in
+            self?.showSubs()
+        }
+        
+        cell.reloadDataHandler = { [weak self] in
+            guard let self else { return }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.viewModel.messagesAI = self.viewModel.currentMessagesAI
+                self.tableView.reloadData()
+            }
         }
         
         return cell

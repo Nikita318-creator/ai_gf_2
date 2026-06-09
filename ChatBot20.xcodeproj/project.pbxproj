@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 100544DF2DFA62B9006D8C3C /* ApphudSDK */; };
 		10074E092FD70F4000E65FB2 /* GroupChatListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10074E082FD70F3E00E65FB2 /* GroupChatListItemCell.swift */; };
+		10074FB62FD7BE8800E65FB2 /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10074FB52FD7BE8700E65FB2 /* GroupMembersViewController.swift */; };
+		10074FB82FD7BE9500E65FB2 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10074FB72FD7BE9400E65FB2 /* MemberCell.swift */; };
 		100AB6FD2E39A58400B8DCD5 /* UIImage+loadCustomAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */; };
 		1017D5AE2EEF75C4009A32E2 /* LoopingPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017D5AD2EEF75C4009A32E2 /* LoopingPlayerManager.swift */; };
 		101FBD772F76FBC7001E6C2A /* StorylineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101FBD762F76FBC7001E6C2A /* StorylineCell.swift */; };
@@ -150,6 +152,8 @@
 
 /* Begin PBXFileReference section */
 		10074E082FD70F3E00E65FB2 /* GroupChatListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatListItemCell.swift; sourceTree = "<group>"; };
+		10074FB52FD7BE8700E65FB2 /* GroupMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMembersViewController.swift; sourceTree = "<group>"; };
+		10074FB72FD7BE9400E65FB2 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		100AB6FC2E39A58100B8DCD5 /* UIImage+loadCustomAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+loadCustomAvatar.swift"; sourceTree = "<group>"; };
 		1017D5AA2EEF68F6009A32E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1017D5AD2EEF75C4009A32E2 /* LoopingPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingPlayerManager.swift; sourceTree = "<group>"; };
@@ -308,6 +312,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10074FB42FD7BE7600E65FB2 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				10074FB72FD7BE9400E65FB2 /* MemberCell.swift */,
+				10074FB52FD7BE8700E65FB2 /* GroupMembersViewController.swift */,
+				10074E082FD70F3E00E65FB2 /* GroupChatListItemCell.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		1017D5AC2EEF75BF009A32E2 /* LoopingPlayerManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,7 +663,7 @@
 		10A8C8CE2FD25B4A00CDA6EF /* GroupChat */ = {
 			isa = PBXGroup;
 			children = (
-				10074E082FD70F3E00E65FB2 /* GroupChatListItemCell.swift */,
+				10074FB42FD7BE7600E65FB2 /* Subviews */,
 				10A8C8D72FD25E9200CDA6EF /* GroupChatVC */,
 				10A8C8CF2FD25B5400CDA6EF /* GroupChatListVC.swift */,
 				10A8C8D32FD25DFC00CDA6EF /* GroupChatListViewModel.swift */,
@@ -1015,6 +1029,7 @@
 				1061A2742DF0ECF400206F61 /* AIChatViewModel.swift in Sources */,
 				10E75C842F0627C100D28EB9 /* DayCell.swift in Sources */,
 				10E75C782F05FA7D00D28EB9 /* DreamWaifuCell.swift in Sources */,
+				10074FB82FD7BE9500E65FB2 /* MemberCell.swift in Sources */,
 				105F10392E282738002CF2FF /* ChatListItemCell.swift in Sources */,
 				107AFD2F2DFB219300E64A9D /* IAPService.swift in Sources */,
 				10E75C282F03516200D28EB9 /* DatePreferencesView.swift in Sources */,
@@ -1030,6 +1045,7 @@
 				10DE77212E5E6B750062F74D /* CoinsService.swift in Sources */,
 				10335FC62DF2685C0075D699 /* MessageHistoryService.swift in Sources */,
 				109D9FB72F7DC6B900C01BBF /* AdditionalVideosService.swift in Sources */,
+				10074FB62FD7BE8800E65FB2 /* GroupMembersViewController.swift in Sources */,
 				104492862E65C94600237274 /* RoleplayCell.swift in Sources */,
 				104EB0A72EC764FD00826D1E /* AIService.swift in Sources */,
 				1061A1AC2DF0E9DD00206F61 /* SceneDelegate.swift in Sources */,
