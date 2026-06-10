@@ -73,42 +73,42 @@ class GroupChatListViewModel {
         let presets: [GroupPreset] = [
             GroupPreset(
                 idSuffix: "volleyball_group",
-                name: "Volleyball Club 🏐",
-                info: "Group chat of the female volleyball team. The user is the only male manager. Young women are athletic, competitive, and highly supportive of the manager.",
+                name: "group_volleyball_name".localize(),
+                info: "group_volleyball_info".localize(),
                 avatar: "groupChat5",
-                initialMessage: "***Rem*** Hey manager! Are you coming to training today? We need you to stats our spikes! 😏",
+                initialMessage: "group_volleyball_message".localize(),
                 avatarName: "roleplay9_14"
             ),
             GroupPreset(
                 idSuffix: "summercamp_group",
-                name: "Summer Camp 🌲",
-                info: "Summer camp camp counselors/campers secret chat. Late night vibes, playful, romantic, adventurous.",
+                name: "group_summercamp_name".localize(),
+                info: "group_summercamp_info".localize(),
                 avatar: "groupChat4",
-                initialMessage: "***Rin*** Psst... is the camp chief asleep? We are planning to sneak out to the lake, who is with us?",
+                initialMessage: "group_summercamp_message".localize(),
                 avatarName: "roleplay8_16"
             ),
             GroupPreset(
                 idSuffix: "roommates_group",
-                name: "Roommates (Floor 3) 🏠",
-                info: "Shared apartment / dorm group chat. Casual, dramatic, cozy, full of daily life teasing.",
+                name: "group_roommates_name".localize(),
+                info: "group_roommates_info".localize(),
                 avatar: "groupChat3",
-                initialMessage: "***Saber*** Who left their hoodie in the living room? It smells nice though... haha",
+                initialMessage: "group_roommates_message".localize(),
                 avatarName: "roleplay10_8"
             ),
             GroupPreset(
                 idSuffix: "office_group",
-                name: "Office Coffee Break ☕",
-                info: "Secret office chat without the boss. Female colleagues flirting and slacking off with the user.",
+                name: "group_office_name".localize(),
+                info: "group_office_info".localize(),
                 avatar: "groupChat2",
-                initialMessage: "***Yuno*** The presentation is so boring. Let's grab coffee? Our favorite desk is empty~",
+                initialMessage: "group_office_message".localize(),
                 avatarName: "roleplay12_4"
             ),
             GroupPreset(
                 idSuffix: "council_group",
-                name: "Student Council 🏛️",
-                info: "High school student council chat. High status young women, teasing the user, tsundere and kuudere dynamics.",
+                name: "group_council_name".localize(),
+                info: "group_council_info".localize(),
                 avatar: "groupChat1",
-                initialMessage: "***Emilia*** Prez! You forgot to sign the budget papers again. Come to the council room right now!",
+                initialMessage: "group_council_message".localize(),
                 avatarName: "roleplay8_2"
             )
         ]

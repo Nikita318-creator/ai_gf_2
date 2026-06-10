@@ -222,6 +222,11 @@ extension GroupChatListVC: UITableViewDataSource, UITableViewDelegate {
             MainHelper.shared.currentAssistant = selectedAssistant
             MainHelper.shared.isFirstMessageInChat = false
             
+            AnalyticService.shared.logEvent(name: "GROUP chat selected", properties: [
+                "index:": "\(index)",
+                "name:": "\(selectedAssistant?.assistantName ?? "")"
+            ])
+            
             // Запуск твоего нового экрана группового чата
             let groupChatVC = GroupChatVC()
             groupChatVC.modalPresentationStyle = .fullScreen
