@@ -498,16 +498,14 @@ class ChatCell: UITableViewCell {
     }
     
     private func makePlayer(from videoName: String) -> AVPlayer? {
-        guard let data = RemoteRealmVideoService.shared.getVideoData(name: videoName) else {
+        // Получаем прямой путь к файлу в папке Caches
+        guard let localURL = RemoteRealmVideoService.shared.getVideoLocalURL(name: videoName) else {
+            print("⚠️ Видео \(videoName) отсутствует в кэше")
             return nil
         }
 
-        let tempURL = FileManager.default.temporaryDirectory
-            .appendingPathComponent("\(videoName).mp4")
-
-        try? data.write(to: tempURL, options: .atomic)
-
-        return AVPlayer(url: tempURL)
+        // AVPlayer запускается мгновенно без нагрузки на RAM
+        return AVPlayer(url: localURL)
     }
     
     // MARK: - Обработка нажатия на видео (Ключевой метод с лупом и аудио - Обновлено)

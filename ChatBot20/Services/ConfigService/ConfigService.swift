@@ -57,7 +57,7 @@ final class ConfigService {
     private let cachedConfigKey = "cachedConfigKey"
 
     private init() {}
-    
+     
     func fetchConfig(completion: ((Bool) -> Void)? = nil) {
         guard let configURL else { return }
         
