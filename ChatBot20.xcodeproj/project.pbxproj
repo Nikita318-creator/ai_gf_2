@@ -18,8 +18,9 @@
 		101FBD7B2F77042B001E6C2A /* StorylineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101FBD7A2F77042A001E6C2A /* StorylineViewModel.swift */; };
 		10335FC62DF2685C0075D699 /* MessageHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10335FC52DF268510075D699 /* MessageHistoryService.swift */; };
 		1035BD882E5919260053486C /* BlurryOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD872E5919250053486C /* BlurryOverlayView.swift */; };
-		1035BD952E592FB00053486C /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035BD942E592FAF0053486C /* BubbleView.swift */; };
 		104492862E65C94600237274 /* RoleplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104492852E65C94600237274 /* RoleplayCell.swift */; };
+		104D71BA2FDE1DA500286CCF /* AppsFlaerManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D71B92FDE1DA400286CCF /* AppsFlaerManeger.swift */; };
+		104D722E2FDE30B600286CCF /* AppsFlyerLib-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 104D722D2FDE30B600286CCF /* AppsFlyerLib-Dynamic */; };
 		104EB0A72EC764FD00826D1E /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104EB0A62EC764FD00826D1E /* AIService.swift */; };
 		105572402E143C1200239F1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1055723F2E143C1200239F1D /* StoreKit.framework */; };
 		1055A50D2F091AFC004FF05B /* HardcorePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1055A50C2F091AFB004FF05B /* HardcorePlayerViewController.swift */; };
@@ -100,7 +101,6 @@
 		10DE771D2E5E63B50062F74D /* BaseAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE771C2E5E63AE0062F74D /* BaseAlertView.swift */; };
 		10DE771F2E5E63D50062F74D /* GiftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE771E2E5E63D40062F74D /* GiftCell.swift */; };
 		10DE77212E5E6B750062F74D /* CoinsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DE77202E5E6B6D0062F74D /* CoinsService.swift */; };
-		10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */; };
 		10E75C242F034CDB00D28EB9 /* DateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E75C232F034CD800D28EB9 /* DateVC.swift */; };
 		10E75C262F034DA900D28EB9 /* DatePlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E75C252F034DA900D28EB9 /* DatePlaceCell.swift */; };
 		10E75C282F03516200D28EB9 /* DatePreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E75C272F03516100D28EB9 /* DatePreferencesView.swift */; };
@@ -170,8 +170,8 @@
 		101FBD842F7755E0001E6C2A /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10335FC52DF268510075D699 /* MessageHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryService.swift; sourceTree = "<group>"; };
 		1035BD872E5919250053486C /* BlurryOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryOverlayView.swift; sourceTree = "<group>"; };
-		1035BD942E592FAF0053486C /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		104492852E65C94600237274 /* RoleplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleplayCell.swift; sourceTree = "<group>"; };
+		104D71B92FDE1DA400286CCF /* AppsFlaerManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlaerManeger.swift; sourceTree = "<group>"; };
 		104EB0A62EC764FD00826D1E /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
 		1055723F2E143C1200239F1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1055A50C2F091AFB004FF05B /* HardcorePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcorePlayerViewController.swift; sourceTree = "<group>"; };
@@ -270,7 +270,6 @@
 		10DE771C2E5E63AE0062F74D /* BaseAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAlertView.swift; sourceTree = "<group>"; };
 		10DE771E2E5E63D40062F74D /* GiftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCell.swift; sourceTree = "<group>"; };
 		10DE77202E5E6B6D0062F74D /* CoinsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsService.swift; sourceTree = "<group>"; };
-		10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingVC.swift; sourceTree = "<group>"; };
 		10E75C232F034CD800D28EB9 /* DateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateVC.swift; sourceTree = "<group>"; };
 		10E75C252F034DA900D28EB9 /* DatePlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePlaceCell.swift; sourceTree = "<group>"; };
 		10E75C272F03516100D28EB9 /* DatePreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePreferencesView.swift; sourceTree = "<group>"; };
@@ -305,6 +304,7 @@
 				100544E02DFA62B9006D8C3C /* ApphudSDK in Frameworks */,
 				1061A34E2DF20D0400206F61 /* RealmSwift in Frameworks */,
 				105572402E143C1200239F1D /* StoreKit.framework in Frameworks */,
+				104D722E2FDE30B600286CCF /* AppsFlyerLib-Dynamic in Frameworks */,
 				1061A1B32DF0EA5B00206F61 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +348,14 @@
 				104492852E65C94600237274 /* RoleplayCell.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		104D71B82FDE1D9300286CCF /* AppsFlaerManeger */ = {
+			isa = PBXGroup;
+			children = (
+				104D71B92FDE1DA400286CCF /* AppsFlaerManeger.swift */,
+			);
+			path = AppsFlaerManeger;
 			sourceTree = "<group>";
 		};
 		104EB0A52EC764FA00826D1E /* AIServiceServer */ = {
@@ -463,7 +471,6 @@
 				107E02172E64E7530061D61A /* Roleplay */,
 				105F10352E28271C002CF2FF /* AllChatsViewController */,
 				10881DA62E00CDF70088F674 /* SplashViewController */,
-				107AFD422DFB6D1700E64A9D /* OnbordingVC */,
 				107AFD332DFB3D9900E64A9D /* SubsView */,
 				1061A33C2DF1F5D800206F61 /* AssistantConfig */,
 				1061A27A2DF0EE8600206F61 /* Services */,
@@ -503,6 +510,7 @@
 			isa = PBXGroup;
 			children = (
 				108731692F01BF6500DD3177 /* MainServices */,
+				104D71B82FDE1D9300286CCF /* AppsFlaerManeger */,
 				10C7DA152F2EB8FB00ACA897 /* AssistantDynamicService */,
 				10E75C912F07663C00D28EB9 /* CoinsService */,
 				10E75C8E2F07625900D28EB9 /* WebHookAnalyticsService */,
@@ -535,15 +543,6 @@
 				107AFD392DFB3E1300E64A9D /* SubsView.swift */,
 			);
 			path = SubsView;
-			sourceTree = "<group>";
-		};
-		107AFD422DFB6D1700E64A9D /* OnbordingVC */ = {
-			isa = PBXGroup;
-			children = (
-				1035BD942E592FAF0053486C /* BubbleView.swift */,
-				10DF26DC2E05F52E005402A9 /* OnbordingVC.swift */,
-			);
-			path = OnbordingVC;
 			sourceTree = "<group>";
 		};
 		107E02172E64E7530061D61A /* Roleplay */ = {
@@ -864,6 +863,7 @@
 				100544DF2DFA62B9006D8C3C /* ApphudSDK */,
 				10881DAC2E00CEA80088F674 /* Lottie */,
 				10E75C6D2F05A39A00D28EB9 /* AmplitudeUnified */,
+				104D722D2FDE30B600286CCF /* AppsFlyerLib-Dynamic */,
 			);
 			productName = ChatBot20;
 			productReference = 1061A1812DF0E9AE00206F61 /* ChatBot20.app */;
@@ -922,6 +922,7 @@
 				100544DE2DFA62B9006D8C3C /* XCRemoteSwiftPackageReference "ApphudSDK" */,
 				10881DAB2E00CEA80088F674 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				10E75C6C2F05A39A00D28EB9 /* XCRemoteSwiftPackageReference "AmplitudeUnified-Swift" */,
+				104D722C2FDE30B600286CCF /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1061A1822DF0E9AE00206F61 /* Products */;
@@ -973,6 +974,7 @@
 				105F103D2E28276C002CF2FF /* AllChatsViewModel.swift in Sources */,
 				1061A3402DF1FA5000206F61 /* AssistantConfig.swift in Sources */,
 				10C7DA1C2F30CFB800ACA897 /* FeedbackAlertView.swift in Sources */,
+				104D71BA2FDE1DA500286CCF /* AppsFlaerManeger.swift in Sources */,
 				10A8C8D22FD25BBF00CDA6EF /* GroupChatView.swift in Sources */,
 				1017D5AE2EEF75C4009A32E2 /* LoopingPlayerManager.swift in Sources */,
 				10E75C902F07626C00D28EB9 /* WebHookAnalyticsService.swift in Sources */,
@@ -980,7 +982,6 @@
 				10A8C8D62FD25E8D00CDA6EF /* GroupChatVC.swift in Sources */,
 				101FBD772F76FBC7001E6C2A /* StorylineCell.swift in Sources */,
 				108731782F01C22700DD3177 /* JigsawGameVC.swift in Sources */,
-				10DF26DD2E05F52F005402A9 /* OnbordingVC.swift in Sources */,
 				1061A27C2DF0EE8F00206F61 /* NetworkMonitor.swift in Sources */,
 				10C7DA172F2EB8FF00ACA897 /* AssistantDynamicService.swift in Sources */,
 				1061A1AB2DF0E9DD00206F61 /* AppDelegate.swift in Sources */,
@@ -1013,7 +1014,6 @@
 				10881DAA2E00CE1C0088F674 /* SplashViewController.swift in Sources */,
 				107E02192E64E7600061D61A /* RoleplayVC.swift in Sources */,
 				10A8C8C92FD203E900CDA6EF /* VoiceConfig.swift in Sources */,
-				1035BD952E592FB00053486C /* BubbleView.swift in Sources */,
 				10904BA52EED0D4700528437 /* AvatarsService.swift in Sources */,
 				10C7DA1A2F302FE300ACA897 /* OutfitCell.swift in Sources */,
 				108731802F01C43B00DD3177 /* BaseGameViewController.swift in Sources */,
@@ -1141,6 +1141,7 @@
 				INFOPLIST_FILE = ChatBot20/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Mia: WaifuAI";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use this data to personalize content for you and analyze app performance. Our goal is to continuously improve the app experience based on how you use it.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1179,6 +1180,7 @@
 				INFOPLIST_FILE = ChatBot20/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Mia: WaifuAI";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library so you can send photos to your girlfriend or save them to your gallery.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use this data to personalize content for you and analyze app performance. Our goal is to continuously improve the app experience based on how you use it.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1356,6 +1358,14 @@
 				minimumVersion = 3.6.2;
 			};
 		};
+		104D722C2FDE30B600286CCF /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		1061A1B12DF0EA5B00206F61 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -1395,6 +1405,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 100544DE2DFA62B9006D8C3C /* XCRemoteSwiftPackageReference "ApphudSDK" */;
 			productName = ApphudSDK;
+		};
+		104D722D2FDE30B600286CCF /* AppsFlyerLib-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 104D722C2FDE30B600286CCF /* XCRemoteSwiftPackageReference "AppsFlyerFramework-Dynamic" */;
+			productName = "AppsFlyerLib-Dynamic";
 		};
 		1061A1B22DF0EA5B00206F61 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

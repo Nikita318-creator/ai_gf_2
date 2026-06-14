@@ -1,4 +1,5 @@
 import AmplitudeUnified
+import AppTrackingTransparency
 
 enum Environment {
     case prod
@@ -10,11 +11,17 @@ class AnalyticService {
     
     let amplitude = Amplitude(apiKey: "d4154e9a8b46ee8e34fafe54f381da2f", serverZone: .EU)
 
+    private var isTrackingAuthorized: Bool?
+
     private init() {}
     
     let environment: Environment = .dev
     
     func logEvent(name: String, properties: [AnyHashable : Any]) {
+        if isTrackingAuthorized == nil {
+            requestTrackingAuthorization()
+        }
+        
         guard environment == .prod else { return }
         
         var versionText = "V:"
@@ -40,5 +47,22 @@ class AnalyticService {
         )
         
         amplitude.track(event: event)
+    }
+    
+    func requestTrackingAuthorization() {
+        ATTrackingManager.requestTrackingAuthorization { [weak self] status in
+            switch status {
+            case .authorized:
+                self?.isTrackingAuthorized = true
+            case .denied, .restricted:
+                self?.isTrackingAuthorized = false
+            case .notDetermined:
+                self?.isTrackingAuthorized = nil
+            @unknown default:
+                self?.isTrackingAuthorized = false
+            }
+            
+            AppsFlyerManager.shared.start()
+        }
     }
 }

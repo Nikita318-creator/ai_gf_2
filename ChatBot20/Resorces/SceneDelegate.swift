@@ -56,6 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func initServices() {
+        AppsFlyerManager.shared.configure()
         let _ = NetworkMonitor.shared
         let _ = MainHelper.shared
         let _ = IAPService.shared

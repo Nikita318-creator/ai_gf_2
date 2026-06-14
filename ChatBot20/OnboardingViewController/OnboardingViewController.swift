@@ -173,6 +173,8 @@ class OnboardingViewController: UIViewController {
             
             // Обновляем текст кнопки на последнем слайде
             if nextIndex == slides.count - 1 {
+                AnalyticService.shared.logEvent(name: "Onboarding Finished", properties: ["":""])
+
                 UIView.transition(with: nextButton, duration: 0.3, options: .transitionCrossDissolve) {
                     self.nextButton.setTitle("GetStarted".localize(), for: .normal)
                 }
@@ -236,6 +238,8 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
         
         // Обновляем текст кнопки
         if page == slides.count - 1 {
+            AnalyticService.shared.logEvent(name: "Onboarding Finished", properties: ["":""])
+
             UIView.transition(with: nextButton, duration: 0.3, options: .transitionCrossDissolve) {
                 self.nextButton.setTitle("GetStarted".localize(), for: .normal)
             }

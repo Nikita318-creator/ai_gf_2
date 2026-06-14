@@ -104,6 +104,23 @@ class IAPService: NSObject {
                 if result.transaction != nil {
                     AnalyticService.shared.logEvent(name: "!!! Purchased: \(product.productId)", properties: ["":""])
 
+                    // Точечный вызов нашего менеджера без лишних импортов
+                    var price: Double = 8.0
+                    var currencyCode: String = "USD"
+                    
+                    if let skProduct = product.skProduct {
+                        price = skProduct.price.doubleValue
+                        if let currency = skProduct.priceLocale.currencyCode {
+                            currencyCode = currency
+                        }
+                    }
+                    
+                    AppsFlyerManager.shared.trackSubscriptionPurchase(
+                        price: price,
+                        currency: currencyCode,
+                        productId: product.productId
+                    )
+
                     closure(.purchased)
                 } else {
                     
