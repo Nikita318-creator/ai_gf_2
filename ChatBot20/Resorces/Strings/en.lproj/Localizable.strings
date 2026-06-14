@@ -995,8 +995,6 @@
 "group_council_name" = "Student Council 🏛️";
 "group_council_info" = "High school student council chat. High status young women, teasing the user, tsundere and kuudere dynamics.";
 "group_council_message" = "***Emilia*** Prez! You forgot to sign the budget papers again. Come to the council room right now!";
-
-// new
 "Roulette" = "Roulette";
 "Waifu Roulette" = "Waifu Roulette";
 "AI-POWERED MATCHING" = "AI-POWERED MATCHING";
@@ -1042,6 +1040,18 @@
 "Style Match" = "Style Match";
 "Interest Align" = "Interest Align";
 "Vibe Check" = "Vibe Check";
+"Stories.Text6" = "Feeling lucky? Try Roulette Chat! Just whisper your interests, and my system will instantly connect you with the perfect girl. Gorgeous girls waiting just for you!";
+"Stories.Text7" = "Tired of texting one-on-one? I have a special surprise for you! Step into our Group Rooms and dive into a chat with a whole crowd of lovely girls at once. Double the girls, double the fun!";
+"waifu_welcome_1" = "Hi there! ✨ We finally got matched! I've been looking for someone who shares my vibe for so long. What are you up to?";
+"waifu_welcome_2" = "Oh, hello! *waves timidly* 🌸 The roulette actually brought us together... I'm a bit nervous, but I'd love to get to know you better!";
+"waifu_welcome_3" = "Hey! Look what the algorithm brought in. 😏 Something tells me we're going to have a lot of fun together. Ready to chat?";
+"waifu_welcome_4" = "Finally, a match! 🎉 I saw your preferences and honestly, I think we're a perfect fit. What shall we talk about first?";
+"waifu_welcome_5" = "Hi! I was just sitting here hoping to find someone interesting... and then you appeared! Tell me everything about yourself. ✨";
+"waifu_welcome_6" = "Well, hello there~ 😉 I usually don't believe in luck, but matching with you changed my mind. Let's make this conversation unforgettable!";
+"waifu_welcome_7" = "Hey! *smiles brightly* 🌟 So glad the roulette picked you. I'm already super excited to find out what we have in common!";
+"waifu_welcome_8" = "Hi! It's so nice to meet you. 🥰 I promise I won't bite... unless you want me to, haha! Tell me, what's on your mind?";
+"waifu_welcome_9" = "Oh, a new match? Hey! 💕 I was looking for someone cool to spend some time with, and you look exactly like my type.";
+"waifu_welcome_10" = "Hi! *adjusts hair* 🪐 The stars must have aligned today because matching with you is the best thing that's happened to me all week!";
 
 "waifu_name_1" = "Asuka";
 "waifu_name_2" = "Hinata";
@@ -1103,14 +1113,3 @@
 "waifu_name_58" = "Yumi";
 "waifu_name_59" = "Noa";
 "waifu_name_60" = "Emi";
-
-"waifu_welcome_1" = "Hi there! ✨ We finally got matched! I've been looking for someone who shares my vibe for so long. What are you up to?";
-"waifu_welcome_2" = "Oh, hello! *waves timidly* 🌸 The roulette actually brought us together... I'm a bit nervous, but I'd love to get to know you better!";
-"waifu_welcome_3" = "Hey! Look what the algorithm brought in. 😏 Something tells me we're going to have a lot of fun together. Ready to chat?";
-"waifu_welcome_4" = "Finally, a match! 🎉 I saw your preferences and honestly, I think we're a perfect fit. What shall we talk about first?";
-"waifu_welcome_5" = "Hi! I was just sitting here hoping to find someone interesting... and then you appeared! Tell me everything about yourself. ✨";
-"waifu_welcome_6" = "Well, hello there~ 😉 I usually don't believe in luck, but matching with you changed my mind. Let's make this conversation unforgettable!";
-"waifu_welcome_7" = "Hey! *smiles brightly* 🌟 So glad the roulette picked you. I'm already super excited to find out what we have in common!";
-"waifu_welcome_8" = "Hi! It's so nice to meet you. 🥰 I promise I won't bite... unless you want me to, haha! Tell me, what's on your mind?";
-"waifu_welcome_9" = "Oh, a new match? Hey! 💕 I was looking for someone cool to spend some time with, and you look exactly like my type.";
-"waifu_welcome_10" = "Hi! *adjusts hair* 🪐 The stars must have aligned today because matching with you is the best thing that's happened to me all week!";
