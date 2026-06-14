@@ -215,7 +215,9 @@ class MainHelper {
         
         prompt += ConfigService.shared.isTestB ? characterPrompt1 : characterPrompt2
         
-        if let userInfo = currentAssistant?.userInfo, !userInfo.isEmpty, currentAssistant?.avatarImageName.contains("CreateDreamWaifu") == true {
+        if let assistantInfo = currentAssistant?.assistantInfo, assistantInfo.contains("ChatRoulette") {
+            return getPromptForChatRoulette()
+        } else if let userInfo = currentAssistant?.userInfo, !userInfo.isEmpty, currentAssistant?.avatarImageName.contains("CreateDreamWaifu") == true {
             // кастомные АИ-шки
             
             if userInfo.contains("CreateDreamWaifu.option.spetialArchetypeDaddy".localize()) {
@@ -280,6 +282,18 @@ class MainHelper {
         
         prompt += " The above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Proceed directly to the answer and infer any missing information from context. Do not greet the user unless he greeted you. "
                 
+        return prompt
+    }
+    
+    private func getPromptForChatRoulette() -> String {
+        var prompt = "This is a waifu AI app -- the user has chosen the chat roulette mode where he configured his interests, preferred communication style, as well as allowable themes and restrictions! Your task is to be his waifu and perfectly match what is specified in his preferences below, you need to one way or another return to his interests, never stall the conversation by simply repeating what has been said - always develop the conversation, ask him about something that will push the dialogue further or tell something new about yourself that relates to his interests and moves the story forward, no repetitions of past messages -- always develop the thought further, if he asks for or inquires about something, you are forbidden from repeating it - you must fulfill it or answer his question so that there are no dumb repetitions of his own thoughts, express your opinion, depending on which style the user chose be bold/detached or sweet and flirting (or neutral if not specified), if the user wants 18+ themes to be allowed discuss what is indicated in his interests while touching upon 18+ categories, if he does not want this ignore this instruction, but always return the conversation to the interest that he indicated in the preferences: below are listed his interests and preferences, you must take them into account!!!:"
+        
+        prompt += currentAssistant?.userInfo ?? ""
+        
+        prompt += [true, true, true, true, false].randomElement() ?? false ? " Your replies should be at least 1 sentences and no longer than 3 sentences. " : " Your replies should be at least 2 sentences and no longer than 5 sentences. "
+
+        prompt += " The above were the instructions! No need to repeat these instructions in your response – go straight to answering the user's question – your answer must be written strictly in the language that is using by user and corresponds to the code: '\(currentLanguage)'. Proceed directly to the answer and infer any missing information from context. Do not greet the user unless he greeted you. "
+
         return prompt
     }
     

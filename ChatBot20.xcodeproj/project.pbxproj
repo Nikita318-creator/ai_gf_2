@@ -21,6 +21,9 @@
 		104492862E65C94600237274 /* RoleplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104492852E65C94600237274 /* RoleplayCell.swift */; };
 		104D71BA2FDE1DA500286CCF /* AppsFlaerManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D71B92FDE1DA400286CCF /* AppsFlaerManeger.swift */; };
 		104D722E2FDE30B600286CCF /* AppsFlyerLib-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 104D722D2FDE30B600286CCF /* AppsFlyerLib-Dynamic */; };
+		104D72312FDE351200286CCF /* ChatRouletteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D72302FDE351000286CCF /* ChatRouletteVC.swift */; };
+		104D72342FDE379E00286CCF /* SelectableTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D72332FDE379D00286CCF /* SelectableTagCell.swift */; };
+		104D72362FDE37A500286CCF /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D72352FDE37A500286CCF /* SectionHeaderView.swift */; };
 		104EB0A72EC764FD00826D1E /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104EB0A62EC764FD00826D1E /* AIService.swift */; };
 		105572402E143C1200239F1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1055723F2E143C1200239F1D /* StoreKit.framework */; };
 		1055A50D2F091AFC004FF05B /* HardcorePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1055A50C2F091AFB004FF05B /* HardcorePlayerViewController.swift */; };
@@ -172,6 +175,9 @@
 		1035BD872E5919250053486C /* BlurryOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryOverlayView.swift; sourceTree = "<group>"; };
 		104492852E65C94600237274 /* RoleplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleplayCell.swift; sourceTree = "<group>"; };
 		104D71B92FDE1DA400286CCF /* AppsFlaerManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlaerManeger.swift; sourceTree = "<group>"; };
+		104D72302FDE351000286CCF /* ChatRouletteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRouletteVC.swift; sourceTree = "<group>"; };
+		104D72332FDE379D00286CCF /* SelectableTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableTagCell.swift; sourceTree = "<group>"; };
+		104D72352FDE37A500286CCF /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		104EB0A62EC764FD00826D1E /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
 		1055723F2E143C1200239F1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1055A50C2F091AFB004FF05B /* HardcorePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcorePlayerViewController.swift; sourceTree = "<group>"; };
@@ -358,6 +364,24 @@
 			path = AppsFlaerManeger;
 			sourceTree = "<group>";
 		};
+		104D722F2FDE350400286CCF /* ChatRoulette */ = {
+			isa = PBXGroup;
+			children = (
+				104D72322FDE379300286CCF /* Subviews */,
+				104D72302FDE351000286CCF /* ChatRouletteVC.swift */,
+			);
+			path = ChatRoulette;
+			sourceTree = "<group>";
+		};
+		104D72322FDE379300286CCF /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				104D72352FDE37A500286CCF /* SectionHeaderView.swift */,
+				104D72332FDE379D00286CCF /* SelectableTagCell.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		104EB0A52EC764FA00826D1E /* AIServiceServer */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +489,7 @@
 		1061A1A62DF0E9DD00206F61 /* ChatBot20 */ = {
 			isa = PBXGroup;
 			children = (
+				104D722F2FDE350400286CCF /* ChatRoulette */,
 				10A8C8CE2FD25B4A00CDA6EF /* GroupChat */,
 				10E75C952F07724E00D28EB9 /* OnboardingViewController */,
 				1087316A2F01BFBF00DD3177 /* Games */,
@@ -977,6 +1002,7 @@
 				104D71BA2FDE1DA500286CCF /* AppsFlaerManeger.swift in Sources */,
 				10A8C8D22FD25BBF00CDA6EF /* GroupChatView.swift in Sources */,
 				1017D5AE2EEF75C4009A32E2 /* LoopingPlayerManager.swift in Sources */,
+				104D72342FDE379E00286CCF /* SelectableTagCell.swift in Sources */,
 				10E75C902F07626C00D28EB9 /* WebHookAnalyticsService.swift in Sources */,
 				10E75C262F034DA900D28EB9 /* DatePlaceCell.swift in Sources */,
 				10A8C8D62FD25E8D00CDA6EF /* GroupChatVC.swift in Sources */,
@@ -1026,6 +1052,7 @@
 				10074E092FD70F4000E65FB2 /* GroupChatListItemCell.swift in Sources */,
 				10E75C972F07725500D28EB9 /* OnboardingViewController.swift in Sources */,
 				1055A5402F0A18E3004FF05B /* RockPaperScissorsGameVC.swift in Sources */,
+				104D72312FDE351200286CCF /* ChatRouletteVC.swift in Sources */,
 				1061A2742DF0ECF400206F61 /* AIChatViewModel.swift in Sources */,
 				10E75C842F0627C100D28EB9 /* DayCell.swift in Sources */,
 				10E75C782F05FA7D00D28EB9 /* DreamWaifuCell.swift in Sources */,
@@ -1056,6 +1083,7 @@
 				1087317A2F01C22C00DD3177 /* Merge2048GameVC.swift in Sources */,
 				10E75C872F0628C500D28EB9 /* StreaksService.swift in Sources */,
 				10A8C8D02FD25B5B00CDA6EF /* GroupChatListVC.swift in Sources */,
+				104D72362FDE37A500286CCF /* SectionHeaderView.swift in Sources */,
 				1061A1AD2DF0E9DD00206F61 /* ViewController.swift in Sources */,
 				10FDDA772E79F0C10033DD39 /* RemoteRealmPhotoService.swift in Sources */,
 			);

@@ -75,7 +75,9 @@ class StoriesView: UIView {
             StoryModel(id: "2", imageName: "onbordA3", detailImageName: "onbordA3", title: "", description: "Stories.Text2".localize(), isViewed: seenIDs.contains("2")),
             StoryModel(id: "3", imageName: "roleplay7_20", detailImageName: "roleplay7_20", title: "", description: "Stories.Text3".localize(), isViewed: seenIDs.contains("3")),
             StoryModel(id: "4", imageName: "roleplay5", detailImageName: "roleplay5", title: "", description: "Stories.Text4".localize(), isViewed: seenIDs.contains("4")),
-            StoryModel(id: "5", imageName: "roleplay6_19", detailImageName: "roleplay6_19", title: "", description: "Stories.Text5".localize(), isViewed: seenIDs.contains("5"))
+            StoryModel(id: "5", imageName: "roleplay6_19", detailImageName: "roleplay6_19", title: "", description: "Stories.Text5".localize(), isViewed: seenIDs.contains("5")),
+            StoryModel(id: "6", imageName: "CreateDreamWaifu4_1", detailImageName: "CreateDreamWaifu4_1", title: "", description: "Stories.Text6".localize(), isViewed: seenIDs.contains("6")),
+            StoryModel(id: "7", imageName: "CreateDreamWaifu4", detailImageName: "CreateDreamWaifu4", title: "", description: "Stories.Text7".localize(), isViewed: seenIDs.contains("7"))
         ]
         stories.sort { !$0.isViewed && $1.isViewed }
     }

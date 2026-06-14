@@ -85,10 +85,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let roleplayVC = RoleplayVC()
         let gamesViewController = GamesViewController()
         let groupChatViewController = GroupChatListVC()
+        let chatRouletteViewController = ChatRouletteVC()
         let rootNavController = UINavigationController(rootViewController: rootVC)
         let roleplayNavController = UINavigationController(rootViewController: roleplayVC)
         let gamesGFNavController = UINavigationController(rootViewController: gamesViewController)
         let groupChatNavController = UINavigationController(rootViewController: groupChatViewController)
+        let chatRouletteNavController = UINavigationController(rootViewController: chatRouletteViewController)
 
         roleplayNavController.setNavigationBarHidden(true, animated: false)
         
@@ -118,12 +120,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tag: 2
         )
         
+        chatRouletteNavController.tabBarItem = UITabBarItem(
+            title: "Roulette".localize(),
+            image: UIImage(systemName: "heart.text.square.fill"),
+            tag: 2
+        )
+        
         if ConfigService.shared.isTestB {
-            tabBarController.viewControllers = [rootNavController, roleplayNavController, groupChatNavController, gamesGFNavController]
+            tabBarController.viewControllers = [rootNavController, groupChatNavController, roleplayNavController, chatRouletteNavController, gamesGFNavController]
         } else {
             tabBarController.viewControllers = [rootNavController, roleplayNavController, gamesGFNavController]
         }
-        tabBarController.selectedIndex = 1
+        tabBarController.selectedIndex = 2
         return tabBarController
     }
     

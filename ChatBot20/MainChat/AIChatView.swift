@@ -588,7 +588,6 @@ class AIChatView: UIView {
         inputTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide)
-            make.height.equalTo(130)
         }
     }
 
@@ -764,23 +763,20 @@ class AIChatView: UIView {
     
     private func updateKeyboardConstraints() {
         var needScroll = false
-        let inputTextViewHeight: CGFloat = isCurrentDeviceiPad() ? 160 : (isWardrobeChat ? 75 : 130)
+        
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             if self.keyboardOffset == 8 {
                 self.inputTextView.snp.remakeConstraints { make in
                     make.leading.trailing.equalToSuperview()
-                    make.bottom.equalTo(self.safeAreaLayoutGuide)
-                    make.height.equalTo(inputTextViewHeight)
+                    make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
                 }
             } else {
                 needScroll = true
                 self.inputTextView.snp.remakeConstraints { make in
                     make.leading.trailing.equalToSuperview()
                     make.bottom.equalToSuperview().inset(self.keyboardOffset)
-                    make.height.equalTo(inputTextViewHeight)
                 }
             }
-
             self.layoutIfNeeded()
         } completion: { [weak self] _ in
             if needScroll {
@@ -1410,9 +1406,9 @@ extension AIChatView {
             make.height.equalTo(90)
         }
         
-        inputTextView.snp.updateConstraints { make in
-            make.height.equalTo(160)
-        }
+//        inputTextView.snp.updateConstraints { make in
+//            make.height.equalTo(160)
+//        }
         
         assistantAvatarImageView.snp.updateConstraints { make in
             make.width.height.equalTo(60)
