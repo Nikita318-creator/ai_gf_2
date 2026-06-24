@@ -232,6 +232,7 @@ class AIChatView: UIView {
                     return prefix + message.content
                 }
                 .joined(separator: "\n") ?? "") + "promp.previosMessagesUserStarter".localize()
+            self?.viewModel.previousMessages = previousMessages
             
             if let self, let currentDatePrompt, let currentDateRoomName {
                 let placeName: String
@@ -273,14 +274,14 @@ class AIChatView: UIView {
                     baseRulePrompt += " Your role allows you to discuss any friendly and romantic topics, but you are **STRICTLY FORBIDDEN** from engaging in any conversation regarding sexual acts. If the user initiates or develops such a topic, you must Use a polite yet firm phrase to stop the conversation, for example: You know, I don't feel comfortable talking about things like that. Let's talk about [New_Positive_Topic] instead. "
                 }
                 
-                viewModel.systemPrompt = baseRulePrompt + instructions + previousMessages
+                viewModel.systemPrompt = baseRulePrompt + instructions
             } else {
                 if MainHelper.shared.currentAssistant?.avatarImageName == "addsBannerAvatar" {
-                    self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner() + previousMessages
-                    self?.viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true) + previousMessages
+                    self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForAdBanner()
+                    self?.viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForAdBanner(isSafe: true)
                 } else {
-                    self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant() + previousMessages
-                    self?.viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForCurrentAssistant(isSafe: true) + previousMessages
+                    self?.viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant()
+                    self?.viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForCurrentAssistant(isSafe: true)
                 }
             }
 
@@ -396,10 +397,10 @@ class AIChatView: UIView {
                 + (self.viewModel.messagesAI.last?.content ?? "")
                 + "promp.previosMessagesUserStarter".localize()
             }
-            let messageText = previousMessages
             viewModel.systemPrompt = MainHelper.shared.getSystemPromptForCurrentAssistant(isReplyOnGift: true)
-            
-            viewModel.sendMessageViaCustomServer(messageText, isReplyOnGift: true)
+            viewModel.systemPromptSafe = MainHelper.shared.getSystemPromptForCurrentAssistant(isSafe: true)
+            viewModel.previousMessages = previousMessages
+            viewModel.sendMessageViaCustomServer("", isReplyOnGift: true)
             animateMessageSend()
         }
     }

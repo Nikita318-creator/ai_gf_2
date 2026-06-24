@@ -30,7 +30,8 @@ class AIChatViewModel {
     var onMessageReceived: (() -> Void)?
     var systemPrompt: String?
     var systemPromptSafe: String?
-
+    var previousMessages: String?
+    
     private var messageIds: [Int: String] = [:]
     
     var currentMessagesAI: [Message] {
@@ -130,7 +131,7 @@ class AIChatViewModel {
         // ================= дальше кастом сервер логика идет ================================ \\
         
         let aiService = AIService()
-        var fullMessage = (systemPrompt ?? "") + "\n" + text
+        var fullMessage = (systemPrompt ?? "") + (previousMessages ?? "") + "\n" + text
         
         // Внутренняя функция для повторного запроса
         func fetchWithRetry(attempt: Int) {
@@ -146,18 +147,16 @@ class AIChatViewModel {
                     self.handleSuccessResponse(for: responseText.trimmingCharacters(in: .whitespacesAndNewlines))
                     
                 case .failure(let error):
-                    if attempt < 1 { // Если это была первая попытка (index 0)
-                        fullMessage = (systemPromptSafe ?? "") + "\n" + text
+                    if attempt < 1 { // Если это была первая попытка убираем фичу памяти то есть юзаем systemPromptSafe
+                        fullMessage = (systemPromptSafe ?? "") + (previousMessages ?? "") + "\n" + text
                         print("⚠️ Request failed, retrying in 1s... Error: \(error.localizedDescription)")
                         AnalyticService.shared.logEvent(name: "Request failed, retrying in 1s", properties: ["fullMessage": "\(fullMessage)"])
 
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             fetchWithRetry(attempt: attempt + 1)
                         }
-                    } else if attempt < 2 {
-                        // Полностью заменяем текст юзера на безопасную историю
-                        let safeHistory = "Then I asked: hi! how are you! you know, the weather was beautiful this morning, but I want to hear how your day went and what your plans are for tomorrow — tell me, and then you said that you couldn't reply to the message right away, so I had to wait longer for a response, but I asked: will you apologize for the delay? you said: yes, I said it's fine and we continued our chat."
-                        fullMessage = (systemPromptSafe ?? "") + "\n" + safeHistory
+                    } else if attempt < 2 { // Если это была вторая попытка убираем еще и предыдущие сообщения юзера
+                        fullMessage = (systemPromptSafe ?? "") + "\n" + text
                         
                         print("⚠️ Request failed_2, context replaced with safe story. Retrying...")
                         AnalyticService.shared.logEvent(name: "Request failed, replaced with safe story", properties: ["fullMessage": "\(fullMessage)"])

@@ -182,9 +182,10 @@ class GroupChatView: UIView {
                     return prefix + message.content
                 }
                 .joined(separator: "\n")) + "promp.previosMessagesUserStarter".localize()
-            let systemPrompt = MainHelper.shared.getSystemPromptForGroupChat() + previousMessages
+            let systemPrompt = MainHelper.shared.getSystemPromptForGroupChat()
             viewModel.systemPrompt = systemPrompt
             viewModel.systemPromptSafe = systemPrompt
+            viewModel.previousMessages = previousMessages
 
             self.viewModel.sendMessageViaCustomServer(text)
             self.scrollToBottomAnimated()
@@ -245,7 +246,8 @@ class GroupChatView: UIView {
                 return prefix + message.content
             }
             .joined(separator: "\n"))
-        let systemPrompt = MainHelper.shared.getSystemPromptForGroupChat() + previousMessages
+        let systemPrompt = MainHelper.shared.getSystemPromptForGroupChat()
+        viewModel.previousMessages = previousMessages
         viewModel.systemPrompt = systemPrompt
         viewModel.systemPromptSafe = systemPrompt
 
