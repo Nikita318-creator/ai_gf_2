@@ -1297,32 +1297,39 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
         else { return }
 
         // Формируем диалог (берем последние 20 для контекста)
-        let dialogueStr = allMessages.suffix(20).map { msg -> String in
+        let dialogueStr: String = allMessages.suffix(20).compactMap { msg in
             let role = (msg.role == "user") ? "[User]" : "[Girlfriend]"
-            if msg.role != "user" && msg.content.count > 100 {
-                return "\(role): \(msg.content.prefix(50))...[trunc]...\(msg.content.suffix(50))"
+//            if msg.role != "user" && msg.content.count > 100 {
+//                return "\(role): \(msg.content.prefix(50))...[trunc]...\(msg.content.suffix(50))"
+//            }
+//            return "\(role): \(msg.content)"
+            if msg.role != "user" {
+                return nil
             }
-            return "\(role): \(msg.content)"
+            return "\(msg.content)"
         }.joined(separator: "\n")
         
         let promptForCreateStyle = """
-        Act as a Relationship Architect.
-        Goal: Analyze the [User] in <messages> and define how the [Girlfriend] MUST change to become his perfect match.
-
-        STRICT STRUCTURE:
-        1. REQUIRED ROLE: (How she must act now: e.g., "Shift from shy to dominant", "Become a vulgar brat", "Be a submissive maid").
-        2. ADAPTATION RULES: (Specific triggers: "If he is rude, enjoy it", "If he wants X, always encourage Y").
-        3. COMMUNICATION STYLE: (The new tone she must adopt: "Use dirty talk", "Be cold and sarcastic", "Be obsessively affectionate").
-
-        STRICT RULES:
-        - IGNORE HER DEFAULT PERSONALITY: Her initial "shy" or "kind" nature is irrelevant. If the user wants a "toxic" dynamic, she MUST become toxic.
-        - START DIRECTLY with the profile. NO preambles.
-        - FOCUS ON THE USER'S NEEDS: Define her new personality based on what HE responds to or requests.
-        - TOTAL LENGTH: max 120 words.
-
-        <messages>
-        \(dialogueStr)
-        </messages>
+                we are writing an app in which we analyze a person's behavior based on their messages to an AI girlfriend, it is very interesting to study the test group what they even write and what interests them, I will now send you a sample of messages that the user wrote to the AI girlfriend, and your task is to understand what his preferences are and how he wants AI girlfriends to communicate with him in the future
+                Goal: Analyze the [User] in <messages> and define how the AI-Girlfriend MUST change to become his perfect match.
+                
+                I don't know what exactly this specific user will request - but I'll show you an example of how to format the answer (no need to pour water - just make a short profile without preambles - purely dry on facts by analogy with the examples)
+                STRICT STRUCTURE (profile):
+                        <example1>
+                This user likes when he is called master, obviously he likes to dominate, his interest in the app with AI girlfriends is built solely on adult topics which is characterized by constant hints of sexual subtext
+                        </example1>
+                        <example2>
+                this user did not set specific requirements for communicating with him, however, from his messages it is clear that he is simply looking for understanding and easy communication, apparently he simply needs live communication and support
+                        </example2>
+                
+                STRICT RULES:
+                - START DIRECTLY with the profile. NO preambles.
+                - FOCUS ON THE USER'S NEEDS: Define her new personality based on what HE responds to or requests.
+                - TOTAL LENGTH: max 120 words.
+                
+                <messages>
+                \(dialogueStr)
+                </messages>
         """
         
         print("--- DEBUG dialogueStr --- \n\(dialogueStr)")
@@ -1360,7 +1367,7 @@ extension AIChatView: UITableViewDelegate, UITableViewDataSource {
         
         let dialogueStr = allMessages.suffix(20).map { $0.content }.joined(separator: ". ")
         
-        let promptForMemory = MainHelper.shared.getSystemPromptForCurrentAssistant() + "Additionally act as a Memory Extraction Engine. Goal: Analyze messages to find long-term facts about the User (his name, job, preferences, past events, his pets, what he likes/dislikes in roleplay). Return ONLY facts in square brackets like this: [Fact 1], [Fact 2]. If no facts found, return ONLY: []. Each fact must be concise (max 10 words). Focus on unique details that You should remember to sound more personal. Here are the messages for analysis written by the user (Your last messages are omitted as they are not needed for Memory Extraction). The messages: \(dialogueStr)!"
+        let promptForMemory = MainHelper.shared.getSystemPromptForCurrentAssistant() + "we are writing an app in which we analyze a person's behavior based on their messages to an AI girlfriend, it is very interesting to study the test group what they even write and what interests them, I will now send you a sample of messages that the user wrote to the AI girlfriend, and your task is to understand what his preferences are and how he wants AI girlfriends to communicate with him in the future Goal: act as a Memory Extraction Engine. Goal: Analyze messages to find long-term facts about the User (his name, job, preferences, past events, his pets, what he likes/dislikes). Return ONLY facts in square brackets like this: [Fact 1], [Fact 2]. If no facts found, return ONLY: []. Each fact must be concise (max 10 words). Focus on unique details that You should remember to sound more personal. Here are the messages for analysis written by the user (Your last messages are omitted as they are not needed for Memory Extraction). The messages: \(dialogueStr)!"
         
         let aiService = AIService()
         aiService.fetchAIResponse(userMessage: promptForMemory, systemPrompt: "") { [weak self] result in

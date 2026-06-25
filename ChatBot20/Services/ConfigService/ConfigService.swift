@@ -8,7 +8,8 @@ struct Config: Codable { // новые поля обязательно опци�
     let needResetData: Bool
     let isVideoReady: Bool
     let isFreeMode: Bool
-    let isDiscountOfferAvailable: Bool
+    let isMemoryAvailable: Bool
+    let isDiscountOfferAvailable: Bool?
     let isGameText: Bool?
     let dailyLimits: Int
     let initialLimit: Int
@@ -33,6 +34,7 @@ final class ConfigService {
     private(set) var isFreeMode: Bool = false
     private(set) var isDiscountOfferAvailable: Bool = false
     private(set) var isGameText: Bool = false
+    private(set) var isMemoryAvailable: Bool = false
     private(set) var dailyLimits = 1
     private(set) var initialLimit = 3
     private(set) var timeIntervalBetweenRequests = 0.1
@@ -53,7 +55,7 @@ final class ConfigService {
         }
     }
 
-    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analiticsWaifu4.json")
+    private let configURL = URL(string: "https://raw.githubusercontent.com/Nikita318-creator/analitics-data/main/analiticsWaifu5.json")
     private let cachedConfigKey = "cachedConfigKey"
 
     private init() {}
@@ -138,6 +140,7 @@ final class ConfigService {
             needResetData: remote.needResetData,
             isVideoReady: remote.isVideoReady,
             isFreeMode: remote.isFreeMode,
+            isMemoryAvailable: isMemoryAvailable,
             isDiscountOfferAvailable: remote.isDiscountOfferAvailable,
             isGameText: stickyIsGameText,
             dailyLimits: remote.dailyLimits,
@@ -163,7 +166,8 @@ final class ConfigService {
         self.needResetData = config.needResetData
         self.isVideoReady = config.isVideoReady
         self.isFreeMode = config.isFreeMode
-        self.isDiscountOfferAvailable = config.isDiscountOfferAvailable
+        self.isDiscountOfferAvailable = config.isDiscountOfferAvailable ?? false
+        self.isMemoryAvailable = config.isMemoryAvailable
         self.isGameText = config.isGameText ?? false
         self.dailyLimits = config.dailyLimits
         self.initialLimit = config.initialLimit

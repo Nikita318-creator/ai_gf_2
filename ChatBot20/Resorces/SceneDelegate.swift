@@ -131,7 +131,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             tabBarController.viewControllers = [rootNavController, roleplayNavController, gamesGFNavController]
         }
-        tabBarController.selectedIndex = 2
+        tabBarController.selectedIndex = ConfigService.shared.isTestB ? 2 : 1
         return tabBarController
     }
     
