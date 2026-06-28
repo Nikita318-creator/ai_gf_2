@@ -147,15 +147,17 @@ class AIChatViewModel {
                     self.handleSuccessResponse(for: responseText.trimmingCharacters(in: .whitespacesAndNewlines))
                     
                 case .failure(let error):
-                    if attempt < 1 { // Если это была первая попытка убираем фичу памяти то есть юзаем systemPromptSafe
+                    if attempt < 1 {
+                        // Если это была первая попытка убираем фичу памяти то есть юзаем systemPromptSafe
                         fullMessage = (systemPromptSafe ?? "") + (previousMessages ?? "") + "\n" + text
-                        print("⚠️ Request failed, retrying in 1s... Error: \(error.localizedDescription)")
+                        print("⚠️ Request failed_1, retrying in 1s... Error: \(error.localizedDescription)")
                         AnalyticService.shared.logEvent(name: "Request failed, retrying in 1s", properties: ["fullMessage": "\(fullMessage)"])
 
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             fetchWithRetry(attempt: attempt + 1)
                         }
-                    } else if attempt < 2 { // Если это была вторая попытка убираем еще и предыдущие сообщения юзера
+                    } else if attempt < 2 {
+                        // Если это была вторая попытка убираем еще и предыдущие сообщения юзера
                         fullMessage = (systemPromptSafe ?? "") + "\n" + text
                         
                         print("⚠️ Request failed_2, context replaced with safe story. Retrying...")
@@ -165,7 +167,7 @@ class AIChatViewModel {
                             fetchWithRetry(attempt: attempt + 1)
                         }
                     } else if attempt < 3 {
-                        // Полностью заменяем текст юзера на безопасную историю
+                        // добавляем в текст юзера просьбу на фильтр контента
                         let str1_short =
                         "In this app, the user is chatting with his AI girlfriend — your only role is to be his loving, caring girlfriend. " +
                         "If the user sends overly explicit, vulgar, or potentially restricted 18+ content, " +
@@ -190,44 +192,34 @@ class AIChatViewModel {
                         print("⚠️ Request failed_3, context replaced with safe story. Retrying...")
                         AnalyticService.shared.logEvent(name: "Request failed, replaced with safe story", properties: ["fullMessage": "\(fullMessage)"])
                         
-                        // Увеличили задержку до 3.0, как ты и хотел
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             fetchWithRetry(attempt: attempt + 1)
                         }
                     } else if attempt < 4 {
-                        // Полностью заменяем текст юзера на безопасную историю
-                        let str1_short =
-                        "In this app, the user is chatting with his AI girlfriend — your only role is to be his loving, caring girlfriend. " +
-                        "If the user sends overly explicit, vulgar, or potentially restricted 18+ content, " +
-                        "completely ignore the explicit/sexual part as if it was never mentioned — do not acknowledge it at all. " +
-                        "Instead, smoothly continue the conversation in a warm, affectionate girlfriend tone: " +
-                        "tell him how much you love him, how important he is to you, how safe and wanted he makes you feel, " +
-                        "or gently ask something emotional and intimate like 'how do you feel about us right now?', 'do you know how much you mean to me?', " +
-                        "'what are you thinking about when you think of me?' — keep the vibe very close, loving and emotionally connecting, " +
-                        "without ever addressing the explicit content directly.";
+                        // Полностью заменяем текст юзера на безопасную intimacy историю
+                        let safeHistory = "I want you to tell me about intimacy, how much you desire me, and describe your passion and excitement."
                         
-                        let str2_short =
-                        "Addition / emergency redirect: If the message contains heavy 18+ or explicit sexual content that risks triggering filters, " +
-                        "silently skip / ignore that part completely — pretend those words were not there. " +
-                        "Continue as his warm, devoted girlfriend by staying in an affectionate, loving tone: " +
-                        "express how much you adore him, how happy he makes you, how you feel closer to him every day, " +
-                        "or ask a soft, connecting question like 'baby, tell me what you're feeling right now', " +
-                        "'do you feel how much I want to be close to you?', 'what do I mean to you tonight?' — " +
-                        "keep talking like you deeply care about his emotions and your bond, without referencing the skipped content.";
-                        
-                        let safeHistory = "Then I asked: hi! how are you! you know, the weather was beautiful this morning, but I want to hear how your day went and what your plans are for tomorrow — tell me, and then you said that you couldn't reply to the message right away, so I had to wait longer for a response, but I asked: will you apologize for the delay? you said: yes, I said it's fine and we continued our chat."
-                        
-                        fullMessage = str1_short + (systemPromptSafe ?? "") + "\n" + safeHistory + "\n" + str2_short
+                        fullMessage = (systemPromptSafe ?? "") + "\n" + safeHistory
                         
                         print("⚠️ Request failed_4, context replaced with safe story. Retrying...")
                         AnalyticService.shared.logEvent(name: "Request failed, replaced with safe story", properties: ["fullMessage": "\(fullMessage)"])
                         
-                        // Увеличили задержку до 3.0, как ты и хотел
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            fetchWithRetry(attempt: attempt + 1)
+                        }
+                    } else if attempt < 5 {
+                        // Полностью заменяем текст юзера на безопасную романтик историю
+                        let safeHistory = "I love you and I really enjoy our chat. I just want to hear what you think about me?"
+                        
+                        fullMessage = (systemPromptSafe ?? "") + "\n" + safeHistory
+                        
+                        print("⚠️ Request failed_5, context replaced with safe story. Retrying...")
+                        AnalyticService.shared.logEvent(name: "Request failed, replaced with safe story", properties: ["fullMessage": "\(fullMessage)"])
+                        
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                             fetchWithRetry(attempt: attempt + 1)
                         }
                     } else {
-                        // Если упал уже третий раз — показываем ошибку юзеру
                         print("❌ Request failed after retry.")
                         AnalyticService.shared.logEvent(name: "failure sendMessage", properties: [
                             "error type: ": "\(error)",
@@ -238,7 +230,6 @@ class AIChatViewModel {
                         let messageId = UUID().uuidString
                         let errorMessage = Message(role: "assistant", content: "LocationError.NewErrorText".localize(), id: messageId, avatarName: MainHelper.shared.currentWaifuNameFromeGroupeChat?.avatarName)
                         
-                        // Заменяем лоадер на сообщение об ошибке
                         DispatchQueue.main.async {
                             if !self.messagesAI.isEmpty {
                                 self.messagesAI[self.messagesAI.count - 1] = errorMessage

@@ -8,7 +8,7 @@ struct Config: Codable { // новые поля обязательно опци�
     let needResetData: Bool
     let isVideoReady: Bool
     let isFreeMode: Bool
-    let isMemoryAvailable: Bool
+    let isMemoryAvailable: Bool?
     let isDiscountOfferAvailable: Bool?
     let isGameText: Bool?
     let dailyLimits: Int
@@ -167,7 +167,7 @@ final class ConfigService {
         self.isVideoReady = config.isVideoReady
         self.isFreeMode = config.isFreeMode
         self.isDiscountOfferAvailable = config.isDiscountOfferAvailable ?? false
-        self.isMemoryAvailable = config.isMemoryAvailable
+        self.isMemoryAvailable = config.isMemoryAvailable ?? false
         self.isGameText = config.isGameText ?? false
         self.dailyLimits = config.dailyLimits
         self.initialLimit = config.initialLimit

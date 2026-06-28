@@ -250,7 +250,7 @@ class MainHelper {
             
             prompt += ConfigService.shared.promptText
 
-            if !isSafe { // новые фичи "памяти" могут ронять запрос если юзер перегнет с пошлостью, поэтому отрезаем их на повторный запрос
+            if !isSafe && ConfigService.shared.isMemoryAvailable { // новые фичи "памяти" могут ронять запрос если юзер перегнет с пошлостью, поэтому отрезаем их на повторный запрос
                 let dynamicService = AssistantDynamicService()
                 let baseStyle = dynamicService.getState(for: currentAssistant?.id ?? "").baseStyle
                 if !baseStyle.isEmpty {
