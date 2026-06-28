@@ -18,19 +18,22 @@ class AppsFlyerManager: NSObject {
     
     /// Первичная конфигурация
     func configure() {
-        AppsFlyerLib.shared().initialize(devKey: "???", appId: "6757113019") // test111
+        AppsFlyerLib.shared().initialize(devKey: "tQLziFNpZCcfBArtWrKNzM", appId: "6761285983")
         AppsFlyerLib.shared().delegate = self
         
         #if DEBUG
         AppsFlyerLib.shared().isDebug = true
         #endif
+
         print("[AppsFlyer] configured")
     }
     
     /// Старт трекинга после ответа на ATT
     func start() {
-        AppsFlyerLib.shared().start()
-        print("[AppsFlyer] started")
+        AppsFlyerLib.shared().registerSessionReadyListener {
+            print("[AppsFlyer] Session is ready to start")
+            AppsFlyerLib.shared().start()
+        }
     }
     
     // MARK: - Tracking Events

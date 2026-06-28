@@ -1,4 +1,5 @@
 import UIKit
+import AppsFlyerLib
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -57,6 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func initServices() {
         AppsFlyerManager.shared.configure()
+        
         let _ = NetworkMonitor.shared
         let _ = MainHelper.shared
         let _ = IAPService.shared
@@ -141,6 +143,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneWillEnterForeground(_ scene: UIScene) {
         UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
+    // Для обработки Universal Links (ссылки вида https://yourbrand.appsflyer.com)
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        AppsFlyerLib.shared().continue(userActivity)
+    }
+
+    // Для обработки классических URL-схем (ссылки вида your-app-scheme://)
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url else { return }
+        AppsFlyerLib.shared().handleOpen(url, options: nil)
     }
 }
 
