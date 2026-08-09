@@ -387,6 +387,7 @@ class AIChatView: UIView {
                 
                 tableView.reloadData()
                 scrollToBottomAnimated()
+                inputTextView.canSendMessage = true
             }
         } else {
             var previousMessages = ""
