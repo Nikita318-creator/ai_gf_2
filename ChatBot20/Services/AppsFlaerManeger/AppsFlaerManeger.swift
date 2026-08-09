@@ -18,7 +18,7 @@ class AppsFlyerManager: NSObject {
     
     /// Первичная конфигурация
     func configure() {
-        AppsFlyerLib.shared().initialize(devKey: "tQLziFNpZCcfBArtWrKNzM", appId: "6761285983")
+        AppsFlyerLib.shared().initialize(devKey: "tQLziFNpZCcfBArtWrKNzM", appId: "6799665553")
         AppsFlyerLib.shared().delegate = self
         
         #if DEBUG

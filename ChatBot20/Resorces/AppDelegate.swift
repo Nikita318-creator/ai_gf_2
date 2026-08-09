@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Apphud:
         let idfv = UIDevice.current.identifierForVendor?.uuidString ?? ""
         Apphud.setDeviceIdentifiers(idfa: nil, idfv: idfv)
-        Apphud.start(apiKey: "app_7zBBGUzXkrBjkdmNT4AnhVRD4aoM9C")
+        Apphud.start(apiKey: "app_SYcRLF38K2fo8XmoCHLt6cLXfWCkVB")
         
         DispatchQueue.main.async {
             self.setFirstLaunchDate()

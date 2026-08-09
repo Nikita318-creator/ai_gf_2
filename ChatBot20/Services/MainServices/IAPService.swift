@@ -2,20 +2,20 @@ import ApphudSDK
 import UIKit
 
 enum SubsIDs {
-    static let weeklyPROSubsId = "com.NatalliaUvarova.myWaifu.app.pro_week"
-    static let monthlyPROSubsId = "com.NatalliaUvarova.myWaifu.app.pro_month"
+    static let weeklyPROSubsId = "com.NatalliaUvarova.LillyWaifu.app.pro_week"
+    static let monthlyPROSubsId = "com.NatalliaUvarova.LillyWaifu.app.pro_month"
     
-    static let weeklySubsId =  "com.NatalliaUvarova.myWaifu.app.week"
-    static let monthlySubsId = "com.NatalliaUvarova.myWaifu.app.month"
+    static let weeklySubsId =  "com.NatalliaUvarova.LillyWaifu.app.pro_week_small"
+    static let monthlySubsId = "com.NatalliaUvarova.LillyWaifu.app.pro_month_small"
 }
 
 enum CoinsIDs {
-    static let coins10   = "com.NatalliaUvarova.myWaifu.app.coins10"
-    static let coins20   = "com.NatalliaUvarova.myWaifu.app.coins20"
-    static let coins50   = "com.NatalliaUvarova.myWaifu.app.coins50"
-    static let coins100  = "com.NatalliaUvarova.myWaifu.app.coins100"
-    static let coins500  = "com.NatalliaUvarova.myWaifu.app.coins500"
-    static let coins1000 = "com.NatalliaUvarova.myWaifu.app.coins1000"
+    static let coins10   = "com.NatalliaUvarova.LillyWaifu.app.coins10"
+    static let coins20   = "com.NatalliaUvarova.LillyWaifu.app.coins20"
+    static let coins50   = "com.NatalliaUvarova.LillyWaifu.app.coins50"
+    static let coins100  = "com.NatalliaUvarova.LillyWaifu.app.coins100"
+    static let coins500  = "com.NatalliaUvarova.LillyWaifu.app.coins500"
+    static let coins1000 = "com.NatalliaUvarova.LillyWaifu.app.coins1000"
 }
 
 enum InAppPurchaseResult {
